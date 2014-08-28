@@ -28,6 +28,7 @@
 		4711AA0C19AFBF850062F587 /* Longitudes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0619AFBF850062F587 /* Longitudes.txt */; };
 		4711AA0D19AFBF850062F587 /* Routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0719AFBF850062F587 /* Routes.txt */; };
 		4711AA0E19AFBF850062F587 /* ShortRouteNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0819AFBF850062F587 /* ShortRouteNames.txt */; };
+		4711AA2419AFC8980062F587 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711AA2319AFC8980062F587 /* Parse.framework */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
@@ -45,8 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4711A9B719AFBB920062F587 /* VT Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "VT Transit.app"; path = "/Users/ankit1200/Developer/iOS Development/VT Transit/build/Debug-iphoneos/VT Transit.app"; sourceTree = "<absolute>"; };
-		4711A9B819AFBB920062F587 /* VT TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "VT TransitTests.xctest"; path = "/Users/ankit1200/Developer/iOS Development/VT Transit/build/Debug-iphoneos/VT TransitTests.xctest"; sourceTree = "<absolute>"; };
 		4711A9B919AFBBB80062F587 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -68,6 +67,10 @@
 		4711AA0619AFBF850062F587 /* Longitudes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Longitudes.txt; sourceTree = "<group>"; };
 		4711AA0719AFBF850062F587 /* Routes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Routes.txt; sourceTree = "<group>"; };
 		4711AA0819AFBF850062F587 /* ShortRouteNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShortRouteNames.txt; sourceTree = "<group>"; };
+		4711AA1F19AFC5330062F587 /* VT Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4711AA2019AFC5330062F587 /* VT TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VT TransitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4711AA2319AFC8980062F587 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "VT Transit/Parse.framework"; sourceTree = "<group>"; };
+		4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit-Bridging-Header.h"; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47BB57BA19AFB0A300B3807E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47BB57C119AFB0A300B3807E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4711AA2419AFC8980062F587 /* Parse.framework in Frameworks */,
 				4711A9D419AFBC290062F587 /* CoreGraphics.framework in Frameworks */,
 				4711A9D219AFBC230062F587 /* Foundation.framework in Frameworks */,
 				4711A9D019AFBC1B0062F587 /* UIKit.framework in Frameworks */,
@@ -111,6 +115,7 @@
 		4711A9D519AFBC300062F587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4711AA2319AFC8980062F587 /* Parse.framework */,
 				4711A9D319AFBC290062F587 /* CoreGraphics.framework */,
 				4711A9D119AFBC230062F587 /* Foundation.framework */,
 				4711A9CF19AFBC1B0062F587 /* UIKit.framework */,
@@ -148,6 +153,8 @@
 				47BB57B719AFB0A300B3807E /* VT Transit */,
 				47BB57CC19AFB0A300B3807E /* VT TransitTests */,
 				4711A9D519AFBC300062F587 /* Frameworks */,
+				4711AA1F19AFC5330062F587 /* VT Transit.app */,
+				4711AA2019AFC5330062F587 /* VT TransitTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +175,7 @@
 				4711AA0119AFBF710062F587 /* VirginiaTech.gpx */,
 				4711AA0F19AFBF8B0062F587 /* Metadata Text Files */,
 				47BB57B919AFB0A300B3807E /* Info.plist */,
+				4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -206,7 +214,7 @@
 			);
 			name = "VT Transit";
 			productName = "VT Transit";
-			productReference = 4711A9B719AFBB920062F587 /* VT Transit.app */;
+			productReference = 4711AA1F19AFC5330062F587 /* VT Transit.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47BB57C819AFB0A300B3807E /* VT TransitTests */ = {
@@ -224,7 +232,7 @@
 			);
 			name = "VT TransitTests";
 			productName = "VT TransitTests";
-			productReference = 4711A9B819AFBB920062F587 /* VT TransitTests.xctest */;
+			productReference = 4711AA2019AFC5330062F587 /* VT TransitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -412,11 +420,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"(old)/BTransit",
+					"$(PROJECT_DIR)/VT",
+					Transit,
+				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit/VT Transit-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -425,11 +443,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"(old)/BTransit",
+					"$(PROJECT_DIR)/VT",
+					Transit,
+				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit/VT Transit-Bridging-Header.h";
 			};
 			name = Release;
 		};
