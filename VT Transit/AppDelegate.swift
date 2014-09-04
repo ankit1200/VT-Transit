@@ -17,8 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
         
+        // Parse keys
         Parse.setApplicationId("DYUHcRr8CGd2KgBCiZzmoQZGUHs4mEvYOFDE3ecF", clientKey: "WanDsaJNb5ofp7cv0r6hQK87KEwPqiaCrcPmORI6")
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions) 
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        // set up local push notifications
+        let types = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
         return true
     }

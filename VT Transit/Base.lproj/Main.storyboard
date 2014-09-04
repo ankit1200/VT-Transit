@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="L2W-UG-HNo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="L2W-UG-HNo">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
@@ -33,11 +34,7 @@
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="VH2-gh-S1y"/>
-                                    <barButtonItem image="Location" id="XhS-Ka-PN5">
-                                        <connections>
-                                            <action selector="zoomToCurrentLocation:" destination="2" id="c2f-EM-ePf"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem image="Location" id="XhS-Ka-PN5"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ajs-XZ-JI1"/>
                                     <barButtonItem style="plain" id="emG-Kq-nqa">
                                         <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="Jmr-oq-fGd">
@@ -54,11 +51,7 @@
                                         </segmentedControl>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="zND-Bv-T1l"/>
-                                    <barButtonItem systemItem="refresh" id="bST-0A-LBW">
-                                        <connections>
-                                            <action selector="refreshBusLocations:" destination="2" id="Dyw-It-Pl7"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem systemItem="refresh" id="bST-0A-LBW"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="uCn-Fk-RsK"/>
                                 </items>
                                 <color key="barTintColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -681,8 +674,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="gee-8C-SlF" id="Wf4-tH-cy1"/>
-                        <outlet property="editButton" destination="rV8-Te-aKv" id="k6s-hY-Dhe"/>
                         <outlet property="favTableView" destination="2Ay-nd-v3Y" id="w3g-oQ-lcz"/>
                     </connections>
                 </tableViewController>

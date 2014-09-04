@@ -28,7 +28,8 @@
 		4711AA0C19AFBF850062F587 /* Longitudes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0619AFBF850062F587 /* Longitudes.txt */; };
 		4711AA0D19AFBF850062F587 /* Routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0719AFBF850062F587 /* Routes.txt */; };
 		4711AA0E19AFBF850062F587 /* ShortRouteNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0819AFBF850062F587 /* ShortRouteNames.txt */; };
-		4711AA2419AFC8980062F587 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711AA2319AFC8980062F587 /* Parse.framework */; };
+		4784FA8519B8E2A4009BE8C4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4784FA8319B8E2A4009BE8C4 /* Bolts.framework */; };
+		4784FA8619B8E2A4009BE8C4 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4784FA8419B8E2A4009BE8C4 /* Parse.framework */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
@@ -69,8 +70,9 @@
 		4711AA0819AFBF850062F587 /* ShortRouteNames.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShortRouteNames.txt; sourceTree = "<group>"; };
 		4711AA1F19AFC5330062F587 /* VT Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4711AA2019AFC5330062F587 /* VT TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VT TransitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4711AA2319AFC8980062F587 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "VT Transit/Parse.framework"; sourceTree = "<group>"; };
 		4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit-Bridging-Header.h"; sourceTree = "<group>"; };
+		4784FA8319B8E2A4009BE8C4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../Bolts.framework; sourceTree = "<group>"; };
+		4784FA8419B8E2A4009BE8C4 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47BB57BA19AFB0A300B3807E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47BB57C119AFB0A300B3807E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,7 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4711AA2419AFC8980062F587 /* Parse.framework in Frameworks */,
+				4784FA8519B8E2A4009BE8C4 /* Bolts.framework in Frameworks */,
+				4784FA8619B8E2A4009BE8C4 /* Parse.framework in Frameworks */,
 				4711A9D419AFBC290062F587 /* CoreGraphics.framework in Frameworks */,
 				4711A9D219AFBC230062F587 /* Foundation.framework in Frameworks */,
 				4711A9D019AFBC1B0062F587 /* UIKit.framework in Frameworks */,
@@ -115,7 +118,8 @@
 		4711A9D519AFBC300062F587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4711AA2319AFC8980062F587 /* Parse.framework */,
+				4784FA8319B8E2A4009BE8C4 /* Bolts.framework */,
+				4784FA8419B8E2A4009BE8C4 /* Parse.framework */,
 				4711A9D319AFBC290062F587 /* CoreGraphics.framework */,
 				4711A9D119AFBC230062F587 /* Foundation.framework */,
 				4711A9CF19AFBC1B0062F587 /* UIKit.framework */,
@@ -424,10 +428,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"(old)/BTransit",
-					"$(PROJECT_DIR)/VT",
-					Transit,
+					/Users/ankit1200/Developer/iOS,
+					Development,
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -447,10 +449,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"(old)/BTransit",
-					"$(PROJECT_DIR)/VT",
-					Transit,
+					/Users/ankit1200/Developer/iOS,
+					Development,
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
