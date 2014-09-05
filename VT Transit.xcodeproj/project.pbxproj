@@ -30,6 +30,8 @@
 		4711AA0E19AFBF850062F587 /* ShortRouteNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0819AFBF850062F587 /* ShortRouteNames.txt */; };
 		4784FA8519B8E2A4009BE8C4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4784FA8319B8E2A4009BE8C4 /* Bolts.framework */; };
 		4784FA8619B8E2A4009BE8C4 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4784FA8419B8E2A4009BE8C4 /* Parse.framework */; };
+		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
+		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
@@ -73,6 +75,8 @@
 		4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit-Bridging-Header.h"; sourceTree = "<group>"; };
 		4784FA8319B8E2A4009BE8C4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../Bolts.framework; sourceTree = "<group>"; };
 		4784FA8419B8E2A4009BE8C4 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47BB57BA19AFB0A300B3807E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47BB57C119AFB0A300B3807E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				47BB57BA19AFB0A300B3807E /* AppDelegate.swift */,
+				4784FA8719B8E3D8009BE8C4 /* Route.swift */,
+				4784FA8919B8F0DA009BE8C4 /* Stop.swift */,
 				47BB57C019AFB0A300B3807E /* Main.storyboard */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
@@ -309,6 +315,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
+				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
+				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
