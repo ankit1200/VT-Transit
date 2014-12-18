@@ -28,14 +28,18 @@
 		4711AA0C19AFBF850062F587 /* Longitudes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0619AFBF850062F587 /* Longitudes.txt */; };
 		4711AA0D19AFBF850062F587 /* Routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0719AFBF850062F587 /* Routes.txt */; };
 		4711AA0E19AFBF850062F587 /* ShortRouteNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0819AFBF850062F587 /* ShortRouteNames.txt */; };
-		4784FA8519B8E2A4009BE8C4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4784FA8319B8E2A4009BE8C4 /* Bolts.framework */; };
-		4784FA8619B8E2A4009BE8C4 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4784FA8419B8E2A4009BE8C4 /* Parse.framework */; };
+		4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF481A29376B00CCEB8F /* Bolts.framework */; };
+		4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
+		4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
+		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
 		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
 		47BB57D019AFB0A300B3807E /* VT_TransitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57CF19AFB0A300B3807E /* VT_TransitTests.swift */; };
+		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
+		47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0E11A284A8400C9BD0A /* TBXML.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,8 +77,12 @@
 		4711AA1F19AFC5330062F587 /* VT Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4711AA2019AFC5330062F587 /* VT TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VT TransitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit-Bridging-Header.h"; sourceTree = "<group>"; };
-		4784FA8319B8E2A4009BE8C4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../Bolts.framework; sourceTree = "<group>"; };
-		4784FA8419B8E2A4009BE8C4 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		4722CF481A29376B00CCEB8F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		4722CF491A29376B00CCEB8F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		4722CF4C1A29967900CCEB8F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopsTableViewController.swift; sourceTree = "<group>"; };
+		4734D7AF19CF59B9007AB683 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../Parse Framework/Bolts.framework"; sourceTree = "<group>"; };
+		4734D7B019CF59B9007AB683 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../Parse Framework/Parse.framework"; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +91,9 @@
 		47BB57C319AFB0A300B3807E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		47BB57CE19AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47BB57CF19AFB0A300B3807E /* VT_TransitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VT_TransitTests.swift; sourceTree = "<group>"; };
+		47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
+		47C8B0E01A284A8400C9BD0A /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		47C8B0E11A284A8400C9BD0A /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,13 +101,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4784FA8519B8E2A4009BE8C4 /* Bolts.framework in Frameworks */,
-				4784FA8619B8E2A4009BE8C4 /* Parse.framework in Frameworks */,
+				4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */,
 				4711A9D419AFBC290062F587 /* CoreGraphics.framework in Frameworks */,
 				4711A9D219AFBC230062F587 /* Foundation.framework in Frameworks */,
 				4711A9D019AFBC1B0062F587 /* UIKit.framework in Frameworks */,
 				4711A9CE19AFBC160062F587 /* MapKit.framework in Frameworks */,
 				4711A9CC19AFBC0B0062F587 /* CoreLocation.framework in Frameworks */,
+				4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */,
 				4711A9CA19AFBC060062F587 /* iAd.framework in Frameworks */,
 				4711A9C819AFBC010062F587 /* SystemConfiguration.framework in Frameworks */,
 				4711A9C619AFBBF50062F587 /* Security.framework in Frameworks */,
@@ -122,8 +133,10 @@
 		4711A9D519AFBC300062F587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4784FA8319B8E2A4009BE8C4 /* Bolts.framework */,
-				4784FA8419B8E2A4009BE8C4 /* Parse.framework */,
+				4722CF481A29376B00CCEB8F /* Bolts.framework */,
+				4722CF491A29376B00CCEB8F /* Parse.framework */,
+				4734D7AF19CF59B9007AB683 /* Bolts.framework */,
+				4734D7B019CF59B9007AB683 /* Parse.framework */,
 				4711A9D319AFBC290062F587 /* CoreGraphics.framework */,
 				4711A9D119AFBC230062F587 /* Foundation.framework */,
 				4711A9CF19AFBC1B0062F587 /* UIKit.framework */,
@@ -170,8 +183,11 @@
 			isa = PBXGroup;
 			children = (
 				47BB57BA19AFB0A300B3807E /* AppDelegate.swift */,
+				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
 				4784FA8719B8E3D8009BE8C4 /* Route.swift */,
 				4784FA8919B8F0DA009BE8C4 /* Stop.swift */,
+				4722CF4C1A29967900CCEB8F /* Parser.swift */,
+				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C019AFB0A300B3807E /* Main.storyboard */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
@@ -205,6 +221,24 @@
 				47BB57CE19AFB0A300B3807E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		47C8B0DD1A26EF9300C9BD0A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */,
+				4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		47C8B0E41A28509500C9BD0A /* Objective-C Classes */ = {
+			isa = PBXGroup;
+			children = (
+				47C8B0E01A284A8400C9BD0A /* TBXML.h */,
+				47C8B0E11A284A8400C9BD0A /* TBXML.m */,
+			);
+			name = "Objective-C Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,8 +349,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
+				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
+				47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */,
+				47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */,
+				4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,10 +472,24 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/ankit1200/Developer/iOS,
 					Development,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -455,10 +507,24 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/ankit1200/Developer/iOS,
 					Development,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					/Users/ankit1200/Developer/iOS,
+					Development/Parse,
+					Framework,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

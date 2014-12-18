@@ -18,15 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // Parse keys
-        Parse.setApplicationId("DYUHcRr8CGd2KgBCiZzmoQZGUHs4mEvYOFDE3ecF", clientKey: "WanDsaJNb5ofp7cv0r6hQK87KEwPqiaCrcPmORI6")
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions) 
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        Parse.setApplicationId("Cn8XelDtAQiaT3K899qx1YZj5lvuTJ2yQxxyrgSq", clientKey: "Fi7NygQMW6m11emvGSmfITaMnyZeuQMbNT4byV6J")
         
         // set up local push notifications
-        let types = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+//        let types = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+//        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
+//        UIBarButtonItem.appearance().titleTextAttributesForState(UIControlState.Normal) = textTileOptions
+//        UIBarButtonItem.appearance().titleTextAttributesForState(UIControlState.Highlighted) = textTileOptions
+//        UISegmentedControl.appearance().titleTextAttributesForState(UIControlState.Normal) = textTileOptions
+        UITabBar.appearance().selectedImageTintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
+        UITabBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         return true
     }
 

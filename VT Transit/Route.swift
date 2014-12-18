@@ -19,15 +19,11 @@ class Route {
         self.shortName = shortName
     }
     
-    func stopsForRoute() {
-        
-        
-    }
     
-    func allRoutes() -> Array<Route> {
-        
-        
-    }
+//    func allRoutes() -> Array<Route> {
+//        
+//        
+//    }
     
     func routeNameFromShortName() {
         
@@ -57,7 +53,7 @@ class Route {
                 name = "Two Town Trolley"
             case "UCB":
                 name = "University City Boulevard"
-            case "UMS"
+            case "UMS":
                 name = "University Mall"
             default:
                 name = "Not a Valid Route"
