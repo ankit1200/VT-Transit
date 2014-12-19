@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -85,11 +86,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="stopsCell" id="j2x-cf-QBJ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="stopsCell" textLabel="PSw-53-LTl" detailTextLabel="sZE-fY-bES" style="IBUITableViewCellStyleSubtitle" id="j2x-cf-QBJ">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j2x-cf-QBJ" id="tn6-2H-gvh">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PSw-53-LTl">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sZE-fY-bES">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimes" id="BPJ-CY-gzr"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -101,6 +119,125 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ela-Tu-19L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1257.5" y="-1250.5"/>
+        </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="X7v-sU-FQL">
+            <objects>
+                <collectionViewController id="b2n-OB-Bc5" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="t1R-vn-zJ2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="tintColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bDs-in-MGc">
+                            <size key="itemSize" width="90" height="90"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="15" minY="15" maxX="15" maxY="15"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="noArrivalTimesCell" id="Qrb-Dz-FKT">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="60"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Bus Times Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlE-HN-it1">
+                                            <rect key="frame" x="82" y="19" width="181" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="nlE-HN-it1" secondAttribute="centerY" id="Y06-8h-k0e"/>
+                                    <constraint firstAttribute="centerX" secondItem="nlE-HN-it1" secondAttribute="centerX" id="x4g-SD-vQP"/>
+                                </constraints>
+                                <size key="customSize" width="345" height="60"/>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="arrivalTimeCell" id="YAf-ee-KG8" customClass="ArrivalTimesCollectionViewCell" customModule="VT_Transit" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfl-69-AKc">
+                                            <rect key="frame" x="0.0" y="5" width="90" height="50"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="arrival time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRD-iI-hvi">
+                                            <rect key="frame" x="0.0" y="63" width="90" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstItem="jfl-69-AKc" firstAttribute="leading" secondItem="YAf-ee-KG8" secondAttribute="leading" id="MZj-7B-8eI"/>
+                                    <constraint firstItem="iRD-iI-hvi" firstAttribute="trailing" secondItem="jfl-69-AKc" secondAttribute="trailing" id="Q9n-2k-n6q"/>
+                                    <constraint firstItem="iRD-iI-hvi" firstAttribute="top" secondItem="jfl-69-AKc" secondAttribute="bottom" constant="8" id="RKw-o5-dCl"/>
+                                    <constraint firstItem="jfl-69-AKc" firstAttribute="top" secondItem="YAf-ee-KG8" secondAttribute="top" constant="5" id="au2-DD-Y4I"/>
+                                    <constraint firstItem="iRD-iI-hvi" firstAttribute="leading" secondItem="jfl-69-AKc" secondAttribute="leading" id="dWt-pn-e4L"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="jfl-69-AKc" secondAttribute="bottom" constant="27" id="pvY-PF-Sdq"/>
+                                    <constraint firstAttribute="trailing" secondItem="jfl-69-AKc" secondAttribute="trailing" id="xq2-zu-sPl"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="arrivalTimeLabel" destination="iRD-iI-hvi" id="oOD-Zf-2Dg"/>
+                                    <outlet property="timeRemainingLabel" destination="jfl-69-AKc" id="bmh-ak-SDP"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="M4k-ZZ-0Kb" customClass="StopsHeaderCollectionReusableView" customModule="VT_Transit" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
+                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoT-Oy-wsx">
+                                    <rect key="frame" x="8" y="27" width="359" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                            <constraints>
+                                <constraint firstItem="rHE-xd-mJ0" firstAttribute="trailing" secondItem="M4k-ZZ-0Kb" secondAttribute="trailingMargin" id="Pqk-Id-8zP"/>
+                                <constraint firstItem="rHE-xd-mJ0" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="8" id="PuA-Tg-oPX"/>
+                                <constraint firstItem="NoT-Oy-wsx" firstAttribute="trailing" secondItem="rHE-xd-mJ0" secondAttribute="trailing" id="RqH-pe-iSe"/>
+                                <constraint firstItem="NoT-Oy-wsx" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="27" id="Twb-Xl-PFj"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="NoT-Oy-wsx" secondAttribute="bottom" constant="-6" id="eGM-GR-mZM"/>
+                                <constraint firstItem="NoT-Oy-wsx" firstAttribute="leading" secondItem="rHE-xd-mJ0" secondAttribute="leading" id="izd-3p-kh7"/>
+                                <constraint firstItem="rHE-xd-mJ0" firstAttribute="leading" secondItem="M4k-ZZ-0Kb" secondAttribute="leadingMargin" id="qVI-U8-Vx7"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="routeNameLabel" destination="rHE-xd-mJ0" id="hM0-Kb-Mii"/>
+                                <outlet property="stopCodeLabel" destination="NoT-Oy-wsx" id="Xa7-v2-SNb"/>
+                            </connections>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="b2n-OB-Bc5" id="HeG-Np-dfG"/>
+                            <outlet property="delegate" destination="b2n-OB-Bc5" id="CNd-uM-6qu"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z4m-C5-gJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1818.5" y="-1250.5"/>
         </scene>
     </scenes>
     <resources>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4705068C1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */; };
+		4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */; };
+		470506911A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */; };
 		4711A9BA19AFBBB80062F587 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9B919AFBBB80062F587 /* StoreKit.framework */; };
 		4711A9BC19AFBBCF0062F587 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */; };
 		4711A9BE19AFBBD60062F587 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */; };
@@ -53,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesCollectionViewCell.swift; sourceTree = "<group>"; };
+		4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesForRouteCollectionViewController.swift; sourceTree = "<group>"; };
 		4711A9B919AFBBB80062F587 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4705068A1A42B5AB00EEA613 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4784FA8719B8E3D8009BE8C4 /* Route.swift */,
+				4784FA8919B8F0DA009BE8C4 /* Stop.swift */,
+				4722CF4C1A29967900CCEB8F /* Parser.swift */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		4705068F1A42B72D00EEA613 /* Collection View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */,
+				4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */,
+			);
+			name = "Collection View Cells";
+			sourceTree = "<group>";
+		};
 		4711A9D519AFBC300062F587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,12 +208,11 @@
 			isa = PBXGroup;
 			children = (
 				47BB57BA19AFB0A300B3807E /* AppDelegate.swift */,
-				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
-				4784FA8719B8E3D8009BE8C4 /* Route.swift */,
-				4784FA8919B8F0DA009BE8C4 /* Stop.swift */,
-				4722CF4C1A29967900CCEB8F /* Parser.swift */,
-				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C019AFB0A300B3807E /* Main.storyboard */,
+				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
+				4705068F1A42B72D00EEA613 /* Collection View Cells */,
+				4705068A1A42B5AB00EEA613 /* Objects */,
+				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
 			);
@@ -228,6 +252,7 @@
 			children = (
 				47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */,
 				4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */,
+				470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -349,6 +374,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
+				4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */,
+				4705068C1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift in Sources */,
+				470506911A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift in Sources */,
 				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,

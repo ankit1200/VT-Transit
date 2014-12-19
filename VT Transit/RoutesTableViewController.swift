@@ -13,6 +13,10 @@ class RoutesTableViewController: UITableViewController {
     var routes = Array<Route>()
     
     
+    // **************************************
+    // MARK: View Controller Delegate Methods
+    // **************************************
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,12 +34,11 @@ class RoutesTableViewController: UITableViewController {
         }
     }
     
-    
+    // ****************************
     // MARK: Table view data source
-
+    // ****************************
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return routes.count
     }
     
@@ -47,7 +50,11 @@ class RoutesTableViewController: UITableViewController {
         return cell
     }
     
+    
+    // ***********************
     // MARK: Prepare For Segue
+    // ***********************
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showStopsForRoutes" {
