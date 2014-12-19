@@ -55,15 +55,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by bus name" translucent="NO" id="Uxg-3a-b1V">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                            <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="iPF-Ah-Mrw" id="VKx-XH-fBB"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="routesCell" id="9cb-dq-2vB">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="routesCell" textLabel="nfo-mE-yIg" style="IBUITableViewCellStyleDefault" id="9cb-dq-2vB">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9cb-dq-2vB" id="Bcx-Yk-i1M">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nfo-mE-yIg">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="6gb-iC-hlK" kind="show" identifier="showStopsForRoutes" id="aZn-7C-hw8"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -72,8 +86,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Routes" id="arx-bx-AQR"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="8uW-7K-C1P" id="6Ka-So-ljD"/>
+                        <segue destination="6gb-iC-hlK" kind="show" identifier="showStopsForRoutes" id="EPd-kZ-GDO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOj-c0-v9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController searchResultsTitle="routesCell" id="8uW-7K-C1P">
+                    <connections>
+                        <outlet property="delegate" destination="iPF-Ah-Mrw" id="x2l-uF-GE5"/>
+                        <outlet property="searchBar" destination="Uxg-3a-b1V" id="C8I-oI-HVq"/>
+                        <outlet property="searchContentsController" destination="iPF-Ah-Mrw" id="A5D-Er-rmH"/>
+                        <outlet property="searchResultsDataSource" destination="iPF-Ah-Mrw" id="x03-z4-hj2"/>
+                        <outlet property="searchResultsDelegate" destination="iPF-Ah-Mrw" id="jCn-99-czJ"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="774.5" y="-1250.5"/>
         </scene>
@@ -85,6 +112,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by stop name" translucent="NO" id="hNI-Ns-DwM">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="6gb-iC-hlK" id="R15-dH-mTS"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="stopsCell" textLabel="PSw-53-LTl" detailTextLabel="sZE-fY-bES" style="IBUITableViewCellStyleSubtitle" id="j2x-cf-QBJ">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -105,9 +141,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimes" id="BPJ-CY-gzr"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -115,8 +148,21 @@
                             <outlet property="delegate" destination="6gb-iC-hlK" id="rdl-Le-66n"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="3Tt-Z5-F6O" id="uPT-bp-7M7"/>
+                        <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimes" id="Xua-HK-BuK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ela-Tu-19L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="3Tt-Z5-F6O">
+                    <connections>
+                        <outlet property="delegate" destination="6gb-iC-hlK" id="lVa-bd-BjI"/>
+                        <outlet property="searchBar" destination="hNI-Ns-DwM" id="ayD-RQ-Tir"/>
+                        <outlet property="searchContentsController" destination="6gb-iC-hlK" id="zLE-KA-X1p"/>
+                        <outlet property="searchResultsDataSource" destination="6gb-iC-hlK" id="Smw-4q-DYD"/>
+                        <outlet property="searchResultsDelegate" destination="6gb-iC-hlK" id="wxS-Lh-fSN"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1257.5" y="-1250.5"/>
         </scene>
@@ -237,7 +283,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4m-C5-gJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1818.5" y="-1250.5"/>
+            <point key="canvasLocation" x="1732.5" y="-1250.5"/>
         </scene>
     </scenes>
     <resources>
