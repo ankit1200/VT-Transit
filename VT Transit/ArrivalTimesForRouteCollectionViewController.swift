@@ -8,34 +8,60 @@
 
 import UIKit
 
-let reuseIdentifier = "arrivalTimeCell"
-
 class ArrivalTimesForRouteCollectionViewController: UICollectionViewController {
 
-    
+    var selectedRoute = Route(name:"", shortName:"")
+    var selectedStop = Stop(name: "", code: "", latitude: "", longitude: "")
+    var arrivalTimes = [String]()
+    let parser = Parser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        arrivalTimes = parser.arrivalTimesForRoute(selectedRoute.shortName, stopCode: selectedStop.code)
     }
 
     // ********************************
     // MARK: UICollectionViewDataSource
     // ********************************
 
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1;
+    
+    }
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //#warning Incomplete method implementation -- Return the number of items in the section
-        return 0
+
+        return (arrivalTimes.count == 0) ?  1 : arrivalTimes.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as ArrivalTimesCollectionViewCell
+        if arrivalTimes.count == 0 {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noArrivalTimesCell", forIndexPath: indexPath) as UICollectionViewCell
+            return cell
+            
+        } else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("arrivalTimeCell", forIndexPath: indexPath) as ArrivalTimesCollectionViewCell
+            cell.arrivalTimeLabel.text = arrivalTimes[indexPath.row]
+            return cell
+        }
+    }
     
-        // Configure the cell
-    
-        return cell
+    // function to set up Header
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
+    {
+        var reusableview = UICollectionReusableView()
+        
+        if kind == UICollectionElementKindSectionHeader {
+            var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as StopsHeaderCollectionReusableView
+            
+            headerView.title.text = selectedStop.name
+            headerView.subtitle.text = "Stop #: \(selectedStop.code)    Route Code: \(selectedRoute.shortName)"
+            
+            reusableview = headerView;
+        }
+        
+        return reusableview
     }
 }

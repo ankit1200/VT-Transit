@@ -55,6 +55,8 @@ class StopsTableViewController: UITableViewController {
             
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
             let indexPath = self.tableView.indexPathForSelectedRow()
+            arrivalTimesForRouteCollectionViewController.selectedRoute = selectedRoute
+            arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath!.row]
         }
     }
 }

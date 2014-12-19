@@ -120,10 +120,10 @@
             </objects>
             <point key="canvasLocation" x="1257.5" y="-1250.5"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Arrival Times For Route Collection View Controller-->
         <scene sceneID="X7v-sU-FQL">
             <objects>
-                <collectionViewController id="b2n-OB-Bc5" sceneMemberID="viewController">
+                <collectionViewController id="b2n-OB-Bc5" customClass="ArrivalTimesForRouteCollectionViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="t1R-vn-zJ2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -197,17 +197,17 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="M4k-ZZ-0Kb" customClass="StopsHeaderCollectionReusableView" customModule="VT_Transit" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderView" id="M4k-ZZ-0Kb" customClass="StopsHeaderCollectionReusableView" customModule="VT_Transit" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
                                     <rect key="frame" x="8" y="8" width="359" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop Code" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoT-Oy-wsx">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoT-Oy-wsx">
                                     <rect key="frame" x="8" y="27" width="359" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -225,8 +225,8 @@
                                 <constraint firstItem="rHE-xd-mJ0" firstAttribute="leading" secondItem="M4k-ZZ-0Kb" secondAttribute="leadingMargin" id="qVI-U8-Vx7"/>
                             </constraints>
                             <connections>
-                                <outlet property="routeNameLabel" destination="rHE-xd-mJ0" id="hM0-Kb-Mii"/>
-                                <outlet property="stopCodeLabel" destination="NoT-Oy-wsx" id="Xa7-v2-SNb"/>
+                                <outlet property="subtitle" destination="NoT-Oy-wsx" id="bfi-gI-hXV"/>
+                                <outlet property="title" destination="rHE-xd-mJ0" id="vBY-26-X9t"/>
                             </connections>
                         </collectionReusableView>
                         <connections>

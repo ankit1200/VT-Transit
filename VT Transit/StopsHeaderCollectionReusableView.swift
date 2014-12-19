@@ -10,7 +10,7 @@ import UIKit
 
 class StopsHeaderCollectionReusableView: UICollectionReusableView {
     
-    @IBOutlet var routeNameLabel: UILabel!
-    @IBOutlet var stopCodeLabel: UILabel!
+    @IBOutlet var title: UILabel!
+    @IBOutlet var subtitle: UILabel!
     
 }
