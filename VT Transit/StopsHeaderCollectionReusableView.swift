@@ -12,5 +12,4 @@ class StopsHeaderCollectionReusableView: UICollectionReusableView {
     
     @IBOutlet var title: UILabel!
     @IBOutlet var subtitle: UILabel!
-    
 }

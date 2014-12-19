@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArrivalTimesForRouteCollectionViewController: UICollectionViewController {
+class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var selectedRoute = Route(name:"", shortName:"")
     var selectedStop = Stop(name: "", code: "", latitude: "", longitude: "")
@@ -63,5 +63,11 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController {
         }
         
         return reusableview
+    }
+    
+    // function to set the size of the cell appropriately
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        return (arrivalTimes.count == 0) ? CGSize(width: 290.0, height: 60.0) : CGSize(width: 90.0, height: 90.0)
     }
 }
