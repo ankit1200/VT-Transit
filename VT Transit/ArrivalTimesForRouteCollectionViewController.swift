@@ -19,6 +19,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         super.viewDidLoad()
         
         arrivalTimes = parser.arrivalTimesForRoute(selectedRoute.shortName, stopCode: selectedStop.code)
+        self.title = selectedRoute.name
     }
 
     // ********************************
@@ -27,11 +28,9 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1;
-    
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         return (arrivalTimes.count == 0) ?  1 : arrivalTimes.count
     }
 
@@ -67,7 +66,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     // function to set the size of the cell appropriately
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         return (arrivalTimes.count == 0) ? CGSize(width: 290.0, height: 60.0) : CGSize(width: 90.0, height: 90.0)
     }
 }

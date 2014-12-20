@@ -67,6 +67,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // ************************
     // MARK: Search Bar Methods
     // ************************
+    
     func filterContentForSearchText(searchText: String) {
         // Filter the array using the filter method
         filteredRoutes = self.routes.filter({( route: Route) -> Bool in

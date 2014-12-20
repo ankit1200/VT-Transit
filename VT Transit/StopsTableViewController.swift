@@ -22,8 +22,6 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.searchDisplayController!.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "stopsCell")
-        
         // gets stops associated with route
         stops = parser.stopsForRoute(selectedRoute.shortName)
         // sort the stops alphabetically 
@@ -41,17 +39,21 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("stopsCell", forIndexPath: indexPath) as UITableViewCell
+        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("stopsCell") as? UITableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "stopsCell")
+        }
         
         var stop:Stop
         // Check to see whether the normal table or search results table is being displayed
         stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : stops[indexPath.row]
         // configure cell
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.textLabel?.text = stop.name
-        cell.detailTextLabel?.text = "Bus Stop #\(stop.code)"
+        cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        cell!.textLabel?.text = stop.name
+        cell!.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
+        cell!.detailTextLabel?.text = "Bus Stop #\(stop.code)"
         
-        return cell
+        return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
