@@ -22,10 +22,6 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // gets stops associated with route
-        stops = parser.stopsForRoute(selectedRoute.shortName)
-        // sort the stops alphabetically 
-        stops.sort({$0.name < $1.name})
         self.title = selectedRoute.name
     }
     

@@ -12,6 +12,8 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
 
     var routes = Array<Route>()
     var filteredRoutes = Array<Route>()
+    let parser = Parser()
+    var stops = Array<Stop>()
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -60,7 +62,28 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
+        
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            // gets stops associated with route
+            stops = parser.stopsForRoute(self.filteredRoutes[indexPath.row].shortName)
+        } else {
+            stops = parser.stopsForRoute(self.routes[indexPath.row].shortName)
+        }
+        if stops.count == 0 {
+            
+            // Instantiate an alert view object
+            var alertView = UIAlertView()
+            alertView.title = "Route not running!"
+            alertView.message = "The selected route is not running at this time. Please try a different Route"
+            alertView.delegate = nil
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+            
+        } else {
+            // sort the stops alphabetically
+            stops.sort({$0.name < $1.name})
+            self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
+        }
     }
     
     
@@ -82,9 +105,9 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     
-    // ***********************
-    // MARK: Prepare For Segue
-    // ***********************
+    // *******************
+    // MARK: Handel Segues
+    // *******************
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -99,6 +122,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
                 let indexPath = self.tableView.indexPathForSelectedRow()!
                 stopsTableViewController.selectedRoute = self.routes[indexPath.row]
             }
+            stopsTableViewController.stops = stops
         }
     }
 }

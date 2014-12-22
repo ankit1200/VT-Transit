@@ -14,14 +14,35 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     var selectedStop = Stop(name: "", code: "", latitude: "", longitude: "")
     var arrivalTimes = [String]()
     let parser = Parser()
+    var refreshControl:UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         arrivalTimes = parser.arrivalTimesForRoute(selectedRoute.shortName, stopCode: selectedStop.code)
+
+        // pull to refresh
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.tintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.collectionView!.addSubview(refreshControl)
+        
         self.title = selectedRoute.name
     }
 
+    // *************************************
+    // MARK: Pull to Refresh Selector Method
+    // *************************************
+    
+    func refresh(sender:AnyObject) {
+        
+        // update data
+        arrivalTimes = parser.arrivalTimesForRoute(selectedRoute.shortName, stopCode: selectedStop.code)
+        self.collectionView?.reloadData()
+        self.refreshControl.endRefreshing()
+    }
+    
     // ********************************
     // MARK: UICollectionViewDataSource
     // ********************************
@@ -42,7 +63,28 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("arrivalTimeCell", forIndexPath: indexPath) as ArrivalTimesCollectionViewCell
-            cell.arrivalTimeLabel.text = arrivalTimes[indexPath.row]
+            
+            let dateFormatter = NSDateFormatter() // date format
+            dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
+            let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.row]) // get date from arrival time
+            var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) + 1 // get time difference in (MINUTES) add 1 minute buffer
+            var timeDifferenceHours = 0
+            cell.timeRemainingLabel.numberOfLines = 0
+            
+            // check to see if more than one hour remaining
+            if timeDifferenceMinutes > 60 {
+                timeDifferenceHours = timeDifferenceMinutes / 60
+                timeDifferenceMinutes = timeDifferenceMinutes % 60
+                cell.timeRemainingLabel.text = "\(timeDifferenceHours) hrs\n\(timeDifferenceMinutes) min"
+                
+            } else {
+                cell.timeRemainingLabel.text = "\(timeDifferenceMinutes) min"
+            }
+            
+            dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle // short style is just h:mm a
+            let arrivalTime = dateFormatter.stringFromDate(arrivalTimeDate!) // get arrival time string from date
+            cell.arrivalTimeLabel.text = arrivalTime
+            
             return cell
         }
     }

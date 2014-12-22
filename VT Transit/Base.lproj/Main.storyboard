@@ -170,7 +170,7 @@
         <scene sceneID="X7v-sU-FQL">
             <objects>
                 <collectionViewController id="b2n-OB-Bc5" customClass="ArrivalTimesForRouteCollectionViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="t1R-vn-zJ2">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="t1R-vn-zJ2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -212,15 +212,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfl-69-AKc">
-                                            <rect key="frame" x="0.0" y="5" width="90" height="50"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="arrival time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRD-iI-hvi">
+                                            <rect key="frame" x="0.0" y="65" width="90" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="arrival time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRD-iI-hvi">
-                                            <rect key="frame" x="0.0" y="63" width="90" height="16"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfl-69-AKc">
+                                            <rect key="frame" x="0.0" y="5" width="90" height="55"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -231,10 +231,10 @@
                                 <constraints>
                                     <constraint firstItem="jfl-69-AKc" firstAttribute="leading" secondItem="YAf-ee-KG8" secondAttribute="leading" id="MZj-7B-8eI"/>
                                     <constraint firstItem="iRD-iI-hvi" firstAttribute="trailing" secondItem="jfl-69-AKc" secondAttribute="trailing" id="Q9n-2k-n6q"/>
-                                    <constraint firstItem="iRD-iI-hvi" firstAttribute="top" secondItem="jfl-69-AKc" secondAttribute="bottom" constant="8" id="RKw-o5-dCl"/>
+                                    <constraint firstItem="iRD-iI-hvi" firstAttribute="top" secondItem="jfl-69-AKc" secondAttribute="bottom" constant="5" id="RKw-o5-dCl"/>
                                     <constraint firstItem="jfl-69-AKc" firstAttribute="top" secondItem="YAf-ee-KG8" secondAttribute="top" constant="5" id="au2-DD-Y4I"/>
                                     <constraint firstItem="iRD-iI-hvi" firstAttribute="leading" secondItem="jfl-69-AKc" secondAttribute="leading" id="dWt-pn-e4L"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="jfl-69-AKc" secondAttribute="bottom" constant="27" id="pvY-PF-Sdq"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="jfl-69-AKc" secondAttribute="bottom" constant="22" id="pvY-PF-Sdq"/>
                                     <constraint firstAttribute="trailing" secondItem="jfl-69-AKc" secondAttribute="trailing" id="xq2-zu-sPl"/>
                                 </constraints>
                                 <connections>
