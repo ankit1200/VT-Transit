@@ -61,6 +61,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         return cell
     }
     
+    // handle tableview cell selection
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if tableView == self.searchDisplayController!.searchResultsTableView {
