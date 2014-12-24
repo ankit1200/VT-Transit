@@ -503,20 +503,6 @@
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ankit1200/Developer/iOS,
-					Development,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
@@ -538,20 +524,6 @@
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ankit1200/Developer/iOS,
-					Development,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
-					/Users/ankit1200/Developer/iOS,
-					Development/Parse,
-					Framework,
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
