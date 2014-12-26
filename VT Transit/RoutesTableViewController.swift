@@ -107,7 +107,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     
     // *******************
-    // MARK: Handel Segues
+    // MARK: Handle Segues
     // *******************
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
