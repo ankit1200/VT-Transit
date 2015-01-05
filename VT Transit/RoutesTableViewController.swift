@@ -79,6 +79,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             alertView.delegate = nil
             alertView.addButtonWithTitle("OK")
             alertView.show()
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
             
         } else {
             // sort the stops alphabetically
@@ -114,16 +115,16 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         
         if segue.identifier == "showStopsForRoutes" {
             
-            let stopsTableViewController = segue.destinationViewController as StopsTableViewController
+            let containerViewController = segue.destinationViewController as ContainerViewController
             // handle selected cells in search display controlller
             if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
-                stopsTableViewController.selectedRoute = self.filteredRoutes[indexPath.row]
+                containerViewController.selectedRoute = self.filteredRoutes[indexPath.row]
             } else {
                 let indexPath = self.tableView.indexPathForSelectedRow()!
-                stopsTableViewController.selectedRoute = self.routes[indexPath.row]
+                containerViewController.selectedRoute = self.routes[indexPath.row]
             }
-            stopsTableViewController.stops = stops
+            containerViewController.stops = stops
         }
     }
 }

@@ -10,6 +10,9 @@
 		4705068C1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */; };
 		4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */; };
 		470506911A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */; };
+		470506951A4B5CEB00EEA613 /* SegmentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506941A4B5CEB00EEA613 /* SegmentMapViewController.swift */; };
+		470506971A4D4DD900EEA613 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506961A4D4DD900EEA613 /* ContainerViewController.swift */; };
+		470506991A4E663D00EEA613 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506981A4E663D00EEA613 /* EmptySegue.swift */; };
 		4711A9BA19AFBBB80062F587 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9B919AFBBB80062F587 /* StoreKit.framework */; };
 		4711A9BC19AFBBCF0062F587 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */; };
 		4711A9BE19AFBBD60062F587 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */; };
@@ -35,6 +38,7 @@
 		4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
+		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
 		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
@@ -59,6 +63,9 @@
 		4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesForRouteCollectionViewController.swift; sourceTree = "<group>"; };
+		470506941A4B5CEB00EEA613 /* SegmentMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentMapViewController.swift; sourceTree = "<group>"; };
+		470506961A4D4DD900EEA613 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		470506981A4E663D00EEA613 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		4711A9B919AFBBB80062F587 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -89,6 +96,7 @@
 		4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopsTableViewController.swift; sourceTree = "<group>"; };
 		4734D7AF19CF59B9007AB683 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../Parse Framework/Bolts.framework"; sourceTree = "<group>"; };
 		4734D7B019CF59B9007AB683 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../Parse Framework/Parse.framework"; sourceTree = "<group>"; };
+		47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -212,6 +220,7 @@
 				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				4705068A1A42B5AB00EEA613 /* Objects */,
+				470506981A4E663D00EEA613 /* EmptySegue.swift */,
 				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
@@ -251,7 +260,10 @@
 			isa = PBXGroup;
 			children = (
 				47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */,
+				470506961A4D4DD900EEA613 /* ContainerViewController.swift */,
+				47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */,
 				4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */,
+				470506941A4B5CEB00EEA613 /* SegmentMapViewController.swift */,
 				470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */,
 			);
 			name = "View Controllers";
@@ -373,15 +385,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */,
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
 				4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */,
 				4705068C1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift in Sources */,
 				470506911A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift in Sources */,
+				470506991A4E663D00EEA613 /* EmptySegue.swift in Sources */,
 				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
+				470506951A4B5CEB00EEA613 /* SegmentMapViewController.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
 				47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */,
 				47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */,
+				470506971A4D4DD900EEA613 /* ContainerViewController.swift in Sources */,
 				4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

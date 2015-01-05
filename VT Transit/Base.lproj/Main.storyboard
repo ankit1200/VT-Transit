@@ -37,6 +37,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textShadowColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -88,7 +92,7 @@
                     <navigationItem key="navigationItem" title="Routes" id="arx-bx-AQR"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="8uW-7K-C1P" id="6Ka-So-ljD"/>
-                        <segue destination="6gb-iC-hlK" kind="show" identifier="showStopsForRoutes" id="EPd-kZ-GDO"/>
+                        <segue destination="rml-P8-JW1" kind="show" identifier="showStopsForRoutes" id="WPt-il-FjO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOj-c0-v9A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,16 +108,38 @@
             </objects>
             <point key="canvasLocation" x="774.5" y="-1250.5"/>
         </scene>
+        <!--Segment View Controller-->
+        <scene sceneID="XXS-Nk-wUX">
+            <objects>
+                <viewController id="AWk-Vx-Rue" customClass="SegmentViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zBv-rh-XJl"/>
+                        <viewControllerLayoutGuide type="bottom" id="B6I-A8-8H6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="grC-Gy-yAZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="6gb-iC-hlK" kind="custom" identifier="showStops" customClass="EmptySegue" customModule="VT_Transit" customModuleProvider="target" id="QBR-gh-efU"/>
+                        <segue destination="O21-DA-OA6" kind="custom" identifier="showMap" customClass="EmptySegue" customModule="VT_Transit" customModuleProvider="target" id="2FH-ti-f87"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wo1-Fz-nKE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1765.5" y="-1250"/>
+        </scene>
         <!--Stops Table View Controller-->
         <scene sceneID="14d-PF-z5s">
             <objects>
                 <tableViewController id="6gb-iC-hlK" customClass="StopsTableViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hws-Ax-CLI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by stop name" translucent="NO" id="hNI-Ns-DwM">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
                             <textInputTraits key="textInputTraits"/>
@@ -148,6 +174,17 @@
                             <outlet property="delegate" destination="6gb-iC-hlK" id="rdl-Le-66n"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="upe-wy-fRc">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="wbq-gs-R00">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Stops"/>
+                                <segment title="Map"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="3Tt-Z5-F6O" id="uPT-bp-7M7"/>
                         <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimes" id="Xua-HK-BuK"/>
@@ -164,14 +201,104 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1257.5" y="-1250.5"/>
+            <point key="canvasLocation" x="2410" y="-1250"/>
+        </scene>
+        <!--Container View Controller-->
+        <scene sceneID="fHr-3u-kcZ">
+            <objects>
+                <viewController id="rml-P8-JW1" customClass="ContainerViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UHC-pn-M9Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="evn-Hg-Vad"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Z8g-9T-8AW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAU-Wb-5Fb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <connections>
+                                    <segue destination="AWk-Vx-Rue" kind="embed" identifier="embedContainer" id="fqr-Uh-Fyx"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KAU-Wb-5Fb" firstAttribute="top" secondItem="UHC-pn-M9Z" secondAttribute="bottom" id="5sO-LG-VK6"/>
+                            <constraint firstAttribute="trailing" secondItem="KAU-Wb-5Fb" secondAttribute="trailing" id="F5v-22-XMI"/>
+                            <constraint firstItem="KAU-Wb-5Fb" firstAttribute="leading" secondItem="Z8g-9T-8AW" secondAttribute="leading" id="MPP-PS-4Xd"/>
+                            <constraint firstAttribute="bottom" secondItem="KAU-Wb-5Fb" secondAttribute="bottom" constant="49" id="TMJ-ay-cMw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Gx-j0-Wyy">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="z3h-Fz-OF5">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Stops"/>
+                                <segment title="Map"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="containerView" destination="KAU-Wb-5Fb" id="xGc-Pd-BXj"/>
+                        <outlet property="segmentControl" destination="z3h-Fz-OF5" id="HY0-PW-ljI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6vZ-Ab-3UE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1259.5" y="-1250.5"/>
+        </scene>
+        <!--Segment Map View Controller-->
+        <scene sceneID="24l-iy-SvU">
+            <objects>
+                <viewController id="O21-DA-OA6" customClass="SegmentMapViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aVv-gO-WmG"/>
+                        <viewControllerLayoutGuide type="bottom" id="r5P-a5-gLP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="su0-yH-I8n">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lKG-2M-Npq">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lKG-2M-Npq" secondAttribute="trailing" id="RTv-Fo-1Iu"/>
+                            <constraint firstItem="r5P-a5-gLP" firstAttribute="top" secondItem="lKG-2M-Npq" secondAttribute="bottom" id="lDF-g1-qgf"/>
+                            <constraint firstItem="lKG-2M-Npq" firstAttribute="top" secondItem="aVv-gO-WmG" secondAttribute="bottom" id="oJE-Qg-2GX"/>
+                            <constraint firstItem="lKG-2M-Npq" firstAttribute="leading" secondItem="su0-yH-I8n" secondAttribute="leading" id="rcY-X3-uGT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hkj-87-3rn">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="MLr-1H-ROg">
+                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Stops"/>
+                                <segment title="Map"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="lKG-2M-Npq" id="Xhc-9j-eiG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SQW-FT-ZoA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2410" y="-1937"/>
         </scene>
         <!--Arrival Times For Route Collection View Controller-->
         <scene sceneID="X7v-sU-FQL">
             <objects>
                 <collectionViewController id="b2n-OB-Bc5" customClass="ArrivalTimesForRouteCollectionViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="t1R-vn-zJ2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                         <color key="tintColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
@@ -248,13 +375,13 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
-                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                    <rect key="frame" x="8" y="8" width="584" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoT-Oy-wsx">
-                                    <rect key="frame" x="8" y="27" width="359" height="21"/>
+                                    <rect key="frame" x="8" y="27" width="584" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
@@ -283,7 +410,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4m-C5-gJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807.5" y="-1250.5"/>
+            <point key="canvasLocation" x="3187" y="-1250"/>
         </scene>
     </scenes>
     <resources>

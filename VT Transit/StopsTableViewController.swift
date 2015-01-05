@@ -21,8 +21,6 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = selectedRoute.name
     }
     
     // ******************************
@@ -55,6 +53,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showArrivalTimes", sender: tableView)
     }
+    
     
     // ************************
     // MARK: Search Bar Methods
@@ -92,6 +91,12 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
                 arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row]
             }
             arrivalTimesForRouteCollectionViewController.selectedRoute = selectedRoute
+        }
+        if segue.identifier == "showMap" {
+            
+            let segmentMapViewController = segue.destinationViewController as SegmentMapViewController
+            
+            
         }
     }
 }
