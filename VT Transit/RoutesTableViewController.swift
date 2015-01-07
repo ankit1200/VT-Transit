@@ -15,6 +15,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     let parser = Parser()
     var stops = Array<Stop>()
     
+    
     // **************************************
     // MARK: View Controller Delegate Methods
     // **************************************
@@ -39,6 +40,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         }
     }
     
+    
     // ****************************
     // MARK: Table view data source
     // ****************************
@@ -50,7 +52,6 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) as UITableViewCell
-        
         var route:Route
         // Check to see whether the normal table or search results table is being displayed
         route = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredRoutes[indexPath.row] : routes[indexPath.row]

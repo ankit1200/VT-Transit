@@ -11,7 +11,7 @@ import Foundation
 class Stop {
     
     let name, code: String
-    let latitude, longitude: String
+    var latitude, longitude: String
     
     // init new Stop object
     init(name: String, code: String, latitude:String, longitude:String) {

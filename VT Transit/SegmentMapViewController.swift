@@ -17,5 +17,24 @@ class SegmentMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set the zoom to burruss hall
+        let drillfield = CLLocationCoordinate2D(latitude: 37.228368, longitude: -80.422942)
+        let span = MKCoordinateSpanMake(0.015, 0.015)
+        let region = MKCoordinateRegion(center: drillfield, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        // add the pins to the mapview
+        for stop in stops {
+            let annotation = MKPointAnnotation()
+            let coordinate = CLLocationCoordinate2D(latitude: (stop.latitude as NSString).doubleValue, longitude: (stop.longitude as NSString).doubleValue)
+            annotation.setCoordinate(coordinate)
+            annotation.title = stop.name
+            annotation.subtitle = "Bus Stop #\(stop.code)"
+            mapView.addAnnotation(annotation)
+        }
     }
 }

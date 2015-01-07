@@ -17,21 +17,21 @@ class ContainerViewController: UIViewController {
     var stops = Array<Stop>()
     
     
+    // **************************************
+    // MARK: View Controller Delegate Methods
+    // **************************************
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentControl.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
-        
-        // set inital view controller as stops table view controller
-//        var stopsTableViewController = StopsTableViewController(selectedRoute: selectedRoute, stops: stops)
-//        addChildViewController(stopsTableViewController)
     }
     
     
     // ***********************************
     // MARK: Segment Control Value Changed
     // ***********************************
+    
     func valueChanged(sender: AnyObject?) {
-
         self.segmentViewController!.swap()
     }
     

@@ -20,19 +20,34 @@ class SegmentViewController: UIViewController {
     var selectedRoute = Route(name:"", shortName:"")
     var stops = Array<Stop>()
     
+    
+    // **************************************
+    // MARK: View Controller Delegate Methods
+    // **************************************
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         transitionInProgress = false
         currentSegueID = firstSegueID
+        var names = [String]()
+        for stop in stops {
+            names.append(stop.name)
+        }
+        querySelectedStopsFromParse(names)
         performSegueWithIdentifier(currentSegueID, sender: nil)
     }
+    
+    
+    // ******************
+    // MARK: Swap Methods
+    // ******************
     
     func swapViewControllers(from:UIViewController, to:UIViewController) {
         
         to.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         from.willMoveToParentViewController(nil)
         addChildViewController(to)
-        transitionFromViewController(from, toViewController: to, duration: 1.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: nil, completion: {
+        transitionFromViewController(from, toViewController: to, duration: 0.75, options: UIViewAnimationOptions.TransitionFlipFromRight, animations: nil, completion: {
             (finished: Bool) -> Void in
             from.removeFromParentViewController()
             to.didMoveToParentViewController(self)
@@ -58,6 +73,33 @@ class SegmentViewController: UIViewController {
             performSegueWithIdentifier(currentSegueID, sender: nil)
         }
     }
+    
+    
+    // ************************
+    // MARK: Query Stops Method
+    // ************************
+    func querySelectedStopsFromParse(names:[String]) {
+        
+        var query = PFQuery(className:"Stops")
+        query.whereKey("name", containedIn: names)
+        query.addAscendingOrder("name")
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            // The find succeeded.
+            if error == nil {
+                // Add latitude and longitute to selected Stops
+                var counter = 0
+                for object in objects {
+                    self.stops[counter].latitude = object["latitude"] as String
+                    self.stops[counter++].longitude = object["longitude"] as String
+                }
+            } else {
+                // Log details of the failure
+                NSLog("Error: %@ %@", error, error.userInfo!)
+            }
+        }
+    }
+    
     
     // *******************
     // MARK: Handle Segues
