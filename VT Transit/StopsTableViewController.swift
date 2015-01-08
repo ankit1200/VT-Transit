@@ -58,6 +58,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // ************************
     // MARK: Search Bar Methods
     // ************************
+    
     func filterContentForSearchText(searchText: String) {
         // Filter the array using the filter method
         filteredStops = self.stops.filter({( stop: Stop) -> Bool in

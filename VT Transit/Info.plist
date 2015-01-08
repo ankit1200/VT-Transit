@@ -22,8 +22,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageSescription</key>
-	<string>VT Transit needs your location to show you your nearby bus stops</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>VT Transit needs your location to show you your nearby bus stops and current location on the map</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -9,14 +9,23 @@
 import UIKit
 import MapKit
 
-class SegmentMapViewController: UIViewController {
+class SegmentMapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet var mapView: MKMapView!
     var selectedRoute = Route(name:"", shortName:"")
     var stops = Array<Stop>()
+    @IBOutlet var mapTypeSegmentControl: UISegmentedControl!
+    let locationManager = CLLocationManager()
+    
+    // **************************************
+    // MARK: View Controller Delegate Methods
+    // **************************************
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // start location manager
+        locationManager.requestWhenInUseAuthorization()
         
         // set the zoom to burruss hall
         let drillfield = CLLocationCoordinate2D(latitude: 37.228368, longitude: -80.422942)
@@ -35,6 +44,25 @@ class SegmentMapViewController: UIViewController {
             annotation.title = stop.name
             annotation.subtitle = "Bus Stop #\(stop.code)"
             mapView.addAnnotation(annotation)
+        }
+    }
+    
+    // *************************
+    // MARK: Map Toolbar Methods
+    // *************************
+    
+    @IBAction func showCurrentLocation(sender: AnyObject) {
+        self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
+    }
+    
+    @IBAction func mapType(sender: AnyObject) {
+        
+        if mapTypeSegmentControl.selectedSegmentIndex == 0 {
+            mapView.mapType = MKMapType.Standard
+        } else if mapTypeSegmentControl.selectedSegmentIndex == 1 {
+            mapView.mapType = MKMapType.Hybrid
+        } else if mapTypeSegmentControl.selectedSegmentIndex == 2 {
+            mapView.mapType = MKMapType.Satellite
         }
     }
 }
