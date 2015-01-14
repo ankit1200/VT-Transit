@@ -13,7 +13,7 @@ import CoreLocation
 class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var mapView: MKMapView!
-    var selectedRoute = Route(name:"", shortName:"")
+    var selectedRoutes = [Route]()
     var stops = Array<Stop>()
     @IBOutlet var mapTypeSegmentControl: UISegmentedControl!
     let locationManager = CLLocationManager()
@@ -95,6 +95,8 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        let stop = (view.annotation as MapAnnotation).stop!
+        selectedRoutes = Parser.routesForStop(stop.code)
         performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: view)
     }
     
@@ -125,7 +127,7 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
         if segue.identifier == "showArrivalTimesForAllRoutes" {
             let arrivalTimesForRoute = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
             arrivalTimesForRoute.selectedStop = ((sender as MKAnnotationView).annotation as MapAnnotation).stop!
-            arrivalTimesForRoute.selectedRoute = selectedRoute
+            arrivalTimesForRoute.selectedRoutes = selectedRoutes
         }
     }
 }

@@ -134,7 +134,6 @@ class SegmentViewController: UIViewController {
         else if segue.identifier == secondSegueID {
             segmentMapViewController = segue.destinationViewController as? SegmentMapViewController
             swapViewControllers(self.childViewControllers[0] as UIViewController, to: segmentMapViewController!)
-            segmentMapViewController?.selectedRoute = selectedRoute
             segmentMapViewController?.stops = stops
         }
     }

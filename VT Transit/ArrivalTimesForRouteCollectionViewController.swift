@@ -10,16 +10,14 @@ import UIKit
 
 class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var selectedRoute = Route(name:"", shortName:"")
+    var selectedRoutes = [Route]()
     var selectedStop = Stop(name: "", code: "", latitude: "", longitude: "")
-    var arrivalTimes = [String]()
+    var arrivalTimes:[(time: [String], route: Route)] = []
     let parser = Parser()
     var refreshControl:UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        arrivalTimes = parser.arrivalTimesForRoute(selectedRoute.shortName, stopCode: selectedStop.code)
 
         // pull to refresh
         self.refreshControl = UIRefreshControl()
@@ -28,7 +26,17 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView!.addSubview(refreshControl)
         
-        self.title = selectedRoute.name
+        if selectedRoutes.count == 1 {
+            self.title = selectedRoutes[0].name
+        } else {
+            self.title = selectedStop.name
+        }
+        
+        // get arrivalTimes for routes
+        for route in selectedRoutes {
+            let time = Parser.arrivalTimesForRoute(route.shortName, stopCode: selectedStop.code)
+            arrivalTimes.append(time: time, route: route)
+        }
     }
 
     // *************************************
@@ -38,7 +46,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     func refresh(sender:AnyObject) {
         
         // update data
-        arrivalTimes = parser.arrivalTimesForRoute(selectedRoute.shortName, stopCode: selectedStop.code)
+        for route in selectedRoutes {
+            let time = Parser.arrivalTimesForRoute(route.shortName, stopCode: selectedStop.code)
+            arrivalTimes.append(time: time, route: route)
+        }
         self.collectionView?.reloadData()
         self.refreshControl.endRefreshing()
     }
@@ -48,16 +59,16 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     // ********************************
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1;
+        return selectedRoutes.count;
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (arrivalTimes.count == 0) ?  1 : arrivalTimes.count
+        return (arrivalTimes[section].time.count == 0) ?  1 : arrivalTimes[section].time.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if arrivalTimes.count == 0 {
+        if arrivalTimes[indexPath.section].time.count == 0 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noArrivalTimesCell", forIndexPath: indexPath) as UICollectionViewCell
             return cell
             
@@ -66,7 +77,8 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             
             let dateFormatter = NSDateFormatter() // date format
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
-            let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.row]) // get date from arrival time
+            // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
+            let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
             var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) + 1 // get time difference in (MINUTES) add 1 minute buffer
             var timeDifferenceHours = 0
             cell.timeRemainingLabel.numberOfLines = 0
@@ -97,8 +109,16 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         if kind == UICollectionElementKindSectionHeader {
             var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as StopsHeaderCollectionReusableView
             
-            headerView.title.text = selectedStop.name
-            headerView.subtitle.text = "Stop #: \(selectedStop.code)    Route Code: \(selectedRoute.shortName)"
+            if selectedRoutes.count == 1 {
+                headerView.title.text = selectedStop.name
+                headerView.subtitle.text = "Stop #: \(selectedStop.code)    Route Code: \(selectedRoutes[indexPath.section].shortName)"
+                headerView.routeTitle.text = ""
+            } else {
+                let selectedRoute = selectedRoutes[indexPath.section]
+                headerView.routeTitle.text = selectedRoute.name
+                headerView.title.text = ""
+                headerView.subtitle.text = ""
+            }
             
             reusableview = headerView;
         }
@@ -108,6 +128,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     // function to set the size of the cell appropriately
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return (arrivalTimes.count == 0) ? CGSize(width: 290.0, height: 60.0) : CGSize(width: 90.0, height: 90.0)
+        return (arrivalTimes[indexPath.section].time.count == 0) ? CGSize(width: 290.0, height: 60.0) : CGSize(width: 90.0, height: 90.0)
     }
 }

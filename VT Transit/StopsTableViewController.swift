@@ -98,7 +98,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
                 arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row]
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
-            arrivalTimesForRouteCollectionViewController.selectedRoute = selectedRoute
+            arrivalTimesForRouteCollectionViewController.selectedRoutes = [selectedRoute]
         }
         if segue.identifier == "showMap" {
             let segmentMapViewController = segue.destinationViewController as SegmentMapViewController

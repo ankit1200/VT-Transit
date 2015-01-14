@@ -422,18 +422,28 @@
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RouteTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-sX-CjW">
+                                    <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
+                                <constraint firstItem="fxd-sX-CjW" firstAttribute="leading" secondItem="rHE-xd-mJ0" secondAttribute="leading" id="4uW-vc-tWJ"/>
+                                <constraint firstItem="fxd-sX-CjW" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="14" id="M9n-Bt-ccu"/>
                                 <constraint firstItem="rHE-xd-mJ0" firstAttribute="trailing" secondItem="M4k-ZZ-0Kb" secondAttribute="trailingMargin" id="Pqk-Id-8zP"/>
                                 <constraint firstItem="rHE-xd-mJ0" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="8" id="PuA-Tg-oPX"/>
                                 <constraint firstItem="NoT-Oy-wsx" firstAttribute="trailing" secondItem="rHE-xd-mJ0" secondAttribute="trailing" id="RqH-pe-iSe"/>
                                 <constraint firstItem="NoT-Oy-wsx" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="27" id="Twb-Xl-PFj"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="NoT-Oy-wsx" secondAttribute="bottom" constant="-6" id="eGM-GR-mZM"/>
                                 <constraint firstItem="NoT-Oy-wsx" firstAttribute="leading" secondItem="rHE-xd-mJ0" secondAttribute="leading" id="izd-3p-kh7"/>
+                                <constraint firstItem="fxd-sX-CjW" firstAttribute="trailing" secondItem="rHE-xd-mJ0" secondAttribute="trailing" id="jDE-25-we7"/>
                                 <constraint firstItem="rHE-xd-mJ0" firstAttribute="leading" secondItem="M4k-ZZ-0Kb" secondAttribute="leadingMargin" id="qVI-U8-Vx7"/>
                             </constraints>
                             <connections>
+                                <outlet property="routeTitle" destination="fxd-sX-CjW" id="M0U-JT-hNg"/>
                                 <outlet property="subtitle" destination="NoT-Oy-wsx" id="bfi-gI-hXV"/>
                                 <outlet property="title" destination="rHE-xd-mJ0" id="vBY-26-X9t"/>
                             </connections>

@@ -12,7 +12,6 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
 
     var routes = Array<Route>()
     var filteredRoutes = Array<Route>()
-    let parser = Parser()
     var stops = Array<Stop>()
     
     
@@ -64,28 +63,31 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // handle tableview cell selection
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if tableView == self.searchDisplayController!.searchResultsTableView {
-            // gets stops associated with route
-            stops = parser.stopsForRoute(self.filteredRoutes[indexPath.row].shortName)
-        } else {
-            stops = parser.stopsForRoute(self.routes[indexPath.row].shortName)
-        }
-        if stops.count == 0 {
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if tableView == self.searchDisplayController!.searchResultsTableView {
+                // gets stops associated with route
+                self.stops = Parser.stopsForRoute(self.filteredRoutes[indexPath.row].shortName)
+            } else {
+                self.stops = Parser.stopsForRoute(self.routes[indexPath.row].shortName)
+            }
             
-            // Instantiate an alert view object
-            var alertView = UIAlertView()
-            alertView.title = "Route not running!"
-            alertView.message = "The selected route is not running at this time. Please try a different Route"
-            alertView.delegate = nil
-            alertView.addButtonWithTitle("OK")
-            alertView.show()
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-            
-        } else {
-            // sort the stops alphabetically
-            stops.sort({$0.name < $1.name})
-            self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
-        }
+            if self.stops.count == 0 {
+                
+                // Instantiate an alert view object
+                var alertView = UIAlertView()
+                alertView.title = "Route not running!"
+                alertView.message = "The selected route is not running at this time. Please try a different Route"
+                alertView.delegate = nil
+                alertView.addButtonWithTitle("OK")
+                alertView.show()
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+                
+            } else {
+                // sort the stops alphabetically
+                self.stops.sort({$0.name < $1.name})
+                self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
+            }
+//        })
     }
     
     
