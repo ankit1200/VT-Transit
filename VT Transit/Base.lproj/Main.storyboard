@@ -264,6 +264,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKG-2M-Npq">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="O21-DA-OA6" id="Ebh-Ii-amj"/>
+                                </connections>
                             </mapView>
                             <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma8-GP-AhQ">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>

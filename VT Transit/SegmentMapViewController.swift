@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class SegmentMapViewController: UIViewController, MKMapViewDelegate {
+class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet var mapView: MKMapView!
     var selectedRoute = Route(name:"", shortName:"")
@@ -23,28 +24,80 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.mapView.showsUserLocation = true
+        locationManager.delegate = self
         // start location manager
-        locationManager.requestWhenInUseAuthorization()
+        // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+//        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
+            locationManager.requestWhenInUseAuthorization()
+//        }
         
-        // set the zoom to burruss hall
-        let drillfield = CLLocationCoordinate2D(latitude: 37.228368, longitude: -80.422942)
-        let span = MKCoordinateSpanMake(0.015, 0.015)
-        let region = MKCoordinateRegion(center: drillfield, span: span)
-        mapView.setRegion(region, animated: true)
+        locationManager.startUpdatingLocation()
     }
     
     override func viewDidAppear(animated: Bool) {
         
         // add the pins to the mapview
         for stop in stops {
-            let annotation = MKPointAnnotation()
             let coordinate = CLLocationCoordinate2D(latitude: (stop.latitude as NSString).doubleValue, longitude: (stop.longitude as NSString).doubleValue)
-            annotation.setCoordinate(coordinate)
-            annotation.title = stop.name
-            annotation.subtitle = "Bus Stop #\(stop.code)"
+            let annotation = MapAnnotation(coordinate: coordinate, title: stop.name, subtitle: "Bus Stop #\(stop.code)", category: "stop")
             mapView.addAnnotation(annotation)
         }
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        println("gets called")
+        // get current distance from VT campus
+        let burrussHall = CLLocationCoordinate2D(latitude: 37.228368, longitude: -80.422942)
+        let distanceInMiles = manager.location.distanceFromLocation(CLLocation(latitude: burrussHall.latitude, longitude: burrussHall.longitude)) / 1609.34
+        
+        // zoom to current location if < 20 away, else zoom to VT Campus
+        if CLLocationManager.locationServicesEnabled() && distanceInMiles < 20 {
+            self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
+        } else {
+            // set the zoom to burruss hall
+            let span = MKCoordinateSpanMake(0.015, 0.015)
+            let region = MKCoordinateRegion(center: burrussHall, span: span)
+            mapView.setRegion(region, animated: true)
+        }
+        manager.stopUpdatingLocation()
+    }
+    
+    // **************************************
+    // MARK: MKMapView Delegate Methods
+    // **************************************
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+            
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("Pin") as? MKPinAnnotationView
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+        }
+        annotationView!.canShowCallout = true
+        annotationView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+        
+        let category = (annotation as MapAnnotation).category
+        switch category {
+        case "stop":
+            annotationView!.pinColor = MKPinAnnotationColor.Red
+        case "current bus":
+            annotationView!.pinColor = MKPinAnnotationColor.Purple
+        case "search":
+            annotationView!.pinColor = MKPinAnnotationColor.Green
+        default:
+            annotationView!.pinColor = MKPinAnnotationColor.Red
+        }
+        
+        return annotationView
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        println("perform segue to collection view of times for stop will all the routes")
     }
     
     // *************************

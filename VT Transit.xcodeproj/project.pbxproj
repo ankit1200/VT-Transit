@@ -34,6 +34,7 @@
 		4711AA0C19AFBF850062F587 /* Longitudes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0619AFBF850062F587 /* Longitudes.txt */; };
 		4711AA0D19AFBF850062F587 /* Routes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0719AFBF850062F587 /* Routes.txt */; };
 		4711AA0E19AFBF850062F587 /* ShortRouteNames.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0819AFBF850062F587 /* ShortRouteNames.txt */; };
+		47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47150D731A649BD6009201CA /* MapAnnotation.swift */; };
 		4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF481A29376B00CCEB8F /* Bolts.framework */; };
 		4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
@@ -90,6 +91,7 @@
 		4711AA1F19AFC5330062F587 /* VT Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4711AA2019AFC5330062F587 /* VT TransitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "VT TransitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit-Bridging-Header.h"; sourceTree = "<group>"; };
+		47150D731A649BD6009201CA /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		4722CF481A29376B00CCEB8F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		4722CF491A29376B00CCEB8F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4722CF4C1A29967900CCEB8F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				4705068A1A42B5AB00EEA613 /* Objects */,
 				470506981A4E663D00EEA613 /* EmptySegue.swift */,
+				47150D731A649BD6009201CA /* MapAnnotation.swift */,
 				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
@@ -396,6 +399,7 @@
 				470506951A4B5CEB00EEA613 /* SegmentMapViewController.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
 				47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */,
+				47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */,
 				47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */,
 				470506971A4D4DD900EEA613 /* ContainerViewController.swift in Sources */,
 				4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */,

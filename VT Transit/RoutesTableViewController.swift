@@ -40,7 +40,6 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         }
     }
     
-    
     // ****************************
     // MARK: Table view data source
     // ****************************
@@ -121,9 +120,11 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
                 containerViewController.selectedRoute = self.filteredRoutes[indexPath.row]
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             } else {
                 let indexPath = self.tableView.indexPathForSelectedRow()!
                 containerViewController.selectedRoute = self.routes[indexPath.row]
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
             containerViewController.stops = stops
         }

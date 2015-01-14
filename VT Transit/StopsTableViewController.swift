@@ -19,8 +19,13 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // MARK: View Controller Delegate Methods
     // **************************************
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // deselect all rows in tableView
+        let indexPath:NSIndexPath? = self.tableView.indexPathForSelectedRow()
+        if indexPath != nil {
+            self.tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+        }
     }
     
     // ******************************
@@ -87,17 +92,16 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
             if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row]
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             } else {
                 let indexPath = self.tableView.indexPathForSelectedRow()!
                 arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row]
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
             arrivalTimesForRouteCollectionViewController.selectedRoute = selectedRoute
         }
         if segue.identifier == "showMap" {
-            
             let segmentMapViewController = segue.destinationViewController as SegmentMapViewController
-            
-            
         }
     }
 }
