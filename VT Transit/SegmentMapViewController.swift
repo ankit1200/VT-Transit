@@ -39,15 +39,13 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         // add the pins to the mapview
         for stop in stops {
-            let coordinate = CLLocationCoordinate2D(latitude: (stop.latitude as NSString).doubleValue, longitude: (stop.longitude as NSString).doubleValue)
-            let annotation = MapAnnotation(coordinate: coordinate, title: stop.name, subtitle: "Bus Stop #\(stop.code)", category: "stop")
+            let annotation = MapAnnotation(stop: stop)
             mapView.addAnnotation(annotation)
         }
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-        println("gets called")
         // get current distance from VT campus
         let burrussHall = CLLocationCoordinate2D(latitude: 37.228368, longitude: -80.422942)
         let distanceInMiles = manager.location.distanceFromLocation(CLLocation(latitude: burrussHall.latitude, longitude: burrussHall.longitude)) / 1609.34
@@ -97,7 +95,7 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        println("perform segue to collection view of times for stop will all the routes")
+        performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: view)
     }
     
     // *************************
@@ -116,6 +114,18 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
             mapView.mapType = MKMapType.Hybrid
         } else if mapTypeSegmentControl.selectedSegmentIndex == 2 {
             mapView.mapType = MKMapType.Satellite
+        }
+    }
+    
+    // ***********************
+    // MARK: Prepare For Segue
+    // ***********************
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showArrivalTimesForAllRoutes" {
+            let arrivalTimesForRoute = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
+            arrivalTimesForRoute.selectedStop = ((sender as MKAnnotationView).annotation as MapAnnotation).stop!
+            arrivalTimesForRoute.selectedRoute = selectedRoute
         }
     }
 }

@@ -322,6 +322,7 @@
                     <connections>
                         <outlet property="mapTypeSegmentControl" destination="Yis-xT-D9A" id="jeu-Wh-aT2"/>
                         <outlet property="mapView" destination="lKG-2M-Npq" id="Xhc-9j-eiG"/>
+                        <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimesForAllRoutes" id="y9Y-Xu-BV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQW-FT-ZoA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -452,5 +453,8 @@
         <image name="Location" width="26" height="25"/>
         <image name="route-tab" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="y9Y-Xu-BV2"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
