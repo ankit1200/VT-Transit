@@ -13,7 +13,7 @@ class SegmentViewController: UIViewController {
     var transitionInProgress = false
     var currentSegueID = String()
     var stopsTableViewController:StopsTableViewController?
-    var segmentMapViewController:SegmentMapViewController?
+    var segmentMapViewController:MapViewController?
     let firstSegueID = "showStops"
     let secondSegueID = "showMap"
     
@@ -29,11 +29,11 @@ class SegmentViewController: UIViewController {
         super.viewDidLoad()
         transitionInProgress = false
         currentSegueID = firstSegueID
-        var names = [String]()
+        var codes = [String]()
         for stop in stops {
-            names.append(stop.name)
+            codes.append(stop.code)
         }
-        querySelectedStopsFromParse(names)
+        querySelectedStopsFromParse(codes)
         performSegueWithIdentifier(currentSegueID, sender: nil)
     }
     
@@ -78,10 +78,10 @@ class SegmentViewController: UIViewController {
     // ************************
     // MARK: Query Stops Method
     // ************************
-    func querySelectedStopsFromParse(names:[String]) {
+    func querySelectedStopsFromParse(codes:[String]) {
         
         var query = PFQuery(className:"Stops")
-        query.whereKey("name", containedIn: names)
+        query.whereKey("code", containedIn: codes)
         query.addAscendingOrder("name")
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -132,9 +132,10 @@ class SegmentViewController: UIViewController {
         // By definition the second view controller will always be swapped with the
         // first one.
         else if segue.identifier == secondSegueID {
-            segmentMapViewController = segue.destinationViewController as? SegmentMapViewController
+            segmentMapViewController = segue.destinationViewController as? MapViewController
             swapViewControllers(self.childViewControllers[0] as UIViewController, to: segmentMapViewController!)
             segmentMapViewController?.stops = stops
+            segmentMapViewController?.selectedRoutes = [selectedRoute]
         }
     }
 }

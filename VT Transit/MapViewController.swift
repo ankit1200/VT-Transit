@@ -10,13 +10,16 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 
     @IBOutlet var mapView: MKMapView!
     var selectedRoutes = [Route]()
     var stops = Array<Stop>()
     @IBOutlet var mapTypeSegmentControl: UISegmentedControl!
     let locationManager = CLLocationManager()
+    var timer = NSTimer()
+    var currentBusAnnotations = [MapAnnotation]()
+    @IBOutlet var searchBar: UISearchBar!
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -42,7 +45,65 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
             let annotation = MapAnnotation(stop: stop)
             mapView.addAnnotation(annotation)
         }
+        
+        // get current bus locations in background
+        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if self.selectedRoutes.count > 1 {
+                currentBusLocations = Parser.getCurrentBusLocations(nil)
+            } else {
+                currentBusLocations = Parser.getCurrentBusLocations(self.selectedRoutes[0].shortName)
+            }
+            // add current bus location in background
+            dispatch_async(dispatch_get_main_queue(), {
+                for location in currentBusLocations {
+                    let annotation = MapAnnotation(coordinate: location.coordinate, title: location.route.name, subtitle: location.route.shortName, category: "current bus")
+                    self.currentBusAnnotations.append(annotation)
+                    self.mapView.addAnnotation(annotation)
+                }
+            })
+        })
+        
+        // set a nstimer
+        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("getCurrentBusLocation"), userInfo: nil, repeats: true)
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        timer.invalidate()
+    }
+    
+    // **************************
+    // MARK: Current Bus Location
+    // **************************
+    
+    func getCurrentBusLocation() {
+        // remove all current bus annotations and empty the list
+        self.mapView.removeAnnotations(currentBusAnnotations)
+        currentBusAnnotations = [MapAnnotation]()
+        
+        // get current bus locations in background
+        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if self.selectedRoutes.count > 1 {
+                currentBusLocations = Parser.getCurrentBusLocations(nil)
+            } else {
+                currentBusLocations = Parser.getCurrentBusLocations(self.selectedRoutes[0].shortName)
+            }
+            // add current bus location in background
+            dispatch_async(dispatch_get_main_queue(), {
+                for location in currentBusLocations {
+                    let annotation = MapAnnotation(coordinate: location.coordinate, title: location.route.name, subtitle: location.route.shortName, category: "current bus")
+                    self.currentBusAnnotations.append(annotation)
+                    self.mapView.addAnnotation(annotation)
+                }
+            })
+        })
+    }
+    
+    // *******************************
+    // MARK: Location Manager Delegate
+    // *******************************
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
@@ -77,18 +138,21 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
         }
         annotationView!.canShowCallout = true
-        annotationView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
         
         let category = (annotation as MapAnnotation).category
         switch category {
         case "stop":
             annotationView!.pinColor = MKPinAnnotationColor.Red
+            annotationView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
         case "current bus":
             annotationView!.pinColor = MKPinAnnotationColor.Purple
+            annotationView!.rightCalloutAccessoryView = nil
         case "search":
             annotationView!.pinColor = MKPinAnnotationColor.Green
+            annotationView!.rightCalloutAccessoryView = nil
         default:
             annotationView!.pinColor = MKPinAnnotationColor.Red
+            annotationView!.rightCalloutAccessoryView = nil
         }
         
         return annotationView
@@ -100,6 +164,30 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
         performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: view)
     }
     
+    // ************************
+    // MARK: Map Search Methods
+    // ************************
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        println("search button clicked")
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as? UITableViewCell
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+        }
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("selected Row")
+    }
+    
     // *************************
     // MARK: Map Toolbar Methods
     // *************************
@@ -109,7 +197,6 @@ class SegmentMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     
     @IBAction func mapType(sender: AnyObject) {
-        
         if mapTypeSegmentControl.selectedSegmentIndex == 0 {
             mapView.mapType = MKMapType.Standard
         } else if mapTypeSegmentControl.selectedSegmentIndex == 1 {

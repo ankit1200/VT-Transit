@@ -30,7 +30,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             if error == nil {
                 
                 for object in objects {
-                    let route = Route(name: object["name"] as String, shortName: object["shortName"] as String)
+                    let route = Route(name: object["name"] as? String, shortName: object["shortName"] as String)
                     self.routes.append(route)
                 }
                 self.routes.sort({$0.name < $1.name})

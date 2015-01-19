@@ -63,7 +63,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (arrivalTimes[section].time.count == 0) ?  1 : arrivalTimes[section].time.count
+        // if no arrival times remain then return 1, for the noArrivalTimesCell else return the count
+        // if there are multiple routes, then only return the first 6 arrivalTimes
+        let arrivalTimesCount = arrivalTimes[section].time.count
+        return (arrivalTimesCount == 0) ?  1 : ((selectedRoutes.count > 1 && arrivalTimesCount > 6) ? 6 : arrivalTimesCount)
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -79,20 +82,24 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
             // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
             let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
-            var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) + 1 // get time difference in (MINUTES) add 1 minute buffer
+            var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES) add 1 minute buffer
             var timeDifferenceHours = 0
             cell.timeRemainingLabel.numberOfLines = 0
-            
+            var timeRemainingText = String()
             // check to see if more than one hour remaining
             if timeDifferenceMinutes > 60 {
                 timeDifferenceHours = timeDifferenceMinutes / 60
                 timeDifferenceMinutes = timeDifferenceMinutes % 60
-                cell.timeRemainingLabel.text = "\(timeDifferenceHours) hrs\n\(timeDifferenceMinutes) min"
+                 timeRemainingText = "\(timeDifferenceHours) hrs\n\(timeDifferenceMinutes) min"
+                
+            } else if timeDifferenceMinutes < 0 {
+                timeRemainingText = "BUS HAS PASSED"
                 
             } else {
-                cell.timeRemainingLabel.text = "\(timeDifferenceMinutes) min"
+                timeRemainingText = "\(timeDifferenceMinutes) min"
             }
             
+            cell.timeRemainingLabel.text = timeRemainingText
             dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle // short style is just h:mm a
             let arrivalTime = dateFormatter.stringFromDate(arrivalTimeDate!) // get arrival time string from date
             cell.arrivalTimeLabel.text = arrivalTime

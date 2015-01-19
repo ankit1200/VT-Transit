@@ -250,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="1259.5" y="-1250.5"/>
         </scene>
-        <!--Segment Map View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="24l-iy-SvU">
             <objects>
-                <viewController id="O21-DA-OA6" customClass="SegmentMapViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="O21-DA-OA6" customClass="MapViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aVv-gO-WmG"/>
                         <viewControllerLayoutGuide type="bottom" id="r5P-a5-gLP"/>
@@ -296,12 +296,23 @@
                                 </items>
                                 <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
+                            <searchBar contentMode="redraw" placeholder="Search a local business or address" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWN-k1-740">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="barTintColor" red="0.50196081400000003" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="O21-DA-OA6" id="oSe-ww-Eog"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ma8-GP-AhQ" firstAttribute="leading" secondItem="su0-yH-I8n" secondAttribute="leading" id="0Bo-Iz-LiN"/>
+                            <constraint firstItem="aWN-k1-740" firstAttribute="leading" secondItem="su0-yH-I8n" secondAttribute="leading" id="Mv1-0p-ptq"/>
                             <constraint firstAttribute="trailing" secondItem="lKG-2M-Npq" secondAttribute="trailing" id="RTv-Fo-1Iu"/>
                             <constraint firstItem="r5P-a5-gLP" firstAttribute="top" secondItem="Ma8-GP-AhQ" secondAttribute="bottom" id="Wym-IY-JNS"/>
+                            <constraint firstItem="aWN-k1-740" firstAttribute="top" secondItem="aVv-gO-WmG" secondAttribute="bottom" id="bmf-6S-X9m"/>
+                            <constraint firstAttribute="trailing" secondItem="aWN-k1-740" secondAttribute="trailing" id="eLD-1O-JQk"/>
                             <constraint firstAttribute="trailing" secondItem="Ma8-GP-AhQ" secondAttribute="trailing" id="jf8-wO-1jl"/>
                             <constraint firstItem="r5P-a5-gLP" firstAttribute="top" secondItem="lKG-2M-Npq" secondAttribute="bottom" id="lDF-g1-qgf"/>
                             <constraint firstItem="lKG-2M-Npq" firstAttribute="top" secondItem="aVv-gO-WmG" secondAttribute="bottom" id="oJE-Qg-2GX"/>
@@ -322,10 +333,21 @@
                     <connections>
                         <outlet property="mapTypeSegmentControl" destination="Yis-xT-D9A" id="jeu-Wh-aT2"/>
                         <outlet property="mapView" destination="lKG-2M-Npq" id="Xhc-9j-eiG"/>
+                        <outlet property="searchBar" destination="aWN-k1-740" id="SFw-9h-I35"/>
+                        <outlet property="searchDisplayController" destination="yR1-oL-64E" id="kwA-Xm-2GZ"/>
                         <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimesForAllRoutes" id="y9Y-Xu-BV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQW-FT-ZoA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="yR1-oL-64E">
+                    <connections>
+                        <outlet property="delegate" destination="O21-DA-OA6" id="aLM-wu-FEz"/>
+                        <outlet property="searchBar" destination="aWN-k1-740" id="yrm-H3-NWh"/>
+                        <outlet property="searchContentsController" destination="O21-DA-OA6" id="s4P-M1-N77"/>
+                        <outlet property="searchResultsDataSource" destination="O21-DA-OA6" id="bcV-aH-gQf"/>
+                        <outlet property="searchResultsDelegate" destination="O21-DA-OA6" id="XGh-8U-d1U"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2410" y="-1937"/>
         </scene>

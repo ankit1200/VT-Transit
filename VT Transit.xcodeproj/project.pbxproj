@@ -10,7 +10,7 @@
 		4705068C1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */; };
 		4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */; };
 		470506911A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */; };
-		470506951A4B5CEB00EEA613 /* SegmentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506941A4B5CEB00EEA613 /* SegmentMapViewController.swift */; };
+		470506951A4B5CEB00EEA613 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506941A4B5CEB00EEA613 /* MapViewController.swift */; };
 		470506971A4D4DD900EEA613 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506961A4D4DD900EEA613 /* ContainerViewController.swift */; };
 		470506991A4E663D00EEA613 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506981A4E663D00EEA613 /* EmptySegue.swift */; };
 		4711A9BA19AFBBB80062F587 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9B919AFBBB80062F587 /* StoreKit.framework */; };
@@ -64,7 +64,7 @@
 		4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4705068D1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesForRouteCollectionViewController.swift; sourceTree = "<group>"; };
-		470506941A4B5CEB00EEA613 /* SegmentMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentMapViewController.swift; sourceTree = "<group>"; };
+		470506941A4B5CEB00EEA613 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		470506961A4D4DD900EEA613 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		470506981A4E663D00EEA613 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		4711A9B919AFBBB80062F587 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -266,7 +266,7 @@
 				470506961A4D4DD900EEA613 /* ContainerViewController.swift */,
 				47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */,
 				4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */,
-				470506941A4B5CEB00EEA613 /* SegmentMapViewController.swift */,
+				470506941A4B5CEB00EEA613 /* MapViewController.swift */,
 				470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */,
 			);
 			name = "View Controllers";
@@ -396,7 +396,7 @@
 				470506991A4E663D00EEA613 /* EmptySegue.swift in Sources */,
 				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
-				470506951A4B5CEB00EEA613 /* SegmentMapViewController.swift in Sources */,
+				470506951A4B5CEB00EEA613 /* MapViewController.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
 				47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */,
 				47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */,

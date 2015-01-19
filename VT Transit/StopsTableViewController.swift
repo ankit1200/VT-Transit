@@ -101,7 +101,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
             arrivalTimesForRouteCollectionViewController.selectedRoutes = [selectedRoute]
         }
         if segue.identifier == "showMap" {
-            let segmentMapViewController = segue.destinationViewController as SegmentMapViewController
+            let segmentMapViewController = segue.destinationViewController as MapViewController
         }
     }
 }

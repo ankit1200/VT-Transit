@@ -88,4 +88,42 @@ class Parser: NSObject {
         }
         return routes
     }
+    
+    // This method gets the current bus locations, return tuple of Route with Coordinate
+    // if route short name is specified then just return a list of the specifed short name
+    // else return all current bus locations
+    class func getCurrentBusLocations(shortName:String?) -> Array<(route:Route, coordinate:CLLocationCoordinate2D)> {
+        
+        var tbxmlParser = TBXML()
+        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
+        
+        let url = NSURL(string: "http://www.bt4u.org/webservices/BT4U_WebService.asmx/GetCurrentBusInfo")
+        let data = NSData(contentsOfURL: url!)
+        tbxmlParser = TBXML.newTBXMLWithXMLData(data, error: nil)
+        var root = tbxmlParser.rootXMLElement
+        
+        if root != nil {
+            var latestInfoTable = TBXML.childElementNamed("LatestInfoTable", parentElement: root)
+            
+            while latestInfoTable != nil {
+                let routeShortNameElement = TBXML.childElementNamed("RouteShortName", parentElement: latestInfoTable)
+                if routeShortNameElement != nil {
+                    let latitudeElement = TBXML.childElementNamed("Latitude", parentElement: latestInfoTable)
+                    let longitudeElement = TBXML.childElementNamed("Longitude", parentElement: latestInfoTable)
+                    let routeShortNameText = TBXML.textForElement(routeShortNameElement)
+                    if shortName != nil && shortName == routeShortNameText {
+                        let latitudeText = TBXML.textForElement(latitudeElement)
+                        let longitudeText = TBXML.textForElement(longitudeElement)
+                        currentBusLocations.append((route: Route(name: nil, shortName: routeShortNameText), coordinate: CLLocationCoordinate2D(latitude: (latitudeText as NSString).doubleValue, longitude: (longitudeText as NSString).doubleValue)))
+                    } else if shortName == nil {
+                        let latitudeText = TBXML.textForElement(latitudeElement)
+                        let longitudeText = TBXML.textForElement(longitudeElement)
+                        currentBusLocations.append((route: Route(name: nil, shortName: routeShortNameText), coordinate: CLLocationCoordinate2D(latitude: (latitudeText as NSString).doubleValue, longitude: (longitudeText as NSString).doubleValue)))
+                    }
+                }
+                latestInfoTable = TBXML.nextSiblingNamed("LatestInfoTable", searchFromElement: latestInfoTable)
+            }
+        }
+        return currentBusLocations
+    }
 }

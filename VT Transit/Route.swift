@@ -14,9 +14,11 @@ class Route {
     var sortedStops: Array<Stop> = []
     
     // init new Route object
-    init(name: String, shortName: String) {
-        self.name = name
+    init(name: String?, shortName: String) {
         self.shortName = shortName
+        // initialize name and then set the correct value
+        self.name = String()
+        self.name = (name == nil) ? routeNameFromShortName(shortName) : name!
     }
     
     
@@ -25,38 +27,38 @@ class Route {
 //        
 //    }
     
-    func routeNameFromShortName() {
+    func routeNameFromShortName(shortName:String) -> String {
         
         switch shortName {
 
             case "CRCH":
-                name = "CRC Hospital"
+                return "CRC Hospital"
             case "CRC":
-                name = "CRC Shuttle"
+                return "CRC Shuttle"
             case "HDG":
-                name = "Harding Avenue"
+                return "Harding Avenue"
             case "HWD":
-                name = "Hethwood"
+                return "Hethwood"
             case "HXP":
-                name = "Hokie Express"
+                return "Hokie Express"
             case "MSN":
-                name = "Main Street North"
+                return "Main Street North"
             case "MSS":
-                name = "Main Street South"
+                return "Main Street South"
             case "PH":
-                name = "Patrick Henry"
+                return "Patrick Henry"
             case "PRG":
-                name = "Progress Street"
+                return "Progress Street"
             case "TC":
-                name = "Toms Creek"
+                return "Toms Creek"
             case "TTT":
-                name = "Two Town Trolley"
+                return "Two Town Trolley"
             case "UCB":
-                name = "University City Boulevard"
+                return "University City Boulevard"
             case "UMS":
-                name = "University Mall"
+                return "University Mall"
             default:
-                name = "Not a Valid Route"
+                return "Not a Valid Route"
         }
     }
 }
