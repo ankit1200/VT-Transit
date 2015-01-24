@@ -21,11 +21,83 @@
                     </tabBar>
                     <connections>
                         <segue destination="Mh1-Zp-iip" kind="relationship" relationship="viewControllers" id="6Om-YM-wTO"/>
+                        <segue destination="jDz-2W-Hev" kind="relationship" relationship="viewControllers" id="kyQ-cR-Brp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yof-M3-Ptq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-178" y="-459"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="F0i-j0-AYw">
+            <objects>
+                <viewController id="Efb-W3-pwM" customClass="MapViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D1K-Qa-aT9"/>
+                        <viewControllerLayoutGuide type="bottom" id="oEI-MF-7qT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ALb-ex-bJe">
+                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kKh-Pc-761">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Efb-W3-pwM" id="Acu-bD-ZzY"/>
+                                </connections>
+                            </mapView>
+                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPT-Hp-rBD">
+                                <rect key="frame" x="0.0" y="574" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ezB-BL-aBy"/>
+                                    <barButtonItem image="Location" id="NtY-ba-NBP">
+                                        <connections>
+                                            <action selector="showCurrentLocation:" destination="Efb-W3-pwM" id="ony-qn-l5Z"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="oe0-dL-FGk"/>
+                                    <barButtonItem style="plain" id="kqs-gj-GAQ">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="guR-dM-7mt">
+                                            <rect key="frame" x="52" y="8" width="209" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Standard"/>
+                                                <segment title="Hybrid"/>
+                                                <segment title="Satellite"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="mapType:" destination="Efb-W3-pwM" eventType="valueChanged" id="BRs-eQ-RDb"/>
+                                                <action selector="mapType:" destination="O21-DA-OA6" eventType="valueChanged" id="Qt2-Zx-eLt"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UsZ-lm-7ja"/>
+                                </items>
+                                <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
+                            </toolbar>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search a local business or address" translatesAutoresizingMaskIntoConstraints="NO" id="a1d-r9-vXp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="barTintColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EPT-Hp-rBD" firstAttribute="leading" secondItem="ALb-ex-bJe" secondAttribute="leading" id="1iv-yi-4Yp"/>
+                            <constraint firstAttribute="trailing" secondItem="EPT-Hp-rBD" secondAttribute="trailing" id="Uph-ia-zt4"/>
+                            <constraint firstItem="oEI-MF-7qT" firstAttribute="top" secondItem="EPT-Hp-rBD" secondAttribute="bottom" id="iuq-8x-eUB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Nqo-jj-Opp"/>
+                    <connections>
+                        <outlet property="mapTypeSegmentControl" destination="guR-dM-7mt" id="PVk-Dm-PyZ"/>
+                        <outlet property="mapView" destination="kKh-Pc-761" id="nes-3I-Ckk"/>
+                        <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimesForAllRoutes" id="OaD-qV-bJ8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzI-au-U7n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="774.5" y="-459.5"/>
         </scene>
         <!--Routes-->
         <scene sceneID="z0t-4n-9IL">
@@ -429,7 +501,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderView" id="M4k-ZZ-0Kb" customClass="StopsHeaderCollectionReusableView" customModule="VT_Transit" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
@@ -480,9 +552,34 @@
             </objects>
             <point key="canvasLocation" x="3187" y="-1250"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="6Ti-CZ-eqN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="jDz-2W-Hev" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="LlA-TD-RRN"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="jSe-wh-hHn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ilU-WV-qRT">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="Efb-W3-pwM" kind="relationship" relationship="rootViewController" id="T17-IQ-qnV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tgc-Zw-abm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="289.5" y="-459.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Location" width="26" height="25"/>
+        <image name="map" width="26" height="26"/>
         <image name="route-tab" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

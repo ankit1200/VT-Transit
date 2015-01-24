@@ -39,17 +39,38 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     override func viewDidAppear(animated: Bool) {
-        
-        // add the pins to the mapview
-        for stop in stops {
-            let annotation = MapAnnotation(stop: stop)
-            mapView.addAnnotation(annotation)
+        if stops.count == 0 {
+            // query parse for all the stops
+            var query = PFQuery(className: "Stops")
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error == nil {
+                    
+                    for object in objects {
+                        let stop = Stop(name: object["name"] as String, code: object["code"] as String, latitude: object["latitude"] as String, longitude: object["longitude"] as String)
+                        self.stops.append(stop)
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    // add the pins to the mapview
+                    for stop in self.stops {
+                        let annotation = MapAnnotation(stop: stop)
+                        self.mapView.addAnnotation(annotation)
+                    }
+                })
+            }
+        } else {
+            // add the pins to the mapview
+            for stop in stops {
+                let annotation = MapAnnotation(stop: stop)
+                mapView.addAnnotation(annotation)
+            }
         }
         
         // get current bus locations in background
         var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            if self.selectedRoutes.count > 1 {
+            if self.selectedRoutes.count == 0 {
                 currentBusLocations = Parser.getCurrentBusLocations(nil)
             } else {
                 currentBusLocations = Parser.getCurrentBusLocations(self.selectedRoutes[0].shortName)
@@ -85,7 +106,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // get current bus locations in background
         var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            if self.selectedRoutes.count > 1 {
+            if self.selectedRoutes.count == 0 {
                 currentBusLocations = Parser.getCurrentBusLocations(nil)
             } else {
                 currentBusLocations = Parser.getCurrentBusLocations(self.selectedRoutes[0].shortName)

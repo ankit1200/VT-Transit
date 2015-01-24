@@ -15,6 +15,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     var arrivalTimes:[(time: [String], route: Route)] = []
     let parser = Parser()
     var refreshControl:UIRefreshControl!
+    var navBarHidden = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,15 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             let time = Parser.arrivalTimesForRoute(route.shortName, stopCode: selectedStop.code)
             arrivalTimes.append(time: time, route: route)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navBarHidden = (self.navigationController?.navigationBarHidden)!
+        self.navigationController?.navigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = navBarHidden
     }
 
     // *************************************
