@@ -19,7 +19,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let locationManager = CLLocationManager()
     var timer = NSTimer()
     var currentBusAnnotations = [MapAnnotation]()
-    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var mapSearchBar: UISearchBar!
+    var mapItems = [String]()
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -29,6 +30,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         self.mapView.showsUserLocation = true
         locationManager.delegate = self
+        
         // start location manager
         // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
 //        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
@@ -39,33 +41,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     override func viewDidAppear(animated: Bool) {
-        if stops.count == 0 {
-            // query parse for all the stops
-            var query = PFQuery(className: "Stops")
-            query.findObjectsInBackgroundWithBlock {
-                (objects: [AnyObject]!, error: NSError!) -> Void in
-                if error == nil {
-                    
-                    for object in objects {
-                        let stop = Stop(name: object["name"] as String, code: object["code"] as String, latitude: object["latitude"] as String, longitude: object["longitude"] as String)
-                        self.stops.append(stop)
-                    }
-                }
-                dispatch_async(dispatch_get_main_queue(), {
-                    // add the pins to the mapview
-                    for stop in self.stops {
-                        let annotation = MapAnnotation(stop: stop)
-                        self.mapView.addAnnotation(annotation)
-                    }
-                })
-            }
-        } else {
-            // add the pins to the mapview
-            for stop in stops {
-                let annotation = MapAnnotation(stop: stop)
-                mapView.addAnnotation(annotation)
-            }
-        }
+        addStopsToMap()
         
         // get current bus locations in background
         var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
@@ -189,25 +165,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: Map Search Methods
     // ************************
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        println("search button clicked")
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as? UITableViewCell
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
-        }
-        return cell!
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("selected Row")
-    }
+//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+//        println("search button clicked")
+////        searchBar.resignFirstResponder()
+//        var request : MKLocalSearchRequest = MKLocalSearchRequest()
+//        request.naturalLanguageQuery = searchBar.text
+//        request.region = mapView.region;
+//        var search : MKLocalSearch = MKLocalSearch(request: request)
+//        
+//        search.startWithCompletionHandler({ response, error in
+//            self.mapItems.removeAll(keepCapacity: false)
+//            searchResultItems.removeAll(keepCapacity: false)
+//            self.myMapView.removeAnnotations(self.myMapView.annotations)
+//            
+//            for item in response.mapItems! {
+//                var point: MKPointAnnotation = MKPointAnnotation()
+//                var mapItem: MKMapItem = item as MKMapItem
+//                point.coordinate = mapItem.placemark.coordinate
+//                point.title = mapItem.placemark.name
+//                point.subtitle = mapItem.placemark.title
+//                self.myMapView.addAnnotation(point)
+//                self.mapItems.append(item.description)
+//                var searchResultName: String = ""
+//                mapItem.name = searchResultName
+//                self.myMapView.showAnnotations(self.myMapView.annotations, animated: true)
+//            }
+//            
+//        })
+//    }
     
     // *************************
     // MARK: Map Toolbar Methods
@@ -224,6 +209,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             mapView.mapType = MKMapType.Hybrid
         } else if mapTypeSegmentControl.selectedSegmentIndex == 2 {
             mapView.mapType = MKMapType.Satellite
+        }
+    }
+    
+    
+    // *************************
+    // MARK: Helper Methods
+    // *************************
+    func addStopsToMap() {
+        if stops.count == 0 {
+            // query parse for all the stops
+            var query = PFQuery(className: "Stops")
+            query.findObjectsInBackgroundWithBlock {
+                (objects: [AnyObject]!, error: NSError!) -> Void in
+                if error == nil {
+                    
+                    for object in objects {
+                        let stop = Stop(name: object["name"] as String, code: object["code"] as String, latitude: object["latitude"] as String, longitude: object["longitude"] as String)
+                        self.stops.append(stop)
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    // add the pins to the mapview
+                    for stop in self.stops {
+                        let annotation = MapAnnotation(stop: stop)
+                        self.mapView.addAnnotation(annotation)
+                    }
+                })
+            }
+        } else {
+            // add the pins to the mapview
+            for stop in stops {
+                let annotation = MapAnnotation(stop: stop)
+                mapView.addAnnotation(annotation)
+            }
         }
     }
     

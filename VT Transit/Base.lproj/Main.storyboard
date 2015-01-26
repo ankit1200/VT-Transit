@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kKh-Pc-761">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <outlet property="delegate" destination="Efb-W3-pwM" id="Acu-bD-ZzY"/>
                                 </connections>
@@ -75,21 +75,25 @@
                                 </items>
                                 <color key="barTintColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
                             </toolbar>
-                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search a local business or address" translatesAutoresizingMaskIntoConstraints="NO" id="a1d-r9-vXp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <searchBar contentMode="redraw" placeholder="Search a local business or address" translatesAutoresizingMaskIntoConstraints="NO" id="a1d-r9-vXp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="barTintColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="a1d-r9-vXp" firstAttribute="leading" secondItem="ALb-ex-bJe" secondAttribute="leading" id="1hL-OM-U7N"/>
                             <constraint firstItem="EPT-Hp-rBD" firstAttribute="leading" secondItem="ALb-ex-bJe" secondAttribute="leading" id="1iv-yi-4Yp"/>
+                            <constraint firstAttribute="trailing" secondItem="a1d-r9-vXp" secondAttribute="trailing" id="HTH-Nv-Df3"/>
                             <constraint firstAttribute="trailing" secondItem="EPT-Hp-rBD" secondAttribute="trailing" id="Uph-ia-zt4"/>
                             <constraint firstItem="oEI-MF-7qT" firstAttribute="top" secondItem="EPT-Hp-rBD" secondAttribute="bottom" id="iuq-8x-eUB"/>
+                            <constraint firstItem="a1d-r9-vXp" firstAttribute="top" secondItem="ALb-ex-bJe" secondAttribute="top" constant="20" id="xQo-x5-jpO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Nqo-jj-Opp"/>
                     <connections>
+                        <outlet property="mapSearchBar" destination="a1d-r9-vXp" id="Lah-69-3hx"/>
                         <outlet property="mapTypeSegmentControl" destination="guR-dM-7mt" id="PVk-Dm-PyZ"/>
                         <outlet property="mapView" destination="kKh-Pc-761" id="nes-3I-Ckk"/>
                         <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimesForAllRoutes" id="OaD-qV-bJ8"/>
@@ -403,23 +407,13 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapSearchBar" destination="aWN-k1-740" id="hym-Ld-Chi"/>
                         <outlet property="mapTypeSegmentControl" destination="Yis-xT-D9A" id="jeu-Wh-aT2"/>
                         <outlet property="mapView" destination="lKG-2M-Npq" id="Xhc-9j-eiG"/>
-                        <outlet property="searchBar" destination="aWN-k1-740" id="SFw-9h-I35"/>
-                        <outlet property="searchDisplayController" destination="yR1-oL-64E" id="kwA-Xm-2GZ"/>
                         <segue destination="b2n-OB-Bc5" kind="show" identifier="showArrivalTimesForAllRoutes" id="y9Y-Xu-BV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SQW-FT-ZoA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="yR1-oL-64E">
-                    <connections>
-                        <outlet property="delegate" destination="O21-DA-OA6" id="aLM-wu-FEz"/>
-                        <outlet property="searchBar" destination="aWN-k1-740" id="yrm-H3-NWh"/>
-                        <outlet property="searchContentsController" destination="O21-DA-OA6" id="s4P-M1-N77"/>
-                        <outlet property="searchResultsDataSource" destination="O21-DA-OA6" id="bcV-aH-gQf"/>
-                        <outlet property="searchResultsDelegate" destination="O21-DA-OA6" id="XGh-8U-d1U"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2410" y="-1937"/>
         </scene>
@@ -501,7 +495,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderView" id="M4k-ZZ-0Kb" customClass="StopsHeaderCollectionReusableView" customModule="VT_Transit" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
