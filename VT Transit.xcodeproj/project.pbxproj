@@ -48,6 +48,7 @@
 		47BB57D019AFB0A300B3807E /* VT_TransitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57CF19AFB0A300B3807E /* VT_TransitTests.swift */; };
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0E11A284A8400C9BD0A /* TBXML.m */; };
+		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		47C8B0E01A284A8400C9BD0A /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		47C8B0E11A284A8400C9BD0A /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +270,7 @@
 				4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */,
 				470506941A4B5CEB00EEA613 /* MapViewController.swift */,
 				470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */,
+				47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */,
 				47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */,
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
 				4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */,

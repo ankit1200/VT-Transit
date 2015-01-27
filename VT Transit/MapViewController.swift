@@ -21,6 +21,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var currentBusAnnotations = [MapAnnotation]()
     @IBOutlet var mapSearchBar: UISearchBar!
     var mapItems = [String]()
+    @IBOutlet var dismissKeyboardButton: UIButton!
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -199,6 +200,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBar.resignFirstResponder()
     }
     
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        dismissKeyboardButton.hidden = false
+    }
+    
+    @IBAction func dismissKeyboard(sender: AnyObject) {
+        mapSearchBar.resignFirstResponder()
+        dismissKeyboardButton.hidden = true
+    }
     // *************************
     // MARK: Map Toolbar Methods
     // *************************
@@ -218,9 +227,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    // *************************
+    // ********************
     // MARK: Helper Methods
-    // *************************
+    // ********************
     func addStopsToMap() {
         if stops.count == 0 {
             // query parse for all the stops
