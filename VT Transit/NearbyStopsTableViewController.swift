@@ -14,6 +14,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     let locationManager = CLLocationManager()
     var nearbyStops: [(stop: Stop, distance: Double)] = []
     var filteredStops: [(stop: Stop, distance: Double)] = []
+    var selectedRoutes = [Route]()
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -52,13 +53,11 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as NearbyStopsTableViewCell!
         if cell == nil {
-//            tableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
-
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as NearbyStopsTableViewCell
         }
+        var tuple: (stop: Stop, distance: Double)
         // check to see if if tableview is search or nearbyStops
-        let tuple = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
-        println(tuple.stop.name)
+        tuple = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
         // Configure cell
         cell.title?.text = tuple.stop.name
         let distanceInMiles = tuple.distance / 1609.34
@@ -82,6 +81,12 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         return 44.0
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var stopCode = (tableView == self.searchDisplayController!.searchResultsTableView!) ? filteredStops[indexPath.row].stop.code : nearbyStops[indexPath.row].stop.code
+        selectedRoutes = Parser.routesForStop(stopCode)
+        performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
+    }
+    
     // ************************
     // MARK: Search Bar Methods
     // ************************
@@ -98,6 +103,10 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         return true
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController, didLoadSearchResultsTableView tableView: UITableView) {
+        tableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
     }
     
     // ********************
@@ -135,7 +144,19 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showArrivalTimesForAllRoutes" {
+            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
+            // handle selected cells in search display controlller
+            if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
+                let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
+                arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row].stop
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            } else {
+                let indexPath = self.tableView.indexPathForSelectedRow()!
+                arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row].stop
+                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            }
+            arrivalTimesForRouteCollectionViewController.selectedRoutes = selectedRoutes
+        }
     }
 }
