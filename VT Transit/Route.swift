@@ -21,12 +21,6 @@ class Route {
         self.name = (name == nil) ? routeNameFromShortName(shortName) : name!
     }
     
-    
-//    func allRoutes() -> Array<Route> {
-//        
-//        
-//    }
-    
     func routeNameFromShortName(shortName:String) -> String {
         
         switch shortName {

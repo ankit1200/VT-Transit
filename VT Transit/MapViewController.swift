@@ -34,9 +34,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // start location manager
         // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-//        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
+        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
             locationManager.requestWhenInUseAuthorization()
-//        }
+        }
         
         locationManager.startUpdatingLocation()
     }

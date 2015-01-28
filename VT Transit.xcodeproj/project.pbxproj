@@ -49,6 +49,7 @@
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0E11A284A8400C9BD0A /* TBXML.m */; };
 		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
+		47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		47C8B0E01A284A8400C9BD0A /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		47C8B0E11A284A8400C9BD0A /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewController.swift; sourceTree = "<group>"; };
+		47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,8 +226,7 @@
 				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				4705068A1A42B5AB00EEA613 /* Objects */,
-				470506981A4E663D00EEA613 /* EmptySegue.swift */,
-				47150D731A649BD6009201CA /* MapAnnotation.swift */,
+				47D6D0B91A77E2DD004A2EFD /* Custom Classes */,
 				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
@@ -282,6 +283,16 @@
 				47C8B0E11A284A8400C9BD0A /* TBXML.m */,
 			);
 			name = "Objective-C Classes";
+			sourceTree = "<group>";
+		};
+		47D6D0B91A77E2DD004A2EFD /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				470506981A4E663D00EEA613 /* EmptySegue.swift */,
+				47150D731A649BD6009201CA /* MapAnnotation.swift */,
+				47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */,
+			);
+			name = "Custom Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +412,7 @@
 				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
 				470506951A4B5CEB00EEA613 /* MapViewController.swift in Sources */,
+				47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
 				47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */,
 				47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */,

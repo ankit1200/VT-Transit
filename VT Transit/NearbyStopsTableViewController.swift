@@ -8,12 +8,30 @@
 
 import UIKit
 
-class NearbyStopsTableViewController: UITableViewController {
+class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 
-    var stops = Array<(stop: Stop, distance: Double)>()
+    var stops: [(stop: Stop, distance: Double)] = []
+    let locationManager = CLLocationManager()
+    var nearbyStops: [(stop: Stop, distance: Double)] = []
+    var filteredStops: [(stop: Stop, distance: Double)] = []
+    
+    // **************************************
+    // MARK: View Controller Delegate Methods
+    // **************************************
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
+        
+//        self.searchDisplayController!.searchResultsTableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
+        
+        // start location manager
+        // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        locationManager.startUpdatingLocation()
+        getDistancesForAllStops()
     }
 
     
@@ -22,19 +40,65 @@ class NearbyStopsTableViewController: UITableViewController {
     // ****************************
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        // check to see if you are returning the search tableview or nearby stops tableview
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            return filteredStops.count
+        } else {
+            // Return at most 10 nearby stops
+            return (nearbyStops.count > 10) ? 10 : nearbyStops.count
+        }
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as NearbyStopsTableViewCell!
+        if cell == nil {
+//            tableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
 
-        // Configure the cell...
-
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as NearbyStopsTableViewCell
+        }
+        // check to see if if tableview is search or nearbyStops
+        let tuple = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
+        println(tuple.stop.name)
+        // Configure cell
+        cell.title?.text = tuple.stop.name
+        let distanceInMiles = tuple.distance / 1609.34
+        cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
+        
+        // if location is disabled then make distance label blank
+        if locationManager.location != nil {
+            cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
+        } else {
+            cell.distance?.text = ""
+        }
+        
         return cell
     }
     
+    // ****************************
+    // MARK: Table view delegate
+    // ****************************
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 44.0
+    }
+    
+    // ************************
+    // MARK: Search Bar Methods
+    // ************************
+    
+    func filterContentForSearchText(searchText: String) {
+        // Filter the array using the filter method
+        filteredStops = self.stops.filter({(stop: Stop, distance:Double) -> Bool in
+            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchText.lowercaseString)
+            let stringMatchCode = stop.code.rangeOfString(searchText)
+            return (stringMatchName != nil || stringMatchCode != nil)
+        })
+    }
+    
+    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.filterContentForSearchText(searchString)
+        return true
+    }
     
     // ********************
     // MARK: Helper Methods
@@ -49,8 +113,17 @@ class NearbyStopsTableViewController: UITableViewController {
             if error == nil {
                 for object in objects {
                     let stop = Stop(name: object["name"] as String, code: object["code"] as String, latitude: object["latitude"] as String, longitude: object["longitude"] as String)
-                    self.stops.append(stop: stop, distance: 2.3)
+                    let stopLocation = CLLocation(latitude: (stop.latitude as NSString).doubleValue, longitude: (stop.longitude as NSString).doubleValue)
+                    var distance = stopLocation.distanceFromLocation(self.locationManager.location) as Double
+                    self.locationManager.stopUpdatingLocation()
+                    let tuple = (stop: stop, distance: distance)
+                    self.stops.append(tuple)
+                    if distance < 1609.34 {
+                        self.nearbyStops.append(tuple)
+                    }
+                    self.nearbyStops.sort({$0.1 < $1.1})
                 }
+                self.tableView.reloadData()
             }
         }
     }
