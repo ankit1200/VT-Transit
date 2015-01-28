@@ -153,7 +153,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             } else {
                 let indexPath = self.tableView.indexPathForSelectedRow()!
-                arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row].stop
+                arrivalTimesForRouteCollectionViewController.selectedStop = nearbyStops[indexPath.row].stop
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
             arrivalTimesForRouteCollectionViewController.selectedRoutes = selectedRoutes
