@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
@@ -146,5 +147,192 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     // function to set the size of the cell appropriately
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return (arrivalTimes[indexPath.section].time.count == 0) ? CGSize(width: 290.0, height: 60.0) : CGSize(width: 90.0, height: 90.0)
+    }
+    
+    
+    // function used to show reminder alert view
+    override func collectionView(collectionView: UICollectionView,
+        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+            
+            
+            let dateFormatter = NSDateFormatter() // date format
+            dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
+            let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
+            
+            var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES)
+            
+            let alertController = UIAlertController(title: "Set Reminder", message: nil, preferredStyle: .ActionSheet)
+            
+            if (timeDifferenceMinutes > 5) {
+                let fiveMinutes = UIAlertAction(title: "5 Minutes", style: .Default, handler: {(UIAlertAction) in self.fireNotification(5, indexPath: indexPath)})
+                alertController.addAction(fiveMinutes)
+            }
+            if (timeDifferenceMinutes > 10) {
+                let tenMinutes = UIAlertAction(title: "10 Minutes", style: .Default, {(UIAlertAction) in self.fireNotification(10, indexPath: indexPath)})
+                alertController.addAction(tenMinutes)
+            }
+            if (timeDifferenceMinutes > 15) {
+                let fifteenMinutes = UIAlertAction(title: "15 Minutes", style: .Default, {(UIAlertAction) in self.fireNotification(15, indexPath: indexPath)})
+                alertController.addAction(fifteenMinutes)
+            }
+            if (timeDifferenceMinutes > 2) {
+                let smartAlert = UIAlertAction(title: "When I Need to Leave", style: .Default, handler: {(UIAlertAction) in self.fireNotification(0, indexPath: indexPath)})
+                alertController.addAction(smartAlert)
+            }
+            
+            if (alertController.actions.count == 0) {
+                let late = UIAlertController(title: "Leave Now", message: "You should probably stop reading this and leave", preferredStyle: .Alert)
+                
+                let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                late.addAction(cancel)
+                
+                presentViewController(late, animated: true, completion: nil)
+            } else {
+                let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                alertController.addAction(cancel)
+                
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            }
+            
+            
+
+            
+            
+            
+    }
+    
+    func fireNotification(minutes: Int, indexPath: NSIndexPath) {
+        if (minutes == 0) {
+            var request : MKDirectionsRequest  = MKDirectionsRequest()
+            var start : MKMapItem = MKMapItem.mapItemForCurrentLocation()
+            var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (selectedStop.latitude as NSString).doubleValue, longitude: (selectedStop.longitude as NSString).doubleValue)
+            
+            var stopPlacemark : MKPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+            var end : MKMapItem = MKMapItem(placemark: stopPlacemark)
+            request.setSource(start)
+            request.setDestination(end)
+            request.transportType = MKDirectionsTransportType.Walking
+            
+            var directions : MKDirections = MKDirections(request: request)
+            directions.calculateDirectionsWithCompletionHandler({
+                (response:MKDirectionsResponse!, error:NSError!) in
+                
+                if (error != nil) {
+                    let alertController = UIAlertController(title: "Uh oh", message: "Walking Directions are not Avaliable", preferredStyle: .Alert)
+                    
+                    let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alertController.addAction(cancel)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                else {
+                    var route: MKRoute = response.routes[0] as MKRoute
+                    var timeToBeAdded = 240.0;
+                    
+                    if (route.expectedTravelTime > 60) {
+                        timeToBeAdded = timeToBeAdded - 0.2 * route.expectedTravelTime
+                    }
+                    if (timeToBeAdded <= 0) {
+                        timeToBeAdded = 0
+                    }
+                    var timeInSeconds = route.expectedTravelTime + timeToBeAdded
+                    
+                    
+                    var localNotification = UILocalNotification()
+                    let dateFormatter = NSDateFormatter() // date format
+                    dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
+                    
+                    // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
+                    let arrivalTimeDate = dateFormatter.dateFromString(self.arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
+                    let fireDate = arrivalTimeDate?.dateByAddingTimeInterval(-1 * timeInSeconds)
+                    
+                    if (fireDate?.compare(NSDate()) == NSComparisonResult.OrderedDescending) {
+                        localNotification.fireDate = fireDate
+                        println("time right now \(NSDate())")
+                        println("time notification will come \(fireDate)")
+                        println("time buss will come \(arrivalTimeDate)")
+                        var alertMessage = "\(self.selectedRoutes[indexPath.section].name) will arrive at \(self.selectedStop.name) in \(timeInSeconds/60) minutes"
+                        
+                        localNotification.alertBody = alertMessage
+                        localNotification.alertAction = "View Updated Times"
+                        localNotification.category = "busTimeReminderCategory"
+                        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+                        
+                        let dateFormaterJustTime = NSDateFormatter()
+                        dateFormaterJustTime.dateFormat = "hh:mm a"
+                        
+                        
+                        let minutesBeforeArrivalTime = arrivalTimeDate?.dateByAddingTimeInterval(-1 * timeInSeconds)
+                        let message = "You will be reminded at " + dateFormaterJustTime.stringFromDate(minutesBeforeArrivalTime!)
+                        
+                        let alertController = UIAlertController(title: "Reminder Set!", message: message, preferredStyle: .Alert)
+                        
+                        let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alertController.addAction(cancel)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                    }
+                    else {
+                        let alertController = UIAlertController(title: "Uh oh", message: "Youre late", preferredStyle: .Alert)
+                        
+                        let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                        alertController.addAction(cancel)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+
+                }
+                    
+            })
+
+        }
+        else {
+            var localNotification = UILocalNotification()
+            let dateFormatter = NSDateFormatter() // date format
+            dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
+            // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
+            let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
+            let fireDate = arrivalTimeDate?.dateByAddingTimeInterval(Double(-60*(minutes + 1)))
+            
+            if (fireDate?.compare(NSDate()) == NSComparisonResult.OrderedDescending) {
+                localNotification.fireDate = fireDate
+                
+                var alertMessage = "\(selectedRoutes[indexPath.section].name) will arrive at \(selectedStop.name) in \(minutes) minutes"
+                
+                localNotification.alertBody = alertMessage
+                localNotification.alertAction = "View Updated Times"
+                localNotification.category = "busTimeReminderCategory"
+                UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+                
+                let dateFormaterJustTime = NSDateFormatter()
+                dateFormaterJustTime.dateFormat = "hh:mm a"
+                
+                
+                let minutesBeforeArrivalTime = arrivalTimeDate?.dateByAddingTimeInterval(Double(-60*(minutes)))
+                let message = "You will be reminded at " + dateFormaterJustTime.stringFromDate(minutesBeforeArrivalTime!)
+                
+                let alertController = UIAlertController(title: "Reminder Set!", message: message, preferredStyle: .Alert)
+                
+                let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(cancel)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+                
+            }
+            else {
+                let alertController = UIAlertController(title: "Uh oh", message: "Youre late", preferredStyle: .Alert)
+                
+                let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(cancel)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            }
+
+        }
+        
+        
+        
     }
 }
