@@ -24,7 +24,12 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         super.viewDidLoad()
         locationManager.delegate = self
         
-//        self.searchDisplayController!.searchResultsTableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
+        // pull to refresh
+        var refreshControl = UIRefreshControl()
+//        refreshControl.tintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh nearby stops")
+        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl = refreshControl
         
         // start location manager
         // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
@@ -32,6 +37,15 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.startUpdatingLocation()
+        getDistancesForAllStops()
+    }
+    
+    
+    // *************************************
+    // MARK: Pull to Refresh Selector Method
+    // *************************************
+    
+    func refresh(sender:AnyObject) {
         getDistancesForAllStops()
     }
 
@@ -51,26 +65,45 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as NearbyStopsTableViewCell!
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as NearbyStopsTableViewCell
-        }
-        var tuple: (stop: Stop, distance: Double)
-        // check to see if if tableview is search or nearbyStops
-        tuple = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
-        // Configure cell
-        cell.title?.text = tuple.stop.name
-        let distanceInMiles = tuple.distance / 1609.34
-        cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
         
-        // if location is disabled then make distance label blank
-        if locationManager.location != nil {
-            cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
+        if tableView == self.searchDisplayController!.searchResultsTableView {
+            var cell = tableView.dequeueReusableCellWithIdentifier("searchCell") as NearbyStopsTableViewCell!
+            if cell == nil {
+                cell = NearbyStopsTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "searchCell")
+            }
+            var tuple: (stop: Stop, distance: Double) = filteredStops[indexPath.row]
+            // check to see if if tableview is search or nearbyStops
+
+            // Configure cell
+            cell.textLabel?.text = tuple.stop.name
+            cell.textLabel?.font = UIFont(name: "System Bold", size: 16)
+            let distanceInMiles = tuple.distance / 1609.34
+            cell.detailTextLabel?.text = "Bus Stop #\(tuple.stop.code)"
+            return cell
+            
         } else {
-            cell.distance?.text = ""
-        }
+            var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as NearbyStopsTableViewCell!
+            if cell == nil {
+                cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as NearbyStopsTableViewCell
+            }
         
-        return cell
+        var tuple = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
+            // check to see if if tableview is search or nearbyStops
+            
+            // Configure cell
+            cell.title?.text = tuple.stop.name
+            let distanceInMiles = tuple.distance / 1609.34
+            cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
+            
+            // if location is disabled then make distance label blank
+            if locationManager.location != nil || distanceInMiles != 0.00 {
+                cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
+            } else {
+                cell.distance?.text = ""
+            }
+            
+            return cell
+        }
     }
     
     // ****************************
@@ -105,9 +138,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         return true
     }
     
-    func searchDisplayController(controller: UISearchDisplayController, didLoadSearchResultsTableView tableView: UITableView) {
-        tableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
-    }
+//    func searchDisplayController(controller: UISearchDisplayController, didLoadSearchResultsTableView tableView: UITableView) {
+//        tableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
+//    }
     
     // ********************
     // MARK: Helper Methods
@@ -115,6 +148,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     
     func getDistancesForAllStops() {
         // query parse for all the stops
+        nearbyStops = []
         var query = PFQuery(className: "Stops")
         query.limit = 1000
         query.findObjectsInBackgroundWithBlock {
@@ -132,7 +166,13 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
                     }
                     self.nearbyStops.sort({$0.1 < $1.1})
                 }
-                self.tableView.reloadData()
+                dispatch_async(dispatch_get_main_queue(), {
+                    println("goes here")
+                    self.tableView.reloadData()
+                    if self.refreshControl!.refreshing {
+                        self.refreshControl!.endRefreshing()
+                    }
+                })
             }
         }
     }
