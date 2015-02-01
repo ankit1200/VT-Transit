@@ -32,6 +32,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UISegmentedControl.appearance().titleTextAttributesForState(UIControlState.Normal) = textTileOptions
         UITabBar.appearance().selectedImageTintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
         UITabBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
+        
+        //notifications
+        
+        // Specify the notification types.
+        var notificationTypes: UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+        
+        
+        // Specify the category related to the above actions.
+        var busTimeReminderCategory = UIMutableUserNotificationCategory()
+        busTimeReminderCategory.identifier = "busTimeReminderCategory"
+        
+        
+        let categoriesForSettings = NSSet(objects: busTimeReminderCategory)
+        
+        
+        // Register the notification settings.
+        let newNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categoriesForSettings)
+        UIApplication.sharedApplication().registerUserNotificationSettings(newNotificationSettings)
+        
         return true
     }
 
