@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
 
     var selectedRoutes = [Route]()
     var selectedStop = Stop(name: "", code: "", latitude: "", longitude: "")
@@ -17,6 +17,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     let parser = Parser()
     var refreshControl:UIRefreshControl!
     var navBarHidden = false
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -198,6 +199,12 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     func fireNotification(minutes: Int, indexPath: NSIndexPath) {
         if (minutes == 0) {
+            locationManager.delegate = self
+            // start location manager
+            // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+            if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
+                locationManager.requestWhenInUseAuthorization()
+            }
             var request : MKDirectionsRequest  = MKDirectionsRequest()
             var start : MKMapItem = MKMapItem.mapItemForCurrentLocation()
             var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (selectedStop.latitude as NSString).doubleValue, longitude: (selectedStop.longitude as NSString).doubleValue)
