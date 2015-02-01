@@ -299,7 +299,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             if (fireDate?.compare(NSDate()) == NSComparisonResult.OrderedDescending) {
                 localNotification.fireDate = fireDate
                 
-                var alertMessage = "\(selectedRoutes[indexPath.section].name) will arrive at \(selectedStop.name) in \(minutes) minutes"
+                var alertMessage = "\(selectedRoutes[indexPath.section].name) will arrive at \(selectedStop.name) in \(Int(minutes)) minutes"
                 
                 localNotification.alertBody = alertMessage
                 localNotification.alertAction = "View Updated Times"
