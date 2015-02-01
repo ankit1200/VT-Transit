@@ -194,12 +194,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 
                 presentViewController(alertController, animated: true, completion: nil)
             }
-            
-            
-
-            
-            
-            
     }
     
     func fireNotification(minutes: Int, indexPath: NSIndexPath) {
@@ -252,7 +246,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                         println("time right now \(NSDate())")
                         println("time notification will come \(fireDate)")
                         println("time buss will come \(arrivalTimeDate)")
-                        var alertMessage = "\(self.selectedRoutes[indexPath.section].name) will arrive at \(self.selectedStop.name) in \(timeInSeconds/60) minutes"
+                        var alertMessage = "\(self.selectedRoutes[indexPath.section].name) will arrive at \(self.selectedStop.name) in \(Int(timeInSeconds/60)) minutes"
                         
                         localNotification.alertBody = alertMessage
                         localNotification.alertAction = "View Updated Times"
@@ -299,7 +293,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             if (fireDate?.compare(NSDate()) == NSComparisonResult.OrderedDescending) {
                 localNotification.fireDate = fireDate
                 
-                var alertMessage = "\(selectedRoutes[indexPath.section].name) will arrive at \(selectedStop.name) in \(Int(minutes)) minutes"
+                var alertMessage = "\(selectedRoutes[indexPath.section].name) will arrive at \(selectedStop.name) in \(minutes) minutes"
                 
                 localNotification.alertBody = alertMessage
                 localNotification.alertAction = "View Updated Times"
@@ -331,8 +325,5 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             }
 
         }
-        
-        
-        
     }
 }
