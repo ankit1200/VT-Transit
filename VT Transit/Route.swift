@@ -22,11 +22,6 @@ class Route {
     }
     
     
-//    func allRoutes() -> Array<Route> {
-//        
-//        
-//    }
-    
     func routeNameFromShortName(shortName:String) -> String {
         
         switch shortName {
