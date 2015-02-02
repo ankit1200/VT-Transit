@@ -32,4 +32,8 @@ class MapAnnotation: NSObject, MKAnnotation {
         self.stop = stop
         self.category = "stop"
     }
+    
+    func setCoordinate(newCoordinate: CLLocationCoordinate2D) {
+        coordinate = newCoordinate
+    }
 }

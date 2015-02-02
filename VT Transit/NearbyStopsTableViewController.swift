@@ -33,8 +33,8 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         
         // start location manager
         // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
-            locationManager.requestWhenInUseAuthorization()
+        if locationManager.respondsToSelector(Selector("requestAlwaysAuthorization:")) {
+            locationManager.requestAlwaysAuthorization()
         }
         locationManager.startUpdatingLocation()
         getDistancesForAllStops()
@@ -49,7 +49,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         getDistancesForAllStops()
     }
 
-    
+
     // ****************************
     // MARK: Table view data source
     // ****************************
@@ -120,6 +120,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
     }
     
+    
     // ************************
     // MARK: Search Bar Methods
     // ************************
@@ -138,9 +139,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         return true
     }
     
-//    func searchDisplayController(controller: UISearchDisplayController, didLoadSearchResultsTableView tableView: UITableView) {
-//        tableView.registerClass(NearbyStopsTableViewCell.self, forCellReuseIdentifier: "nearbyStops")
-//    }
     
     // ********************
     // MARK: Helper Methods
@@ -168,6 +166,10 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     println("goes here")
+                    if self.nearbyStops.count == 0 {
+                        let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
+                        alertView.show()
+                    }
                     self.tableView.reloadData()
                     if self.refreshControl!.refreshing {
                         self.refreshControl!.endRefreshing()
