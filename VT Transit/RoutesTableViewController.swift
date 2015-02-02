@@ -44,6 +44,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // ****************************
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // check to see if you are returning the search tableview or routes stops tableview
         return (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredRoutes.count : routes.count
     }
     
@@ -54,7 +55,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         // Check to see whether the normal table or search results table is being displayed
         route = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredRoutes[indexPath.row] : routes[indexPath.row]
         // configure cell
-        cell.textLabel?.text = route.name as String
+        cell.textLabel?.text = route.name
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         return cell

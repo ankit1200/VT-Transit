@@ -34,13 +34,17 @@ class Route {
                 return "Harding Avenue"
             case "HWD":
                 return "Hethwood"
+            case "HWDA":
+                return "Hethwood A"
+            case "HWDB":
+                return "Hethwood B"
             case "HXP":
                 return "Hokie Express"
             case "MSN":
                 return "Main Street North"
             case "MSS":
                 return "Main Street South"
-            case "PH":
+            case "PHD":
                 return "Patrick Henry"
             case "PRG":
                 return "Progress Street"

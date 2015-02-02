@@ -40,6 +40,7 @@
 		4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
 		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
+		474D51541A7D56F9006EE7EF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D51531A7D56F9006EE7EF /* CloudKit.framework */; };
 		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
@@ -48,6 +49,8 @@
 		47BB57D019AFB0A300B3807E /* VT_TransitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57CF19AFB0A300B3807E /* VT_TransitTests.swift */; };
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0E11A284A8400C9BD0A /* TBXML.m */; };
+		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
+		47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +102,8 @@
 		4734D7AF19CF59B9007AB683 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../Parse Framework/Bolts.framework"; sourceTree = "<group>"; };
 		4734D7B019CF59B9007AB683 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../Parse Framework/Parse.framework"; sourceTree = "<group>"; };
 		47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
+		474D51521A7D56EA006EE7EF /* VT Transit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit.entitlements"; sourceTree = "<group>"; };
+		474D51531A7D56F9006EE7EF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +115,8 @@
 		47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		47C8B0E01A284A8400C9BD0A /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		47C8B0E11A284A8400C9BD0A /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewController.swift; sourceTree = "<group>"; };
+		47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +133,7 @@
 				4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */,
 				4711A9CA19AFBC060062F587 /* iAd.framework in Frameworks */,
 				4711A9C819AFBC010062F587 /* SystemConfiguration.framework in Frameworks */,
+				474D51541A7D56F9006EE7EF /* CloudKit.framework in Frameworks */,
 				4711A9C619AFBBF50062F587 /* Security.framework in Frameworks */,
 				4711A9C419AFBBED0062F587 /* AudioToolbox.framework in Frameworks */,
 				4711A9C219AFBBE10062F587 /* CFNetwork.framework in Frameworks */,
@@ -168,6 +176,7 @@
 		4711A9D519AFBC300062F587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				474D51531A7D56F9006EE7EF /* CloudKit.framework */,
 				4722CF481A29376B00CCEB8F /* Bolts.framework */,
 				4722CF491A29376B00CCEB8F /* Parse.framework */,
 				4734D7AF19CF59B9007AB683 /* Bolts.framework */,
@@ -222,8 +231,7 @@
 				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				4705068A1A42B5AB00EEA613 /* Objects */,
-				470506981A4E663D00EEA613 /* EmptySegue.swift */,
-				47150D731A649BD6009201CA /* MapAnnotation.swift */,
+				47D6D0B91A77E2DD004A2EFD /* Custom Classes */,
 				47C8B0E41A28509500C9BD0A /* Objective-C Classes */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
@@ -234,6 +242,7 @@
 		47BB57B819AFB0A300B3807E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				474D51521A7D56EA006EE7EF /* VT Transit.entitlements */,
 				4711AA0119AFBF710062F587 /* VirginiaTech.gpx */,
 				4711AA0F19AFBF8B0062F587 /* Metadata Text Files */,
 				47BB57B919AFB0A300B3807E /* Info.plist */,
@@ -268,6 +277,7 @@
 				4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */,
 				470506941A4B5CEB00EEA613 /* MapViewController.swift */,
 				470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */,
+				47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -279,6 +289,16 @@
 				47C8B0E11A284A8400C9BD0A /* TBXML.m */,
 			);
 			name = "Objective-C Classes";
+			sourceTree = "<group>";
+		};
+		47D6D0B91A77E2DD004A2EFD /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				470506981A4E663D00EEA613 /* EmptySegue.swift */,
+				47150D731A649BD6009201CA /* MapAnnotation.swift */,
+				47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */,
+			);
+			name = "Custom Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +351,11 @@
 					47BB57B419AFB0A300B3807E = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = A28NM53F25;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					47BB57C819AFB0A300B3807E = {
 						CreatedOnToolsVersion = 6.0;
@@ -388,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */,
 				47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */,
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
 				4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */,
@@ -397,6 +423,7 @@
 				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
 				470506951A4B5CEB00EEA613 /* MapViewController.swift in Sources */,
+				47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,
 				47C8B0E31A284A8400C9BD0A /* TBXML.m in Sources */,
 				47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */,
@@ -519,7 +546,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "VT Transit/VT Transit.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -529,6 +558,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit/VT Transit-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -540,7 +570,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "VT Transit/VT Transit.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,6 +582,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit/VT Transit-Bridging-Header.h";
 			};
 			name = Release;

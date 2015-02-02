@@ -21,6 +21,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var currentBusAnnotations = [MapAnnotation]()
     @IBOutlet var mapSearchBar: UISearchBar!
     var mapItems = [String]()
+    @IBOutlet var dismissKeyboardButton: UIButton!
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -33,9 +34,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // start location manager
         // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-//        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
+        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
             locationManager.requestWhenInUseAuthorization()
-//        }
+        }
         
         locationManager.startUpdatingLocation()
     }
@@ -151,7 +152,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotationView!.pinColor = MKPinAnnotationColor.Red
             annotationView!.rightCalloutAccessoryView = nil
         }
-        
         return annotationView
     }
     
@@ -165,35 +165,49 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: Map Search Methods
     // ************************
     
-//    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-//        println("search button clicked")
-////        searchBar.resignFirstResponder()
-//        var request : MKLocalSearchRequest = MKLocalSearchRequest()
-//        request.naturalLanguageQuery = searchBar.text
-//        request.region = mapView.region;
-//        var search : MKLocalSearch = MKLocalSearch(request: request)
-//        
-//        search.startWithCompletionHandler({ response, error in
-//            self.mapItems.removeAll(keepCapacity: false)
-//            searchResultItems.removeAll(keepCapacity: false)
-//            self.myMapView.removeAnnotations(self.myMapView.annotations)
-//            
-//            for item in response.mapItems! {
-//                var point: MKPointAnnotation = MKPointAnnotation()
-//                var mapItem: MKMapItem = item as MKMapItem
-//                point.coordinate = mapItem.placemark.coordinate
-//                point.title = mapItem.placemark.name
-//                point.subtitle = mapItem.placemark.title
-//                self.myMapView.addAnnotation(point)
-//                self.mapItems.append(item.description)
-//                var searchResultName: String = ""
-//                mapItem.name = searchResultName
-//                self.myMapView.showAnnotations(self.myMapView.annotations, animated: true)
-//            }
-//            
-//        })
-//    }
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        // get the MKLocalRequest from searchbar text
+        var request : MKLocalSearchRequest = MKLocalSearchRequest()
+        request.naturalLanguageQuery = searchBar.text
+        request.region = mapView.region;
+        var search : MKLocalSearch = MKLocalSearch(request: request)
+        
+        search.startWithCompletionHandler({ response, error in
+            // remove search pins already in place
+            self.mapItems.removeAll(keepCapacity: false)
+            for ann in self.mapView.annotations {
+                if ann is MKUserLocation {
+                    continue
+                }
+                if (ann as MapAnnotation).category == "search" {
+                    self.mapView.removeAnnotation((ann as MapAnnotation))
+                }
+            }
+            // add response items
+            if response != nil {
+                for item in response.mapItems! {
+                    var mapItem: MKMapItem = item as MKMapItem
+                    var point: MapAnnotation = MapAnnotation(coordinate: mapItem.placemark.coordinate, title: mapItem.placemark.name, subtitle:  mapItem.placemark.title, category: "search")   
+                    self.mapView.addAnnotation(point)
+                    self.mapItems.append(item.description)
+                    var searchResultName: String = ""
+                    mapItem.name = searchResultName
+                    self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+                }
+            }
+            
+        })
+        searchBar.resignFirstResponder()
+    }
     
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        dismissKeyboardButton.hidden = false
+    }
+    
+    @IBAction func dismissKeyboard(sender: AnyObject) {
+        mapSearchBar.resignFirstResponder()
+        dismissKeyboardButton.hidden = true
+    }
     // *************************
     // MARK: Map Toolbar Methods
     // *************************
@@ -213,13 +227,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    // *************************
+    // ********************
     // MARK: Helper Methods
-    // *************************
+    // ********************
     func addStopsToMap() {
         if stops.count == 0 {
             // query parse for all the stops
             var query = PFQuery(className: "Stops")
+            query.limit = 1000
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
