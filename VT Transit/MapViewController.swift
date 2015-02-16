@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CloudKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 
@@ -34,9 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // start location manager
         // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-        if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
-            locationManager.requestWhenInUseAuthorization()
-        }
+        locationManager.requestWhenInUseAuthorization()
         
         locationManager.startUpdatingLocation()
     }
@@ -69,6 +68,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidDisappear(animated: Bool) {
         self.mapView.removeAnnotations(self.mapView.annotations)
         timer.invalidate()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     // **************************
@@ -121,9 +124,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         manager.stopUpdatingLocation()
     }
     
-    // **************************************
+    // ********************************
     // MARK: MKMapView Delegate Methods
-    // **************************************
+    // ********************************
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
             
@@ -233,14 +236,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func addStopsToMap() {
         if stops.count == 0 {
             // query parse for all the stops
+            
             var query = PFQuery(className: "Stops")
-            query.limit = 1000
+            query.limit = 500
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
                     
                     for object in objects {
-                        let stop = Stop(name: object["name"] as String, code: object["code"] as String, latitude: object["latitude"] as String, longitude: object["longitude"] as String)
+                        let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
+                        let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
                         self.stops.append(stop)
                     }
                 }

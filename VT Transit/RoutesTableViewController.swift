@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
@@ -23,7 +24,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         super.viewDidLoad()
         
         self.searchDisplayController!.searchResultsTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "routesCell")
-        
+
         var query = PFQuery(className: "Routes")
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -31,12 +32,17 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
                 
                 for object in objects {
                     let route = Route(name: object["name"] as? String, shortName: object["shortName"] as String)
+                    
                     self.routes.append(route)
                 }
                 self.routes.sort({$0.name < $1.name})
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     // ****************************
@@ -64,7 +70,6 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     // handle tableview cell selection
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             if tableView == self.searchDisplayController!.searchResultsTableView {
                 // gets stops associated with route
                 self.stops = Parser.stopsForRoute(self.filteredRoutes[indexPath.row].shortName)
@@ -88,7 +93,6 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
                 self.stops.sort({$0.name < $1.name})
                 self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
             }
-//        })
     }
     
     

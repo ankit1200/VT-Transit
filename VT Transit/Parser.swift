@@ -30,7 +30,7 @@ class Parser: NSObject {
                 let stopNameElement = TBXML.childElementNamed("StopName", parentElement: scheduledStops)
                 let stopCodeText = TBXML.textForElement(stopCodeElement)
                 let stopNameText = TBXML.textForElement(stopNameElement)
-                stops.append(Stop(name: stopNameText, code: stopCodeText, latitude: "", longitude: ""))
+                stops.append(Stop(name: stopNameText, code: stopCodeText, location:CLLocation()))
                 scheduledStops = TBXML.nextSiblingNamed("ScheduledStops", searchFromElement: scheduledStops)
             }
         }

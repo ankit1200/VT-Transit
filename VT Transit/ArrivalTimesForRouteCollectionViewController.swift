@@ -12,7 +12,7 @@ import MapKit
 class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
 
     var selectedRoutes = [Route]()
-    var selectedStop = Stop(name: "", code: "", latitude: "", longitude: "")
+    var selectedStop = Stop(name: "", code: "", location:CLLocation())
     var arrivalTimes:[(time: [String], route: Route)] = []
     let parser = Parser()
     var refreshControl:UIRefreshControl!
@@ -35,6 +35,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             self.title = selectedStop.name
         }
         
+        locationManager.delegate = self
+        // start location manager
+        locationManager.requestWhenInUseAuthorization()
+        
         // get arrivalTimes for routes
         for route in selectedRoutes {
             let time = Parser.arrivalTimesForRoute(route.shortName, stopCode: selectedStop.code)
@@ -49,6 +53,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.navigationBarHidden = navBarHidden
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 
     // *************************************
@@ -120,6 +128,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         }
     }
     
+    // ******************************
+    // MARK: UICollectionViewDelegate
+    // ******************************
+    
     // function to set up Header
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
     {
@@ -163,7 +175,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES)
             
             let alertController = UIAlertController(title: "Set Reminder", message: nil, preferredStyle: .ActionSheet)
-            
+            locationManager.startUpdatingLocation()
             if (timeDifferenceMinutes > 5) {
                 let fiveMinutes = UIAlertAction(title: "5 Minutes", style: .Default, handler: {(UIAlertAction) in self.fireNotification(5, indexPath: indexPath)})
                 alertController.addAction(fiveMinutes)
@@ -197,17 +209,15 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             }
     }
     
+    // ********************
+    // MARK: Helper Methods
+    // ********************
+    
     func fireNotification(minutes: Int, indexPath: NSIndexPath) {
         if (minutes == 0) {
-            locationManager.delegate = self
-            // start location manager
-            // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-            if locationManager.respondsToSelector(Selector("requestWhenInUseAuthorization:")) {
-                locationManager.requestWhenInUseAuthorization()
-            }
             var request : MKDirectionsRequest  = MKDirectionsRequest()
             var start : MKMapItem = MKMapItem.mapItemForCurrentLocation()
-            var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (selectedStop.latitude as NSString).doubleValue, longitude: (selectedStop.longitude as NSString).doubleValue)
+            var coordinate : CLLocationCoordinate2D = selectedStop.location.coordinate
             
             var stopPlacemark : MKPlacemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
             var end : MKMapItem = MKMapItem(placemark: stopPlacemark)
@@ -283,9 +293,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                         
                         self.presentViewController(alertController, animated: true, completion: nil)
                     }
-
                 }
-                    
             })
 
         }
@@ -332,5 +340,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             }
 
         }
+        locationManager.stopUpdatingLocation()
     }
 }

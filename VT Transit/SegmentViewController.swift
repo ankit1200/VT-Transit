@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class SegmentViewController: UIViewController {
 
@@ -37,6 +38,9 @@ class SegmentViewController: UIViewController {
         performSegueWithIdentifier(currentSegueID, sender: nil)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     // ******************
     // MARK: Swap Methods
@@ -90,8 +94,8 @@ class SegmentViewController: UIViewController {
                 // Add latitude and longitute to selected Stops
                 var counter = 0
                 for object in objects {
-                    self.stops[counter].latitude = object["latitude"] as String
-                    self.stops[counter++].longitude = object["longitude"] as String
+                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
+                    self.stops[counter++].location = location
                 }
             } else {
                 // Log details of the failure

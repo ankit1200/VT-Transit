@@ -26,7 +26,7 @@ class MapAnnotation: NSObject, MKAnnotation {
     
     init(stop: Stop) {
         
-        self.coordinate = CLLocationCoordinate2D(latitude: (stop.latitude as NSString).doubleValue, longitude: (stop.longitude as NSString).doubleValue)
+        self.coordinate = stop.location.coordinate
         self.title = stop.name
         self.subtitle = "Bus Stop #\(stop.code)"
         self.stop = stop

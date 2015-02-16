@@ -41,6 +41,7 @@
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
 		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
 		474D51541A7D56F9006EE7EF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D51531A7D56F9006EE7EF /* CloudKit.framework */; };
+		475626CA1A92AFAB005AFE07 /* CloudKitStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */; };
 		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
@@ -104,6 +105,7 @@
 		47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
 		474D51521A7D56EA006EE7EF /* VT Transit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit.entitlements"; sourceTree = "<group>"; };
 		474D51531A7D56F9006EE7EF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStuff.swift; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				4711AA0F19AFBF8B0062F587 /* Metadata Text Files */,
 				47BB57B919AFB0A300B3807E /* Info.plist */,
 				4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */,
+				475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */,
+				475626CA1A92AFAB005AFE07 /* CloudKitStuff.swift in Sources */,
 				47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */,
 				47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */,
 				4705068E1A42B72800EEA613 /* StopsHeaderCollectionReusableView.swift in Sources */,
@@ -555,7 +559,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -579,7 +583,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "VT Transit/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

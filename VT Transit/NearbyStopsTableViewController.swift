@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 
@@ -26,27 +27,39 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         
         // pull to refresh
         var refreshControl = UIRefreshControl()
-//        refreshControl.tintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh nearby stops")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
         // start location manager
-        // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-        if locationManager.respondsToSelector(Selector("requestAlwaysAuthorization:")) {
-            locationManager.requestAlwaysAuthorization()
-        }
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
         getDistancesForAllStops()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     // *************************************
     // MARK: Pull to Refresh Selector Method
     // *************************************
     
     func refresh(sender:AnyObject) {
-        getDistancesForAllStops()
+        nearbyStops = []
+        for tuple in stops {
+            var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
+            self.locationManager.stopUpdatingLocation()
+            let tuple = (stop: tuple.stop, distance: distance)
+            self.stops.append(tuple)
+            if distance < 1.61 {
+                self.nearbyStops.append(tuple)
+            }
+            self.nearbyStops.sort({$0.1 < $1.1})
+        }
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
     }
 
 
@@ -92,9 +105,8 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             
             // Configure cell
             cell.title?.text = tuple.stop.name
-            let distanceInMiles = tuple.distance / 1609.34
+            let distanceInMiles = tuple.distance
             cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
-            
             // if location is disabled then make distance label blank
             if locationManager.location != nil || distanceInMiles != 0.00 {
                 cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
@@ -145,35 +157,30 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // ********************
     
     func getDistancesForAllStops() {
-        // query parse for all the stops
-        nearbyStops = []
+        let currentLocation = locationManager.location
         var query = PFQuery(className: "Stops")
-        query.limit = 1000
+        query.limit = 500
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 for object in objects {
-                    let stop = Stop(name: object["name"] as String, code: object["code"] as String, latitude: object["latitude"] as String, longitude: object["longitude"] as String)
-                    let stopLocation = CLLocation(latitude: (stop.latitude as NSString).doubleValue, longitude: (stop.longitude as NSString).doubleValue)
-                    var distance = stopLocation.distanceFromLocation(self.locationManager.location) as Double
+                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
+                    let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
+                    var distance = stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
                     self.locationManager.stopUpdatingLocation()
                     let tuple = (stop: stop, distance: distance)
                     self.stops.append(tuple)
-                    if distance < 1609.34 {
+                    if distance < 1.61 {
                         self.nearbyStops.append(tuple)
                     }
                     self.nearbyStops.sort({$0.1 < $1.1})
                 }
                 dispatch_async(dispatch_get_main_queue(), {
-                    println("goes here")
                     if self.nearbyStops.count == 0 {
                         let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
                         alertView.show()
                     }
                     self.tableView.reloadData()
-                    if self.refreshControl!.refreshing {
-                        self.refreshControl!.endRefreshing()
-                    }
                 })
             }
         }

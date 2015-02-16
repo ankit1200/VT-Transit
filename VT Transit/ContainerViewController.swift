@@ -26,6 +26,9 @@ class ContainerViewController: UIViewController {
         segmentControl.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     // ***********************************
     // MARK: Segment Control Value Changed

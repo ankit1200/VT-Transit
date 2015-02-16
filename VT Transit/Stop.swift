@@ -11,13 +11,12 @@ import Foundation
 class Stop {
     
     let name, code: String
-    var latitude, longitude: String
+    var location: CLLocation
     
     // init new Stop object
-    init(name: String, code: String, latitude:String, longitude:String) {
+    init(name: String, code: String, location:CLLocation) {
         self.name = name
         self.code = code
-        self.latitude = latitude
-        self.longitude = longitude
+        self.location = location
     }
 }
