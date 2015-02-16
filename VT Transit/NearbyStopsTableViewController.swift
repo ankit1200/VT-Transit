@@ -35,7 +35,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
-        getDistancesForAllStops()
+        getStopsFromParse()
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,8 +51,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         for tuple in stops {
             var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
             self.locationManager.stopUpdatingLocation()
-            let tuple = (stop: tuple.stop, distance: distance)
-            self.stops.append(tuple)
             if distance < 1.61 {
                 self.nearbyStops.append(tuple)
             }
@@ -156,7 +154,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // MARK: Helper Methods
     // ********************
     
-    func getDistancesForAllStops() {
+    func getStopsFromParse() {
         let currentLocation = locationManager.location
         var query = PFQuery(className: "Stops")
         query.limit = 500
@@ -166,14 +164,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
                 for object in objects {
                     let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
                     let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
-                    var distance = stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
-                    self.locationManager.stopUpdatingLocation()
-                    let tuple = (stop: stop, distance: distance)
-                    self.stops.append(tuple)
-                    if distance < 1.61 {
-                        self.nearbyStops.append(tuple)
-                    }
-                    self.nearbyStops.sort({$0.1 < $1.1})
+                    self.getDistancesForStop(stop)
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     if self.nearbyStops.count == 0 {
@@ -184,6 +175,17 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
                 })
             }
         }
+    }
+    
+    func getDistancesForStop(stop:Stop) {
+        var distance = stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
+        self.locationManager.stopUpdatingLocation()
+        let tuple = (stop: stop, distance: distance)
+        self.stops.append(tuple)
+        if distance < 1.61 {
+            self.nearbyStops.append(tuple)
+        }
+        self.nearbyStops.sort({$0.1 < $1.1})
     }
     
     
