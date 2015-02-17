@@ -42,6 +42,8 @@
 		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
 		474D51541A7D56F9006EE7EF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D51531A7D56F9006EE7EF /* CloudKit.framework */; };
 		475626CA1A92AFAB005AFE07 /* CloudKitStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */; };
+		475626CE1A92C530005AFE07 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626CC1A92C530005AFE07 /* FavoritesViewController.swift */; };
+		475626D21A92CAEA005AFE07 /* AddStopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */; };
 		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
@@ -106,6 +108,8 @@
 		474D51521A7D56EA006EE7EF /* VT Transit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit.entitlements"; sourceTree = "<group>"; };
 		474D51531A7D56F9006EE7EF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStuff.swift; sourceTree = "<group>"; };
+		475626CC1A92C530005AFE07 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStopsViewController.swift; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 				470506941A4B5CEB00EEA613 /* MapViewController.swift */,
 				470506901A42B94F00EEA613 /* ArrivalTimesForRouteCollectionViewController.swift */,
 				47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */,
+				475626CC1A92C530005AFE07 /* FavoritesViewController.swift */,
+				475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -416,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				475626D21A92CAEA005AFE07 /* AddStopsViewController.swift in Sources */,
 				47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */,
 				475626CA1A92AFAB005AFE07 /* CloudKitStuff.swift in Sources */,
 				47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */,
@@ -434,6 +441,7 @@
 				47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */,
 				470506971A4D4DD900EEA613 /* ContainerViewController.swift in Sources */,
 				4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */,
+				475626CE1A92C530005AFE07 /* FavoritesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
