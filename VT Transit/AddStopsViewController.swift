@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 extension String {
     
@@ -21,11 +22,13 @@ extension String {
 
 class AddStopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
     
-    var stops = Array<Stop>()
-    var filteredStops = Array<Stop>()
+    var stops = Array<Stop>() // All stops
+    var filteredStops = Array<Stop>() // stops for search
     @IBOutlet weak var tableView: UITableView!
-    var stopsDictionary = Dictionary<String, Array<Stop>>()
-    var sectionTitles = Array<String>()
+    var stopsDictionary = Dictionary<String, Array<Stop>>() // dictionary for section index
+    var sectionTitles = Array<String>() // section index titles
+    var favoriteStops = Array<Stop>() // favorite stops from cloudkit query
+    let database = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -40,7 +43,6 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
         // set the tableView section Index Color
         self.tableView.sectionIndexColor = UIColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         
-        
         // Query All Stops from parse
         var query = PFQuery(className: "Stops")
         query.limit = 500
@@ -54,7 +56,10 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 self.stops.sort({$0.name < $1.name})
                 self.createAlphabetArray()
-                self.tableView.reloadData()
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -68,9 +73,8 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     // *************************
     
     @IBAction func donePressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {
-            // Save the tableView Selections
-        })
+        // Save the tableView Selections
+        self.dismissViewControllerAnimated(true, completion: {})
     }
     
     // ******************************
@@ -86,10 +90,14 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"cell")
+        let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"Cell")
         
         let sectionArray = stopsDictionary[sectionTitles[indexPath.section]]!
         var stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
+        
+        if favoriteStops.filter({$0.code == stop.code}).count > 0 {
+            cell.accessoryType = .Checkmark
+        }
         
         cell.textLabel?.text = stop.name
         cell.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
@@ -101,12 +109,49 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     // ***************************
     // MARK: - Table view delegate
     // ***************************
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        return (tableView == self.searchDisplayController!.searchResultsTableView) ? nil : sectionTitles[section]
     }
     
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
         return sectionTitles
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let sectionArray = stopsDictionary[sectionTitles[indexPath.section]]!
+        var stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
+        let recordID = CKRecordID(recordName: stop.code)
+        // Deselect the cell
+        if tableView.cellForRowAtIndexPath(indexPath)!.accessoryType == .Checkmark {
+            tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .None
+            
+            // remove data from iCloud database
+            favoriteStops = favoriteStops.filter{$0.code != stop.code}
+            
+            database.deleteRecordWithID(recordID, completionHandler: { (record, error) -> Void in
+                if error != nil {
+                    println(error)
+                }
+            })
+            
+        } else { // Select the cell
+            tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .Checkmark
+            
+            // Save data to iCloud database
+            favoriteStops.append(stop)
+            
+            let record = CKRecord(recordType: "Stop", recordID: recordID)
+            record.setValue(stop.name, forKey: "name")
+            record.setValue(stop.code, forKey: "code")
+            record.setValue(stop.location, forKey: "location")
+            self.database.saveRecord(record, completionHandler: { (record, error) -> Void in
+                if error != nil {
+                    println(error)
+                }
+            })
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // ************************

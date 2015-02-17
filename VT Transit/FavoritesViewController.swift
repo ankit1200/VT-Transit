@@ -7,14 +7,40 @@
 //
 
 import UIKit
+import CloudKit
 
 class FavoritesViewController: UITableViewController {
+    
+    let database = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
+    var favoriteStops = Array<Stop>() // favoriteStops
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
          self.navigationItem.leftBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        favoriteStops = []
+
+        // Query favorite Stops from CloudKit
+        let ckQuery = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
+        ckQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        self.database.performQuery(ckQuery, inZoneWithID: nil) {
+            results, error in
+            if error != nil {
+                println(error)
+            } else {
+                for record in results {
+                    let stop = Stop(name: record["name"] as String, code: record["code"] as String, location: record["location"] as CLLocation)
+                    self.favoriteStops.append(stop)
+                }
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,24 +52,17 @@ class FavoritesViewController: UITableViewController {
     // MARK: - Table view data source
     // ******************************
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        return favoriteStops.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
-        // Configure the cell...
-
+        let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"FavoriteStop")
+        var stop = favoriteStops[indexPath.row]
+        cell.textLabel?.text = stop.name
+        cell.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
+        cell.detailTextLabel?.text = "Bus Stop #" + stop.code
         return cell
     }
 
@@ -95,6 +114,24 @@ class FavoritesViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // ***************************
+    // MARK: - Add Button Pressed
+    // ***************************
+    
+    @IBAction func addStops(sender: AnyObject) {
+        performSegueWithIdentifier("showAddStopsViewController", sender: self)
+    }
+    
+    // *************************
+    // MARK: - Prepare For Segue
+    // *************************
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showAddStopsViewController" {
+            let advc = segue.destinationViewController as AddStopsViewController
+            advc.favoriteStops = self.favoriteStops
+        }
+    }
 }
     
     
