@@ -22,7 +22,6 @@ class FavoritesViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        favoriteStops = []
 
         // Query favorite Stops from CloudKit
         let ckQuery = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
@@ -32,6 +31,7 @@ class FavoritesViewController: UITableViewController {
             if error != nil {
                 println(error)
             } else {
+              self.favoriteStops = []
                 for record in results {
                     let stop = Stop(name: record["name"] as String, code: record["code"] as String, location: record["location"] as CLLocation)
                     self.favoriteStops.append(stop)
@@ -56,7 +56,6 @@ class FavoritesViewController: UITableViewController {
         return favoriteStops.count
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"FavoriteStop")
         var stop = favoriteStops[indexPath.row]
@@ -123,6 +122,10 @@ class FavoritesViewController: UITableViewController {
         performSegueWithIdentifier("showAddStopsViewController", sender: self)
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
+    }
+    
     // *************************
     // MARK: - Prepare For Segue
     // *************************
@@ -130,6 +133,14 @@ class FavoritesViewController: UITableViewController {
         if segue.identifier == "showAddStopsViewController" {
             let advc = segue.destinationViewController as AddStopsViewController
             advc.favoriteStops = self.favoriteStops
+        } else if segue.identifier == "showArrivalTimesForAllRoutes" {
+            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
+            // handle selected cells in search display controlller
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let stop = favoriteStops[indexPath.row]
+            arrivalTimesForRouteCollectionViewController.selectedStop = stop
+            arrivalTimesForRouteCollectionViewController.selectedRoutes = Parser.routesForStop(stop.code)
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }
     }
 }
