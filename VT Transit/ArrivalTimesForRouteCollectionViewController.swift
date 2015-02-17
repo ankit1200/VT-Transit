@@ -142,11 +142,13 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             
             if selectedRoutes.count == 1 {
                 headerView.title.text = selectedStop.name
+                headerView.title.adjustsFontSizeToFitWidth = true
                 headerView.subtitle.text = "Stop #: \(selectedStop.code)    Route Code: \(selectedRoutes[indexPath.section].shortName)"
                 headerView.routeTitle.text = ""
             } else {
                 let selectedRoute = selectedRoutes[indexPath.section]
                 headerView.routeTitle.text = selectedRoute.name
+                headerView.routeTitle.adjustsFontSizeToFitWidth = true
                 headerView.title.text = ""
                 headerView.subtitle.text = ""
             }

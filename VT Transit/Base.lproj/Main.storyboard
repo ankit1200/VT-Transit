@@ -412,8 +412,8 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KAU-Wb-5Fb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                            <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAU-Wb-5Fb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <connections>
                                     <segue destination="AWk-Vx-Rue" kind="embed" identifier="embedContainer" id="fqr-Uh-Fyx"/>
                                 </connections>
@@ -634,35 +634,43 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-xd-mJ0">
-                                    <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                    <rect key="frame" x="8" y="8" width="554" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoT-Oy-wsx">
-                                    <rect key="frame" x="8" y="27" width="584" height="21"/>
+                                    <rect key="frame" x="8" y="27" width="549" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RouteTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-sX-CjW">
-                                    <rect key="frame" x="8" y="14" width="584" height="21"/>
+                                    <rect key="frame" x="8" y="14" width="554" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPX-Ux-qTZ">
+                                    <rect key="frame" x="570" y="14" width="22" height="22"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstItem="fxd-sX-CjW" firstAttribute="leading" secondItem="rHE-xd-mJ0" secondAttribute="leading" id="4uW-vc-tWJ"/>
                                 <constraint firstItem="fxd-sX-CjW" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="14" id="M9n-Bt-ccu"/>
-                                <constraint firstItem="rHE-xd-mJ0" firstAttribute="trailing" secondItem="M4k-ZZ-0Kb" secondAttribute="trailingMargin" id="Pqk-Id-8zP"/>
+                                <constraint firstItem="rHE-xd-mJ0" firstAttribute="trailing" secondItem="M4k-ZZ-0Kb" secondAttribute="trailingMargin" constant="-30" id="Pqk-Id-8zP"/>
                                 <constraint firstItem="rHE-xd-mJ0" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="8" id="PuA-Tg-oPX"/>
-                                <constraint firstItem="NoT-Oy-wsx" firstAttribute="trailing" secondItem="rHE-xd-mJ0" secondAttribute="trailing" id="RqH-pe-iSe"/>
+                                <constraint firstAttribute="trailing" secondItem="jPX-Ux-qTZ" secondAttribute="trailing" constant="8" id="QXF-g9-6zZ"/>
+                                <constraint firstItem="NoT-Oy-wsx" firstAttribute="trailing" secondItem="rHE-xd-mJ0" secondAttribute="trailing" constant="-5" id="RqH-pe-iSe"/>
                                 <constraint firstItem="NoT-Oy-wsx" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="27" id="Twb-Xl-PFj"/>
                                 <constraint firstAttribute="bottomMargin" secondItem="NoT-Oy-wsx" secondAttribute="bottom" constant="-6" id="eGM-GR-mZM"/>
                                 <constraint firstItem="NoT-Oy-wsx" firstAttribute="leading" secondItem="rHE-xd-mJ0" secondAttribute="leading" id="izd-3p-kh7"/>
                                 <constraint firstItem="fxd-sX-CjW" firstAttribute="trailing" secondItem="rHE-xd-mJ0" secondAttribute="trailing" id="jDE-25-we7"/>
+                                <constraint firstItem="jPX-Ux-qTZ" firstAttribute="top" secondItem="M4k-ZZ-0Kb" secondAttribute="top" constant="14" id="n8b-QX-EVn"/>
                                 <constraint firstItem="rHE-xd-mJ0" firstAttribute="leading" secondItem="M4k-ZZ-0Kb" secondAttribute="leadingMargin" id="qVI-U8-Vx7"/>
                             </constraints>
                             <connections>

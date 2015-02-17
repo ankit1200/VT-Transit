@@ -53,6 +53,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
         // configure cell
         cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell!.textLabel?.text = stop.name
+        cell!.textLabel?.adjustsFontSizeToFitWidth = true
         cell!.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
         cell!.detailTextLabel?.text = "Bus Stop #\(stop.code)"
         
