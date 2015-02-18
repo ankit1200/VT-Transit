@@ -196,12 +196,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             }
             
             if (alertController.actions.count == 0) {
-                let late = UIAlertController(title: "Leave Now", message: "You should probably stop reading this and leave", preferredStyle: .Alert)
-                
-                let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                late.addAction(cancel)
-                
-                presentViewController(late, animated: true, completion: nil)
+                showAlert("Leave Now!", message: "You should probably stop reading this and leave.")
             } else {
                 let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
                 alertController.addAction(cancel)
@@ -221,8 +216,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             self.stopsForRoute = Parser.stopsForRoute(route!.shortName)
             
             if self.stopsForRoute.count == 0 {
-                let alertView = UIAlertView(title: "Route not running!", message:  "The selected route is not running at this time. Please try a different Route", delegate: nil, cancelButtonTitle: "Ok")
-                alertView.show()
+                showAlert("Route not running!", message: "The selected route is not running at this time. Please try a different Route")
             } else {
                 // sort the stops alphabetically
                 self.stopsForRoute.sort({$0.name < $1.name})
@@ -253,12 +247,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 (response:MKDirectionsResponse!, error:NSError!) in
                 
                 if (error != nil) {
-                    let alertController = UIAlertController(title: "Uh oh", message: "Walking Directions are not Avaliable", preferredStyle: .Alert)
-                    
-                    let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alertController.addAction(cancel)
-                    
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    self.showAlert("Could Not Calculate Walking Time", message: "Please make sure location services and network connection are available.")
                 }
                 else {
                     var route: MKRoute = response.routes[0] as MKRoute
@@ -299,22 +288,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                         
                         let minutesBeforeArrivalTime = arrivalTimeDate?.dateByAddingTimeInterval(-1 * timeInSeconds)
                         let message = "You will be reminded at " + dateFormaterJustTime.stringFromDate(minutesBeforeArrivalTime!)
-                        
-                        let alertController = UIAlertController(title: "Reminder Set!", message: message, preferredStyle: .Alert)
-                        
-                        let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alertController.addAction(cancel)
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
-                        
+                        self.showAlert("Reminder Set!", message: message)
                     }
                     else {
-                        let alertController = UIAlertController(title: "Uh oh", message: "Youre late", preferredStyle: .Alert)
-                        
-                        let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        alertController.addAction(cancel)
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
+                        self.showAlert("Uh Oh!", message: "You're running late!")
                     }
                 }
             })
@@ -340,27 +317,22 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 let dateFormaterJustTime = NSDateFormatter()
                 dateFormaterJustTime.dateFormat = "hh:mm a"
                 
-                
                 let minutesBeforeArrivalTime = arrivalTimeDate?.dateByAddingTimeInterval(Double(-60*(minutes)))
                 let message = "You will be reminded at " + dateFormaterJustTime.stringFromDate(minutesBeforeArrivalTime!)
-                
-                let alertController = UIAlertController(title: "Reminder Set!", message: message, preferredStyle: .Alert)
-                
-                let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alertController.addAction(cancel)
-                
-                presentViewController(alertController, animated: true, completion: nil)
+                showAlert("Reminder Set!", message: message)
             }
             else {
-                let alertController = UIAlertController(title: "Uh oh", message: "Youre late", preferredStyle: .Alert)
-                
-                let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alertController.addAction(cancel)
-                
-                presentViewController(alertController, animated: true, completion: nil)
+                showAlert("Uh Oh!", message: "You're running late!")
             }
         }
         locationManager.stopUpdatingLocation()
+    }
+    
+    func showAlert(title:String, message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let cancel = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(cancel)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     // *******************
