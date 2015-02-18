@@ -20,3 +20,7 @@ class Stop {
         self.location = location
     }
 }
+
+func == (lhs: Stop, rhs: Stop) -> Bool {
+    return (lhs.name == rhs.name) && (lhs.code == rhs.code)
+}

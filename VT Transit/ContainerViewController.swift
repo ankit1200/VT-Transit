@@ -15,7 +15,7 @@ class ContainerViewController: UIViewController {
     var segmentViewController: SegmentViewController?
     var selectedRoute = Route(name:"", shortName:"")
     var stops = Array<Stop>()
-    
+    var selectedStop:Stop? // stop that is selected in the collection view that will be zoomed to in the map
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -24,6 +24,9 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentControl.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
+        if (segmentControl.selectedSegmentIndex == 1) {
+            self.segmentViewController!.swap()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +52,7 @@ class ContainerViewController: UIViewController {
             segmentViewController = segue.destinationViewController as? SegmentViewController
             segmentViewController?.selectedRoute = selectedRoute
             segmentViewController?.stops = stops
+            segmentViewController?.selectedStop = selectedStop
         }
     }
 }

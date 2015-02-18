@@ -20,7 +20,7 @@ class SegmentViewController: UIViewController {
     
     var selectedRoute = Route(name:"", shortName:"")
     var stops = Array<Stop>()
-    
+    var selectedStop: Stop?
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -140,6 +140,7 @@ class SegmentViewController: UIViewController {
             swapViewControllers(self.childViewControllers[0] as UIViewController, to: segmentMapViewController!)
             segmentMapViewController?.stops = stops
             segmentMapViewController?.selectedRoutes = [selectedRoute]
+            segmentMapViewController?.selectedStop = selectedStop
         }
     }
 }

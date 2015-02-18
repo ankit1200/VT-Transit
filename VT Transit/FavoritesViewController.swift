@@ -22,7 +22,6 @@ class FavoritesViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        println("test")
         // Query favorite Stops from CloudKit
         let ckQuery = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
         self.database.performQuery(ckQuery, inZoneWithID: nil) {

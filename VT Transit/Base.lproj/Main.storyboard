@@ -688,7 +688,6 @@
                         </connections>
                     </collectionView>
                     <connections>
-                        <segue destination="Efb-W3-pwM" kind="showDetail" identifier="showStopOnMap" id="QKL-dG-Z8d"/>
                         <segue destination="rml-P8-JW1" kind="show" identifier="showStopsForRoute" id="7Ju-ox-L79"/>
                     </connections>
                 </collectionViewController>
@@ -904,7 +903,6 @@
         <image name="stops_tab" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QKL-dG-Z8d"/>
         <segue reference="pow-jQ-d57"/>
         <segue reference="7Ju-ox-L79"/>
     </inferredMetricsTieBreakers>

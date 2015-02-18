@@ -16,6 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet var mapView: MKMapView!
     var selectedRoutes = [Route]()
     var stops = Array<Stop>()
+    var selectedStop: Stop?
     @IBOutlet var mapTypeSegmentControl: UISegmentedControl!
     let locationManager = CLLocationManager()
     var timer = NSTimer()
@@ -43,31 +44,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool) {
         addStopsToMap()
         
-        // get current bus locations in background
-        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            if self.selectedRoutes.count == 0 {
-                currentBusLocations = Parser.getCurrentBusLocations(nil)
-            } else {
-                currentBusLocations = Parser.getCurrentBusLocations(self.selectedRoutes[0].shortName)
-            }
-            // add current bus location in background
-            dispatch_async(dispatch_get_main_queue(), {
-                for location in currentBusLocations {
-                    let annotation = MapAnnotation(coordinate: location.coordinate, title: location.route.name, subtitle: location.route.shortName, category: "current bus")
-                    self.currentBusAnnotations.append(annotation)
-                    self.mapView.addAnnotation(annotation)
-                }
-            })
-        })
-        
-        // set a nstimer
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("getCurrentBusLocation"), userInfo: nil, repeats: true)
+//        // get current bus locations in background
+//        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//            if self.selectedRoutes.count == 0 {
+//                currentBusLocations = Parser.getCurrentBusLocations(nil)
+//            } else {
+//                currentBusLocations = Parser.getCurrentBusLocations(self.selectedRoutes[0].shortName)
+//            }
+//            // add current bus location in background
+//            dispatch_async(dispatch_get_main_queue(), {
+//                for location in currentBusLocations {
+//                    let annotation = MapAnnotation(coordinate: location.coordinate, title: location.route.name, subtitle: location.route.shortName, category: "current bus")
+//                    self.currentBusAnnotations.append(annotation)
+//                    self.mapView.addAnnotation(annotation)
+//                }
+//            })
+//        })
+//        
+//        // set a nstimer
+//        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: Selector("getCurrentBusLocation"), userInfo: nil, repeats: true)
     }
     
     override func viewDidDisappear(animated: Bool) {
         self.mapView.removeAnnotations(self.mapView.annotations)
-        timer.invalidate()
+//        timer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -113,13 +114,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let distanceInMiles = manager.location.distanceFromLocation(CLLocation(latitude: burrussHall.latitude, longitude: burrussHall.longitude)) / 1609.34
         
         // zoom to current location if < 20 away, else zoom to VT Campus
-        if CLLocationManager.locationServicesEnabled() && distanceInMiles < 20 {
+        if CLLocationManager.locationServicesEnabled() && distanceInMiles < 20 && selectedStop == nil {
             self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
         } else {
             // set the zoom to burruss hall
             let span = MKCoordinateSpanMake(0.015, 0.015)
             let region = MKCoordinateRegion(center: burrussHall, span: span)
-            mapView.setRegion(region, animated: true)
+            mapView.setRegion(region, animated: false)
         }
         manager.stopUpdatingLocation()
     }
@@ -242,7 +243,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             query.findObjectsInBackgroundWithBlock {
                 (objects: [AnyObject]!, error: NSError!) -> Void in
                 if error == nil {
-                    
                     for object in objects {
                         let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
                         let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
@@ -255,6 +255,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         let annotation = MapAnnotation(stop: stop)
                         self.mapView.addAnnotation(annotation)
                     }
+                    self.mapView.showAnnotations(self.mapView.annotations, animated: false)
+                    self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
                 })
             }
         } else {
@@ -262,6 +264,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             for stop in stops {
                 let annotation = MapAnnotation(stop: stop)
                 mapView.addAnnotation(annotation)
+                if selectedStop != nil && selectedStop! == stop {
+                    mapView.selectAnnotation(annotation, animated: false)
+                    mapView.showAnnotations([annotation], animated: false)
+                }
+            }
+            if selectedStop == nil {
+                mapView.showAnnotations(mapView.annotations, animated: false)
             }
         }
     }

@@ -141,23 +141,22 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         if kind == UICollectionElementKindSectionHeader {
             var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as StopsHeaderCollectionReusableView
             
+            let selectedRoute = selectedRoutes[indexPath.section]
             if selectedRoutes.count == 1 {
                 headerView.title.text = selectedStop.name
                 headerView.title.adjustsFontSizeToFitWidth = true
-                headerView.subtitle.text = "Stop #: \(selectedStop.code)    Route Code: \(selectedRoutes[indexPath.section].shortName)"
+                headerView.subtitle.text = "Stop #: \(selectedStop.code)    Route Code: \(selectedRoute.shortName)"
                 headerView.routeTitle.text = ""
+                headerView.route = selectedRoute
             } else {
-                let selectedRoute = selectedRoutes[indexPath.section]
                 headerView.routeTitle.text = selectedRoute.name
                 headerView.routeTitle.adjustsFontSizeToFitWidth = true
                 headerView.title.text = ""
                 headerView.subtitle.text = ""
                 headerView.route = selectedRoute
             }
-            
             reusableview = headerView;
         }
-        
         return reusableview
     }
     
@@ -165,7 +164,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return (arrivalTimes[indexPath.section].time.count == 0) ? CGSize(width: 290.0, height: 60.0) : CGSize(width: 90.0, height: 90.0)
     }
-    
     
     // function used to show reminder alert view
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -209,20 +207,12 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     // ***************************
     
     @IBAction func detailButtonPressed(sender: UIButton) {
-        if selectedRoutes.count == 1 {
-            performSegueWithIdentifier("showStopOnMap", sender: sender)
-        } else {
-            let route = (sender.superview as StopsHeaderCollectionReusableView).route
-            self.stopsForRoute = Parser.stopsForRoute(route!.shortName)
-            
-            if self.stopsForRoute.count == 0 {
-                showAlert("Route not running!", message: "The selected route is not running at this time. Please try a different Route")
-            } else {
-                // sort the stops alphabetically
-                self.stopsForRoute.sort({$0.name < $1.name})
-                performSegueWithIdentifier("showStopsForRoute", sender: sender)
-            }
-        }
+        
+        let route = (sender.superview as StopsHeaderCollectionReusableView).route
+        self.stopsForRoute = Parser.stopsForRoute(route!.shortName)
+        // sort the stops alphabetically
+        self.stopsForRoute.sort({$0.name < $1.name})
+        performSegueWithIdentifier("showStopsForRoute", sender:sender)
     }
     
     
@@ -345,12 +335,10 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             let containerViewController = segue.destinationViewController as ContainerViewController
             containerViewController.selectedRoute = ((sender as UIButton).superview as StopsHeaderCollectionReusableView).route!
             containerViewController.stops = stopsForRoute
-            
-            
-        } else if segue.identifier == "showStopOnMap" {
-            let mapViewController = segue.destinationViewController as MapViewController
-            
-            
+            if (selectedRoutes.count == 1) {
+                containerViewController.segmentControl.selectedSegmentIndex = 1
+                containerViewController.selectedStop = selectedStop
+            }
         }
     }
 }

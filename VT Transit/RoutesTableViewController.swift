@@ -78,16 +78,10 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             }
             
             if self.stops.count == 0 {
-                
                 // Instantiate an alert view object
-                var alertView = UIAlertView()
-                alertView.title = "Route not running!"
-                alertView.message = "The selected route is not running at this time. Please try a different Route"
-                alertView.delegate = nil
-                alertView.addButtonWithTitle("OK")
+                let alertView = UIAlertView(title: "Route not running!", message: "The selected route is not running at this time. Please try a different Route", delegate: nil, cancelButtonTitle: "Ok")
                 alertView.show()
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
-                
             } else {
                 // sort the stops alphabetically
                 self.stops.sort({$0.name < $1.name})
