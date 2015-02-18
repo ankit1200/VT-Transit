@@ -12,7 +12,7 @@ import CloudKit
 class FavoritesViewController: UITableViewController {
     
     let database = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
-    var favoriteStops = Array<Stop>() // favoriteStops
+    let manager = CloudKitManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,23 +22,10 @@ class FavoritesViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        // Query favorite Stops from CloudKit
-        let ckQuery = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
-        self.database.performQuery(ckQuery, inZoneWithID: nil) {
-            results, error in
-            if error != nil {
-                println(error)
-            } else {
-              self.favoriteStops = []
-                for record in results {
-                    let stop = Stop(name: record["name"] as String, code: record["code"] as String, location: record["location"] as CLLocation)
-                    self.favoriteStops.append(stop)
-                }
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        // query from singleton
+        manager.queryFavoriteStops({
+            self.tableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,12 +38,12 @@ class FavoritesViewController: UITableViewController {
     // ******************************
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteStops.count
+        return manager.favoriteStops.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"FavoriteStop")
-        var stop = favoriteStops[indexPath.row]
+        var stop = manager.favoriteStops[indexPath.row]
         cell.textLabel?.text = stop.name
         cell.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
         cell.detailTextLabel?.text = "Bus Stop #" + stop.code
@@ -72,7 +59,7 @@ class FavoritesViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            let deletedStop = favoriteStops.removeAtIndex(indexPath.row)
+            let deletedStop = manager.favoriteStops.removeAtIndex(indexPath.row)
             let recordID = CKRecordID(recordName: deletedStop.code)
             database.deleteRecordWithID(recordID, completionHandler: { (record, error) -> Void in
                 if error != nil {
@@ -105,13 +92,11 @@ class FavoritesViewController: UITableViewController {
     // *************************
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showAddStopsViewController" {
-            let advc = segue.destinationViewController as AddStopsViewController
-            advc.favoriteStops = self.favoriteStops
         } else if segue.identifier == "showArrivalTimesForAllRoutes" {
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
             // handle selected cells in search display controlller
             let indexPath = self.tableView.indexPathForSelectedRow()!
-            let stop = favoriteStops[indexPath.row]
+            let stop = manager.favoriteStops[indexPath.row]
             arrivalTimesForRouteCollectionViewController.selectedStop = stop
             arrivalTimesForRouteCollectionViewController.selectedRoutes = Parser.routesForStop(stop.code)
             self.tableView.deselectRowAtIndexPath(indexPath, animated: false)

@@ -15,15 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
-        // Override point for customization after application launch.
         
         // Parse keys
         Parse.setApplicationId("Cn8XelDtAQiaT3K899qx1YZj5lvuTJ2yQxxyrgSq", clientKey: "Fi7NygQMW6m11emvGSmfITaMnyZeuQMbNT4byV6J")
-        // set up local push notifications
-//        let types = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-//        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
@@ -34,18 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         
         //notifications
-        
+
         // Specify the notification types.
         var notificationTypes: UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound
-        
         
         // Specify the category related to the above actions.
         var busTimeReminderCategory = UIMutableUserNotificationCategory()
         busTimeReminderCategory.identifier = "busTimeReminderCategory"
-        
-        
         let categoriesForSettings = NSSet(objects: busTimeReminderCategory)
-        
         
         // Register the notification settings.
         let newNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categoriesForSettings)

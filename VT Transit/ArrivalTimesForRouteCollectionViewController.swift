@@ -30,6 +30,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView!.addSubview(refreshControl)
         
+        // differentiate between whether one route is displayed with all times or 6 times displayed for multiple routes
         if selectedRoutes.count == 1 {
             self.title = selectedRoutes[0].name
         } else {

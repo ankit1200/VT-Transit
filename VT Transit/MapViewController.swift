@@ -237,7 +237,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func addStopsToMap() {
         if stops.count == 0 {
             // query parse for all the stops
-            
             var query = PFQuery(className: "Stops")
             query.limit = 500
             query.findObjectsInBackgroundWithBlock {

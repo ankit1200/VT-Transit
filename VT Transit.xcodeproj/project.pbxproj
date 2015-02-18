@@ -44,6 +44,7 @@
 		475626CA1A92AFAB005AFE07 /* CloudKitStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */; };
 		475626CE1A92C530005AFE07 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626CC1A92C530005AFE07 /* FavoritesViewController.swift */; };
 		475626D21A92CAEA005AFE07 /* AddStopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */; };
+		475626D41A9522DE005AFE07 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D31A9522DE005AFE07 /* CloudKitManager.swift */; };
 		4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
@@ -110,6 +111,7 @@
 		475626C91A92AFAB005AFE07 /* CloudKitStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitStuff.swift; sourceTree = "<group>"; };
 		475626CC1A92C530005AFE07 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStopsViewController.swift; sourceTree = "<group>"; };
+		475626D31A9522DE005AFE07 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				47BB57BA19AFB0A300B3807E /* AppDelegate.swift */,
 				47BB57C019AFB0A300B3807E /* Main.storyboard */,
 				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
+				475626D31A9522DE005AFE07 /* CloudKitManager.swift */,
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				4705068A1A42B5AB00EEA613 /* Objects */,
 				47D6D0B91A77E2DD004A2EFD /* Custom Classes */,
@@ -433,6 +436,7 @@
 				470506991A4E663D00EEA613 /* EmptySegue.swift in Sources */,
 				4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */,
 				4784FA8819B8E3D8009BE8C4 /* Route.swift in Sources */,
+				475626D41A9522DE005AFE07 /* CloudKitManager.swift in Sources */,
 				470506951A4B5CEB00EEA613 /* MapViewController.swift in Sources */,
 				47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */,
 				4784FA8A19B8F0DA009BE8C4 /* Stop.swift in Sources */,

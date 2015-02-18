@@ -27,8 +27,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     var stopsDictionary = Dictionary<String, Array<Stop>>() // dictionary for section index
     var sectionTitles = Array<String>() // section index titles
-    var favoriteStops = Array<Stop>() // favorite stops from cloudkit query
-    let database = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
+    let manager = CloudKitManager.sharedInstance
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -56,7 +55,6 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 self.stops.sort({$0.name < $1.name})
                 self.createAlphabetArray()
-                
                 dispatch_async(dispatch_get_main_queue()) {
                     self.tableView.reloadData()
                 }
@@ -95,7 +93,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
         let sectionArray = stopsDictionary[sectionTitles[indexPath.section]]!
         var stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
         
-        if favoriteStops.filter({$0.code == stop.code}).count > 0 {
+        if manager.favoriteStops.filter({$0.code == stop.code}).count > 0 {
             cell.accessoryType = .Checkmark
         }
         
@@ -127,9 +125,9 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
             tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .None
             
             // remove data from iCloud database
-            favoriteStops = favoriteStops.filter{$0.code != stop.code}
+            manager.favoriteStops = manager.favoriteStops.filter{$0.code != stop.code}
             
-            database.deleteRecordWithID(recordID, completionHandler: { (record, error) -> Void in
+            manager.privateDB.deleteRecordWithID(recordID, completionHandler: { (record, error) -> Void in
                 if error != nil {
                     println(error)
                 }
@@ -139,13 +137,13 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
             tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .Checkmark
             
             // Save data to iCloud database
-            favoriteStops.append(stop)
+            manager.favoriteStops.append(stop)
             
             let record = CKRecord(recordType: "Stop", recordID: recordID)
             record.setValue(stop.name, forKey: "name")
             record.setValue(stop.code, forKey: "code")
             record.setValue(stop.location, forKey: "location")
-            self.database.saveRecord(record, completionHandler: { (record, error) -> Void in
+            manager.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
                 if error != nil {
                     println(error)
                 }

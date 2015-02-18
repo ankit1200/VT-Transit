@@ -903,8 +903,8 @@
         <image name="stops_tab" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pow-jQ-d57"/>
-        <segue reference="7Ju-ox-L79"/>
+        <segue reference="WPt-il-FjO"/>
+        <segue reference="OaD-qV-bJ8"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>
