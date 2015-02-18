@@ -38,7 +38,7 @@
                         <viewControllerLayoutGuide type="bottom" id="oEI-MF-7qT"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="ALb-ex-bJe">
-                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kKh-Pc-761">
@@ -47,7 +47,7 @@
                                     <outlet property="delegate" destination="Efb-W3-pwM" id="Acu-bD-ZzY"/>
                                 </connections>
                             </mapView>
-                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EPT-Hp-rBD">
+                            <toolbar clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPT-Hp-rBD">
                                 <rect key="frame" x="0.0" y="574" width="375" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ezB-BL-aBy"/>
@@ -84,7 +84,7 @@
                                     <outlet property="delegate" destination="Efb-W3-pwM" id="WfF-PC-mCc"/>
                                 </connections>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tL-XJ-nW0">
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7tL-XJ-nW0">
                                 <rect key="frame" x="0.0" y="64" width="375" height="510"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -253,7 +253,7 @@
             <objects>
                 <tableViewController id="iPF-Ah-Mrw" customClass="RoutesTableViewController" customModule="VT_Transit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="asP-6Q-HPd">
-                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by bus name" translucent="NO" id="Uxg-3a-b1V">
@@ -409,7 +409,7 @@
                         <viewControllerLayoutGuide type="bottom" id="evn-Hg-Vad"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Z8g-9T-8AW">
-                        <rect key="frame" x="0.0" y="64" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KAU-Wb-5Fb">
@@ -656,6 +656,9 @@
                                     <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="detailButtonPressed:" destination="b2n-OB-Bc5" eventType="touchUpInside" id="bsM-S2-zwX"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.40000003579999999" green="0.0" blue="0.019607843829999999" alpha="1" colorSpace="deviceRGB"/>
@@ -684,6 +687,10 @@
                             <outlet property="delegate" destination="b2n-OB-Bc5" id="CNd-uM-6qu"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="Efb-W3-pwM" kind="showDetail" identifier="showStopOnMap" id="QKL-dG-Z8d"/>
+                        <segue destination="rml-P8-JW1" kind="show" identifier="showStopsForRoute" id="7Ju-ox-L79"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4m-C5-gJA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -897,7 +904,9 @@
         <image name="stops_tab" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HI0-eD-KfC"/>
+        <segue reference="QKL-dG-Z8d"/>
+        <segue reference="pow-jQ-d57"/>
+        <segue reference="7Ju-ox-L79"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.40000000000000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

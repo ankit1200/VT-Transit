@@ -18,6 +18,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     var refreshControl:UIRefreshControl!
     var navBarHidden = false
     let locationManager = CLLocationManager()
+    var stopsForRoute = Array<Stop>() // stops list for when info button is pressed
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,6 +152,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 headerView.routeTitle.adjustsFontSizeToFitWidth = true
                 headerView.title.text = ""
                 headerView.subtitle.text = ""
+                headerView.route = selectedRoute
             }
             
             reusableview = headerView;
@@ -166,9 +168,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     
     // function used to show reminder alert view
-    override func collectionView(collectionView: UICollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
             
             let dateFormatter = NSDateFormatter() // date format
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
@@ -205,11 +205,32 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             } else {
                 let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
                 alertController.addAction(cancel)
-                
-                
                 presentViewController(alertController, animated: true, completion: nil)
             }
     }
+    
+    // ***************************
+    // MARK: Detail Button Pressed
+    // ***************************
+    
+    @IBAction func detailButtonPressed(sender: UIButton) {
+        if selectedRoutes.count == 1 {
+            performSegueWithIdentifier("showStopOnMap", sender: sender)
+        } else {
+            let route = (sender.superview as StopsHeaderCollectionReusableView).route
+            self.stopsForRoute = Parser.stopsForRoute(route!.shortName)
+            
+            if self.stopsForRoute.count == 0 {
+                let alertView = UIAlertView(title: "Route not running!", message:  "The selected route is not running at this time. Please try a different Route", delegate: nil, cancelButtonTitle: "Ok")
+                alertView.show()
+            } else {
+                // sort the stops alphabetically
+                self.stopsForRoute.sort({$0.name < $1.name})
+                performSegueWithIdentifier("showStopsForRoute", sender: sender)
+            }
+        }
+    }
+    
     
     // ********************
     // MARK: Helper Methods
@@ -297,7 +318,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                     }
                 }
             })
-
         }
         else {
             var localNotification = UILocalNotification()
@@ -330,7 +350,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 alertController.addAction(cancel)
                 
                 presentViewController(alertController, animated: true, completion: nil)
-                
             }
             else {
                 let alertController = UIAlertController(title: "Uh oh", message: "Youre late", preferredStyle: .Alert)
@@ -340,8 +359,26 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 
                 presentViewController(alertController, animated: true, completion: nil)
             }
-
         }
         locationManager.stopUpdatingLocation()
+    }
+    
+    // *******************
+    // MARK: Handle Segues
+    // *******************
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "showStopsForRoute" {
+            let containerViewController = segue.destinationViewController as ContainerViewController
+            containerViewController.selectedRoute = ((sender as UIButton).superview as StopsHeaderCollectionReusableView).route!
+            containerViewController.stops = stopsForRoute
+            
+            
+        } else if segue.identifier == "showStopOnMap" {
+            let mapViewController = segue.destinationViewController as MapViewController
+            
+            
+        }
     }
 }

@@ -13,4 +13,5 @@ class StopsHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet var title: UILabel!
     @IBOutlet var subtitle: UILabel!
     @IBOutlet var routeTitle: UILabel!
+    var route: Route?
 }
