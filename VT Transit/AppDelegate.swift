@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Parse keys
         Parse.setApplicationId("Cn8XelDtAQiaT3K899qx1YZj5lvuTJ2yQxxyrgSq", clientKey: "Fi7NygQMW6m11emvGSmfITaMnyZeuQMbNT4byV6J")
         
+        // populate favorite Stops
+        CloudKitManager.sharedInstance.queryFavoriteStops({})
+        
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
 //        UIBarButtonItem.appearance().titleTextAttributesForState(UIControlState.Normal) = textTileOptions

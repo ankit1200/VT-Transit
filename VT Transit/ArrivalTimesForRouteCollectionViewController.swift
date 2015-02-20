@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CloudKit
 
 class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
 
@@ -19,10 +20,16 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     var navBarHidden = false
     let locationManager = CLLocationManager()
     var stopsForRoute = Array<Stop>() // stops list for when info button is pressed
+    let manager = CloudKitManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if manager.favoriteStops.filter({$0.code == self.selectedStop.code}).count == 0 {
+            // Add the Add Favorites button
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addToFavorites:")
+        }
+        
         // pull to refresh
         self.refreshControl = UIRefreshControl()
         self.refreshControl.tintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
@@ -61,12 +68,11 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         super.didReceiveMemoryWarning()
     }
 
-    // *************************************
-    // MARK: Pull to Refresh Selector Method
-    // *************************************
+    // **********************
+    // MARK: Selector Methods
+    // **********************
     
-    func refresh(sender:AnyObject) {
-        
+    func refresh(sender:AnyObject?) {
         // update data
         for route in selectedRoutes {
             let time = Parser.arrivalTimesForRoute(route.shortName, stopCode: selectedStop.code)
@@ -74,6 +80,21 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         }
         self.collectionView?.reloadData()
         self.refreshControl.endRefreshing()
+    }
+    
+    func addToFavorites(sender:UIBarButtonItem) {
+        let record = CKRecord(recordType: "Stop", recordID: CKRecordID(recordName: selectedStop.code))
+        record.setValue(selectedStop.name, forKey: "name")
+        record.setValue(selectedStop.code, forKey: "code")
+        record.setValue(selectedStop.location, forKey: "location")
+        manager.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
+            if error != nil {
+                println(error)
+            }
+        })
+        manager.favoriteStops.append(selectedStop)
+        self.navigationItem.rightBarButtonItem = nil
+        showAlert("Stop Added To Favorites", message: "\(selectedStop.name) has been added to favorites!")
     }
     
     // ********************************

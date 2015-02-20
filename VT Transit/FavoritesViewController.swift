@@ -22,10 +22,8 @@ class FavoritesViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        // query from singleton
-        manager.queryFavoriteStops({
-            self.tableView.reloadData()
-        })
+        // reload table view to update changes
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
