@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // populate favorite Stops
         CloudKitManager.sharedInstance.queryFavoriteStops({})
+        // populate all stops list
+        CloudKitManager.sharedInstance.queryAllStops({})
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)

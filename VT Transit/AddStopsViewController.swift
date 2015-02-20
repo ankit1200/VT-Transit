@@ -22,7 +22,6 @@ extension String {
 
 class AddStopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
     
-    var stops = Array<Stop>() // All stops
     var filteredStops = Array<Stop>() // stops for search
     @IBOutlet weak var tableView: UITableView!
     var stopsDictionary = Dictionary<String, Array<Stop>>() // dictionary for section index
@@ -42,24 +41,11 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
         // set the tableView section Index Color
         self.tableView.sectionIndexColor = UIColor(red: 1.0, green: 0.4, blue: 0.0, alpha: 1.0)
         
-        // Query All Stops from parse
-        var query = PFQuery(className: "Stops")
-        query.limit = 500
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
-                    let stop = Stop(name: object["name"] as String, code: object["code"] as String, location: location)
-                    self.stops.append(stop)
-                }
-                self.stops.sort({$0.name < $1.name})
-                self.createAlphabetArray()
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        manager.allStops.sort({$0.name < $1.name})
+        createAlphabetArray()
+//        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,19 +112,16 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
             
             // remove data from iCloud database
             manager.favoriteStops = manager.favoriteStops.filter{$0.code != stop.code}
-            
             manager.privateDB.deleteRecordWithID(recordID, completionHandler: { (record, error) -> Void in
                 if error != nil {
                     println(error)
                 }
             })
-            
         } else { // Select the cell
             tableView.cellForRowAtIndexPath(indexPath)!.accessoryType = .Checkmark
             
             // Save data to iCloud database
             manager.favoriteStops.append(stop)
-            
             let record = CKRecord(recordType: "Stop", recordID: recordID)
             record.setValue(stop.name, forKey: "name")
             record.setValue(stop.code, forKey: "code")
@@ -158,7 +141,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func filterContentForSearchText(searchText: String) {
         // Filter the array using the filter method
-        filteredStops = self.stops.filter({ (stop: Stop) -> Bool in
+        filteredStops = manager.allStops.filter({ (stop: Stop) -> Bool in
             let stringMatchName = stop.name.lowercaseString.rangeOfString(searchText.lowercaseString)
             let stringMatchCode = stop.code.rangeOfString(searchText)
             return (stringMatchName != nil || stringMatchCode != nil)
@@ -174,7 +157,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: Helper Methods
     // ********************
     func createAlphabetArray() {
-        for stop in stops {
+        for stop in manager.allStops {
             var firstLetter:String = (stop.name)[0]
             // check if first letter is a number
             if let n = firstLetter.toInt() {

@@ -13,7 +13,8 @@ import CloudKit
 class CloudKitManager: NSObject {
    
     let privateDB = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
-    var favoriteStops = Array<Stop>() // favoriteStops
+    var favoriteStops:Array<Stop>! = Array<Stop>() // favoriteStops
+    var allStops:Array<Stop>! = Array<Stop>() // all stops
     
     class var sharedInstance: CloudKitManager {
         struct Static {
@@ -27,8 +28,8 @@ class CloudKitManager: NSObject {
     }
     
     func queryFavoriteStops(completionHandler: ()->()) {
-        let ckQuery = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
-        privateDB.performQuery(ckQuery, inZoneWithID: nil) {
+        let query = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
+        privateDB.performQuery(query, inZoneWithID: nil) {
             results, error in
             if error != nil {
                 println(error)
@@ -36,12 +37,28 @@ class CloudKitManager: NSObject {
                 self.favoriteStops = []
                 for record in results {
                     let stop = Stop(name: record["name"] as String, code: record["code"] as String, location: record["location"] as CLLocation)
-                    self.favoriteStops.append(stop)
+                    self.favoriteStops!.append(stop)
                 }
                 dispatch_async(dispatch_get_main_queue()) {
                     completionHandler()
                 }
             }
+        }
+    }
+    
+    func queryAllStops(completionHandler: ()->()) {
+        var query = PFQuery(className: "Stops")
+        query.limit = 500
+        query.findObjectsInBackgroundWithBlock {
+            (objects: [AnyObject]!, error: NSError!) -> Void in
+            if error == nil {
+                for object in objects {
+                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
+                    let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
+                    self.allStops.append(stop)
+                }
+            }
+            completionHandler()
         }
     }
 }

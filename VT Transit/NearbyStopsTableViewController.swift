@@ -16,6 +16,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     var nearbyStops: [(stop: Stop, distance: Double)] = []
     var filteredStops: [(stop: Stop, distance: Double)] = []
     var selectedRoutes = [Route]()
+    let manager = CloudKitManager.sharedInstance
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -33,7 +34,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         
         // start location manager
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
         getStopsFromParse()
     }
@@ -47,6 +47,8 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // *************************************
     
     func refresh(sender:AnyObject) {
+        locationManager.startUpdatingLocation()
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         nearbyStops = []
         for tuple in stops {
             var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
@@ -60,6 +62,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         self.refreshControl?.endRefreshing()
     }
 
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+
+    }
 
     // ****************************
     // MARK: Table view data source
@@ -87,8 +92,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
 
             // Configure cell
             cell.textLabel?.text = tuple.stop.name
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
             cell.textLabel?.font = UIFont(name: "System Bold", size: 16)
-            let distanceInMiles = tuple.distance / 1609.34
+            let distanceInMiles = tuple.distance
             cell.detailTextLabel?.text = "Bus Stop #\(tuple.stop.code)"
             return cell
             
@@ -98,11 +104,12 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
                 cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as NearbyStopsTableViewCell
             }
         
-        var tuple = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
+            var tuple = nearbyStops[indexPath.row]
             // check to see if if tableview is search or nearbyStops
             
             // Configure cell
             cell.title?.text = tuple.stop.name
+            cell.title?.adjustsFontSizeToFitWidth = true
             let distanceInMiles = tuple.distance
             cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
             // if location is disabled then make distance label blank
@@ -155,7 +162,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // ********************
     
     func getStopsFromParse() {
-        let currentLocation = locationManager.location
         var query = PFQuery(className: "Stops")
         query.limit = 500
         query.findObjectsInBackgroundWithBlock {

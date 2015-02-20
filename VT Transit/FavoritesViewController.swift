@@ -22,8 +22,12 @@ class FavoritesViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        // reload table view to update changes
-        self.tableView.reloadData()
+        // if favorite stops are 0 then query the database
+        if manager.favoriteStops.count == 0 {
+            manager.queryFavoriteStops({self.tableView.reloadData()})
+        } else {
+            self.tableView.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
