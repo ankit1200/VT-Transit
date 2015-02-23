@@ -14,16 +14,16 @@ import CloudKit
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet var mapTypeSegmentControl: UISegmentedControl!
+    @IBOutlet var mapSearchBar: UISearchBar!
+    @IBOutlet var dismissKeyboardButton: UIButton!
     var selectedRoutes = [Route]()
     var stops = Array<Stop>()
     var selectedStop: Stop?
-    @IBOutlet var mapTypeSegmentControl: UISegmentedControl!
     let locationManager = CLLocationManager()
     var timer = NSTimer()
     var currentBusAnnotations = [MapAnnotation]()
-    @IBOutlet var mapSearchBar: UISearchBar!
     var mapItems = [String]()
-    @IBOutlet var dismissKeyboardButton: UIButton!
     let manager = CloudKitManager.sharedInstance
     
     

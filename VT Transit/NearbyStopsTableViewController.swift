@@ -52,11 +52,16 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         nearbyStops = []
         for tuple in stops {
             var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
-            self.locationManager.stopUpdatingLocation()
             if distance < 1.61 {
-                self.nearbyStops.append(tuple)
+                let nearbyTuple = (stop: tuple.stop, distance: distance)
+                self.nearbyStops.append(nearbyTuple)
             }
-            self.nearbyStops.sort({$0.1 < $1.1})
+        }
+        self.nearbyStops.sort({$0.1 < $1.1})
+        locationManager.stopUpdatingLocation()
+        if self.nearbyStops.count == 0 {
+            let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
         }
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()

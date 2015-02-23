@@ -26,9 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
-//        UIBarButtonItem.appearance().titleTextAttributesForState(UIControlState.Normal) = textTileOptions
-//        UIBarButtonItem.appearance().titleTextAttributesForState(UIControlState.Highlighted) = textTileOptions
-//        UISegmentedControl.appearance().titleTextAttributesForState(UIControlState.Normal) = textTileOptions
         UITabBar.appearance().selectedImageTintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
         UITabBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         
