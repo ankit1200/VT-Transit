@@ -126,6 +126,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
             record.setValue(stop.name, forKey: "name")
             record.setValue(stop.code, forKey: "code")
             record.setValue(stop.location, forKey: "location")
+            record.setValue(manager.favoriteStops.endIndex, forKey: "favoritesIndex")
             manager.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
                 if error != nil {
                     println(error)

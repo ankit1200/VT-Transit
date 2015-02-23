@@ -83,16 +83,17 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     }
     
     func addToFavorites(sender:UIBarButtonItem) {
+        manager.favoriteStops.append(selectedStop)
         let record = CKRecord(recordType: "Stop", recordID: CKRecordID(recordName: selectedStop.code))
         record.setValue(selectedStop.name, forKey: "name")
         record.setValue(selectedStop.code, forKey: "code")
         record.setValue(selectedStop.location, forKey: "location")
+        record.setValue(manager.favoriteStops.endIndex, forKey: "favoritesIndex")
         manager.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
             if error != nil {
                 println(error)
             }
         })
-        manager.favoriteStops.append(selectedStop)
         self.navigationItem.rightBarButtonItem = nil
         showAlert("Stop Added To Favorites", message: "\(selectedStop.name) has been added to favorites!")
     }

@@ -74,7 +74,15 @@ class FavoritesViewController: UITableViewController {
 
     // Override to support rearranging the table view.
     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+        
+        // update the favorite stops list
+        let fromStop = manager.favoriteStops[fromIndexPath.row]
+        let toStop = manager.favoriteStops[toIndexPath.row]
+        manager.favoriteStops[fromIndexPath.row] = manager.favoriteStops[toIndexPath.row]
+        manager.favoriteStops[toIndexPath.row] = fromStop
+        
+        // update cloudKit
+        manager.updateFavoriteStops()
     }
     
     // ***************************

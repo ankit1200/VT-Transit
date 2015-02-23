@@ -27,8 +27,11 @@ class CloudKitManager: NSObject {
         return Static.instance!
     }
     
+    // get favorite stops from iCloud
     func queryFavoriteStops(completionHandler: ()->()) {
         let query = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
+        let sort = NSSortDescriptor(key: "favoritesIndex", ascending: true)
+        query.sortDescriptors = [sort]
         privateDB.performQuery(query, inZoneWithID: nil) {
             results, error in
             if error != nil {
@@ -46,6 +49,28 @@ class CloudKitManager: NSObject {
         }
     }
     
+    // update favorite stops to iCloud
+    func updateFavoriteStops() {
+        for (index, stop) in enumerate(favoriteStops) {
+            privateDB.fetchRecordWithID(CKRecordID(recordName: stop.code), completionHandler: { (record, error) -> Void in
+                if error != nil {
+                    println(error)
+                } else {
+                    // save the record once fetched
+                    dispatch_async(dispatch_get_main_queue(), {
+                        record.setValue(index, forKey:"favoritesIndex")
+                        self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
+                            if error != nil {
+                                println(error)
+                            }
+                        })
+                    })
+                }
+            })
+        }
+    }
+    
+    // get all the stops from Parse
     func queryAllStops(completionHandler: ()->()) {
         var query = PFQuery(className: "Stops")
         query.limit = 500
