@@ -35,6 +35,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         // start location manager
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
         getStopsFromParse()
     }
     
@@ -50,21 +51,25 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         nearbyStops = []
-        for tuple in stops {
-            var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
-            if distance < 1.61 {
-                let nearbyTuple = (stop: tuple.stop, distance: distance)
-                self.nearbyStops.append(nearbyTuple)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            for tuple in self.stops {
+                var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
+                if distance < 1.61 {
+                    let nearbyTuple = (stop: tuple.stop, distance: distance)
+                    self.nearbyStops.append(nearbyTuple)
+                }
             }
-        }
-        self.nearbyStops.sort({$0.1 < $1.1})
-        locationManager.stopUpdatingLocation()
-        if self.nearbyStops.count == 0 {
-            let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
-            alertView.show()
-        }
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
+            self.nearbyStops.sort({$0.1 < $1.1})
+            self.locationManager.stopUpdatingLocation()
+            if self.nearbyStops.count == 0 {
+                let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
+                alertView.show()
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            })
+        })
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
