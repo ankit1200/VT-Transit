@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         UITabBar.appearance().selectedImageTintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
         UITabBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
+        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
         //notifications
 
