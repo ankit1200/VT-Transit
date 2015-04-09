@@ -49,6 +49,7 @@ class FavoritesViewController: UITableViewController {
         cell.textLabel?.text = stop.name
         cell.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
         cell.detailTextLabel?.text = "Bus Stop #" + stop.code
+        cell.accessoryType = .DisclosureIndicator
         return cell
     }
 

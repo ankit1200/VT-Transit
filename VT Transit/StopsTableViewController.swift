@@ -19,6 +19,10 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // MARK: View Controller Delegate Methods
     // **************************************
     
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // deselect all rows in tableView

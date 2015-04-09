@@ -44,6 +44,8 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             self.title = selectedStop.name
         }
         
+        
+        // set location manager delegate to self
         locationManager.delegate = self
         // start location manager
         locationManager.requestWhenInUseAuthorization()
@@ -56,12 +58,18 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     }
     
     override func viewWillAppear(animated: Bool) {
-        navBarHidden = (self.navigationController?.navigationBarHidden)!
         self.navigationController?.navigationBarHidden = false
     }
     
     override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = navBarHidden
+        let viewControllers = self.navigationController?.viewControllers as [UIViewController]
+        if viewControllers[0].isKindOfClass(MapViewController) {
+            self.navigationController?.navigationBarHidden = true
+        } else {
+            self.navigationController?.navigationBarHidden = false
+        }
+        
+//        self.navigationController?.navigationBarHidden = navBarHidden
     }
     
     override func didReceiveMemoryWarning() {

@@ -161,6 +161,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return annotationView
     }
     
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+        mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
+    }
+    
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         let stop = (view.annotation as MapAnnotation).stop!
         selectedRoutes = Parser.routesForStop(stop.code)

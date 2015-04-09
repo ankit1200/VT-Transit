@@ -166,6 +166,7 @@
 				4784FA8719B8E3D8009BE8C4 /* Route.swift */,
 				4784FA8919B8F0DA009BE8C4 /* Stop.swift */,
 				4722CF4C1A29967900CCEB8F /* Parser.swift */,
+				475626D31A9522DE005AFE07 /* CloudKitManager.swift */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -235,7 +236,6 @@
 				47BB57BA19AFB0A300B3807E /* AppDelegate.swift */,
 				47BB57C019AFB0A300B3807E /* Main.storyboard */,
 				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
-				475626D31A9522DE005AFE07 /* CloudKitManager.swift */,
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				4705068A1A42B5AB00EEA613 /* Objects */,
 				47D6D0B91A77E2DD004A2EFD /* Custom Classes */,
