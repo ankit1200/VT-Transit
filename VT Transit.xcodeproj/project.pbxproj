@@ -40,6 +40,12 @@
 		4722CF4D1A29967900CCEB8F /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
 		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
+		474BC65D1AD79C5100E15B5B /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474BC65C1AD79C5100E15B5B /* InterfaceController.swift */; };
+		474BC65F1AD79C5100E15B5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474BC65E1AD79C5100E15B5B /* Images.xcassets */; };
+		474BC6631AD79C5100E15B5B /* VT Transit WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 474BC6621AD79C5100E15B5B /* VT Transit WatchKit App.app */; };
+		474BC66B1AD79C5200E15B5B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 474BC6691AD79C5200E15B5B /* Interface.storyboard */; };
+		474BC66D1AD79C5200E15B5B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 474BC66C1AD79C5200E15B5B /* Images.xcassets */; };
+		474BC6701AD79C5200E15B5B /* VT Transit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 474BC6581AD79C5100E15B5B /* VT Transit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		474D51541A7D56F9006EE7EF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D51531A7D56F9006EE7EF /* CloudKit.framework */; };
 		475626CE1A92C530005AFE07 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626CC1A92C530005AFE07 /* FavoritesViewController.swift */; };
 		475626D21A92CAEA005AFE07 /* AddStopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */; };
@@ -57,6 +63,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		474BC6641AD79C5100E15B5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47BB57AD19AFB0A300B3807E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 474BC6611AD79C5100E15B5B;
+			remoteInfo = "VT Transit WatchKit App";
+		};
+		474BC66E1AD79C5200E15B5B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47BB57AD19AFB0A300B3807E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 474BC6571AD79C5100E15B5B;
+			remoteInfo = "VT Transit WatchKit Extension";
+		};
 		47BB57CA19AFB0A300B3807E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 47BB57AD19AFB0A300B3807E /* Project object */;
@@ -65,6 +85,20 @@
 			remoteInfo = "VT Transit";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		474BC6771AD79C5200E15B5B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				474BC6701AD79C5200E15B5B /* VT Transit WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4705068B1A42B65400EEA613 /* ArrivalTimesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrivalTimesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -105,6 +139,14 @@
 		4734D7AF19CF59B9007AB683 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../Parse Framework/Bolts.framework"; sourceTree = "<group>"; };
 		4734D7B019CF59B9007AB683 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../Parse Framework/Parse.framework"; sourceTree = "<group>"; };
 		47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
+		474BC6581AD79C5100E15B5B /* VT Transit WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VT Transit WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		474BC65B1AD79C5100E15B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		474BC65C1AD79C5100E15B5B /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		474BC65E1AD79C5100E15B5B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		474BC6621AD79C5100E15B5B /* VT Transit WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		474BC6681AD79C5200E15B5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		474BC66A1AD79C5200E15B5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		474BC66C1AD79C5200E15B5B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		474D51521A7D56EA006EE7EF /* VT Transit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit.entitlements"; sourceTree = "<group>"; };
 		474D51531A7D56F9006EE7EF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		475626CC1A92C530005AFE07 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +168,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		474BC6551AD79C5100E15B5B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47BB57B219AFB0A300B3807E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -219,14 +268,54 @@
 			name = "Metadata Text Files";
 			sourceTree = "<group>";
 		};
+		474BC6591AD79C5100E15B5B /* VT Transit WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				474BC65C1AD79C5100E15B5B /* InterfaceController.swift */,
+				474BC65E1AD79C5100E15B5B /* Images.xcassets */,
+				474BC65A1AD79C5100E15B5B /* Supporting Files */,
+			);
+			path = "VT Transit WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		474BC65A1AD79C5100E15B5B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				474BC65B1AD79C5100E15B5B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		474BC6661AD79C5100E15B5B /* VT Transit WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				474BC6691AD79C5200E15B5B /* Interface.storyboard */,
+				474BC66C1AD79C5200E15B5B /* Images.xcassets */,
+				474BC6671AD79C5200E15B5B /* Supporting Files */,
+			);
+			path = "VT Transit WatchKit App";
+			sourceTree = "<group>";
+		};
+		474BC6671AD79C5200E15B5B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				474BC6681AD79C5200E15B5B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		47BB57AC19AFB0A300B3807E = {
 			isa = PBXGroup;
 			children = (
 				47BB57B719AFB0A300B3807E /* VT Transit */,
+				474BC6591AD79C5100E15B5B /* VT Transit WatchKit Extension */,
+				474BC6661AD79C5100E15B5B /* VT Transit WatchKit App */,
 				47BB57CC19AFB0A300B3807E /* VT TransitTests */,
 				4711A9D519AFBC300062F587 /* Frameworks */,
 				4711AA1F19AFC5330062F587 /* VT Transit.app */,
 				4711AA2019AFC5330062F587 /* VT TransitTests.xctest */,
+				474BC6581AD79C5100E15B5B /* VT Transit WatchKit Extension.appex */,
+				474BC6621AD79C5100E15B5B /* VT Transit WatchKit App.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -313,6 +402,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		474BC6571AD79C5100E15B5B /* VT Transit WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 474BC6761AD79C5200E15B5B /* Build configuration list for PBXNativeTarget "VT Transit WatchKit Extension" */;
+			buildPhases = (
+				474BC6541AD79C5100E15B5B /* Sources */,
+				474BC6551AD79C5100E15B5B /* Frameworks */,
+				474BC6561AD79C5100E15B5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				474BC6651AD79C5100E15B5B /* PBXTargetDependency */,
+			);
+			name = "VT Transit WatchKit Extension";
+			productName = "VT Transit WatchKit Extension";
+			productReference = 474BC6581AD79C5100E15B5B /* VT Transit WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		474BC6611AD79C5100E15B5B /* VT Transit WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 474BC6751AD79C5200E15B5B /* Build configuration list for PBXNativeTarget "VT Transit WatchKit App" */;
+			buildPhases = (
+				474BC6601AD79C5100E15B5B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VT Transit WatchKit App";
+			productName = "VT Transit WatchKit App";
+			productReference = 474BC6621AD79C5100E15B5B /* VT Transit WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		47BB57B419AFB0A300B3807E /* VT Transit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47BB57D319AFB0A300B3807E /* Build configuration list for PBXNativeTarget "VT Transit" */;
@@ -320,10 +442,12 @@
 				47BB57B119AFB0A300B3807E /* Sources */,
 				47BB57B219AFB0A300B3807E /* Frameworks */,
 				47BB57B319AFB0A300B3807E /* Resources */,
+				474BC6771AD79C5200E15B5B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				474BC66F1AD79C5200E15B5B /* PBXTargetDependency */,
 			);
 			name = "VT Transit";
 			productName = "VT Transit";
@@ -357,6 +481,13 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Appify;
 				TargetAttributes = {
+					474BC6571AD79C5100E15B5B = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = A28NM53F25;
+					};
+					474BC6611AD79C5100E15B5B = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					47BB57B419AFB0A300B3807E = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = A28NM53F25;
@@ -387,11 +518,31 @@
 			targets = (
 				47BB57B419AFB0A300B3807E /* VT Transit */,
 				47BB57C819AFB0A300B3807E /* VT TransitTests */,
+				474BC6571AD79C5100E15B5B /* VT Transit WatchKit Extension */,
+				474BC6611AD79C5100E15B5B /* VT Transit WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		474BC6561AD79C5100E15B5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				474BC65F1AD79C5100E15B5B /* Images.xcassets in Resources */,
+				474BC6631AD79C5100E15B5B /* VT Transit WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		474BC6601AD79C5100E15B5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				474BC66B1AD79C5200E15B5B /* Interface.storyboard in Resources */,
+				474BC66D1AD79C5200E15B5B /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47BB57B319AFB0A300B3807E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +569,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		474BC6541AD79C5100E15B5B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				474BC65D1AD79C5100E15B5B /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47BB57B119AFB0A300B3807E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,6 +615,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		474BC6651AD79C5100E15B5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 474BC6611AD79C5100E15B5B /* VT Transit WatchKit App */;
+			targetProxy = 474BC6641AD79C5100E15B5B /* PBXContainerItemProxy */;
+		};
+		474BC66F1AD79C5200E15B5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 474BC6571AD79C5100E15B5B /* VT Transit WatchKit Extension */;
+			targetProxy = 474BC66E1AD79C5200E15B5B /* PBXContainerItemProxy */;
+		};
 		47BB57CB19AFB0A300B3807E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 47BB57B419AFB0A300B3807E /* VT Transit */;
@@ -464,6 +633,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		474BC6691AD79C5200E15B5B /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				474BC66A1AD79C5200E15B5B /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		47BB57C019AFB0A300B3807E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -475,6 +652,70 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		474BC6711AD79C5200E15B5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Appify LLC (A28NM53F25)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "VT Transit WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		474BC6721AD79C5200E15B5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Appify LLC (A28NM53F25)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = "VT Transit WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		474BC6731AD79C5200E15B5B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = VT_Transit_WatchKit_Extension;
+				INFOPLIST_FILE = "VT Transit WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		474BC6741AD79C5200E15B5B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COPY_PHASE_STRIP = NO;
+				IBSC_MODULE = VT_Transit_WatchKit_Extension;
+				INFOPLIST_FILE = "VT Transit WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
 		47BB57D119AFB0A300B3807E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -562,6 +803,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Appify LLC (A28NM53F25)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -586,6 +828,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Appify LLC (A28NM53F25)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -636,6 +879,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		474BC6751AD79C5200E15B5B /* Build configuration list for PBXNativeTarget "VT Transit WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				474BC6731AD79C5200E15B5B /* Debug */,
+				474BC6741AD79C5200E15B5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		474BC6761AD79C5200E15B5B /* Build configuration list for PBXNativeTarget "VT Transit WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				474BC6711AD79C5200E15B5B /* Debug */,
+				474BC6721AD79C5200E15B5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		47BB57B019AFB0A300B3807E /* Build configuration list for PBXProject "VT Transit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

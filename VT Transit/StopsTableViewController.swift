@@ -82,7 +82,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
         })
     }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         return true
     }
@@ -95,10 +95,10 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         if segue.identifier == "showArrivalTimes" {
             
-            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
+            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             
             // handle selected cells in search display controlller
-            if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
+            if sender as! UITableView == self.searchDisplayController!.searchResultsTableView {
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row]
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
@@ -110,7 +110,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
             arrivalTimesForRouteCollectionViewController.selectedRoutes = [selectedRoute]
         }
         if segue.identifier == "showMap" {
-            let segmentMapViewController = segue.destinationViewController as MapViewController
+            let segmentMapViewController = segue.destinationViewController as! MapViewController
         }
     }
 }

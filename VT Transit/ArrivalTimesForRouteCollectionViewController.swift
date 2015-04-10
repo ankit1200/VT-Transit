@@ -27,7 +27,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
 
         if manager.favoriteStops.filter({$0.code == self.selectedStop.code}).count == 0 {
             // Add the Add Favorites button
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Bordered, target: self, action: "addToFavorites:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "addToFavorites:")
         }
         
         // pull to refresh
@@ -62,14 +62,13 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     }
     
     override func viewWillDisappear(animated: Bool) {
-        let viewControllers = self.navigationController?.viewControllers as [UIViewController]
-        if viewControllers[0].isKindOfClass(MapViewController) {
-            self.navigationController?.navigationBarHidden = true
-        } else {
-            self.navigationController?.navigationBarHidden = false
-        }
-        
-//        self.navigationController?.navigationBarHidden = navBarHidden
+//        let viewControllers = self.navigationController?.viewControllers as! [UIViewController]
+//        if viewControllers[0].isKindOfClass(MapViewController) {
+//            self.navigationController?.navigationBarHidden = true
+//        } else {
+//            self.navigationController?.navigationBarHidden = false
+//        }
+        self.navigationController?.navigationBarHidden = (selectedRoutes.count == 1) ? false : true
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,11 +123,11 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if arrivalTimes[indexPath.section].time.count == 0 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noArrivalTimesCell", forIndexPath: indexPath) as UICollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("noArrivalTimesCell", forIndexPath: indexPath) as! UICollectionViewCell
             return cell
             
         } else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("arrivalTimeCell", forIndexPath: indexPath) as ArrivalTimesCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("arrivalTimeCell", forIndexPath: indexPath) as! ArrivalTimesCollectionViewCell
             
             let dateFormatter = NSDateFormatter() // date format
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
@@ -170,7 +169,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         var reusableview = UICollectionReusableView()
         
         if kind == UICollectionElementKindSectionHeader {
-            var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as StopsHeaderCollectionReusableView
+            var headerView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! StopsHeaderCollectionReusableView
             
             let selectedRoute = selectedRoutes[indexPath.section]
             if selectedRoutes.count == 1 {
@@ -212,11 +211,11 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 alertController.addAction(fiveMinutes)
             }
             if (timeDifferenceMinutes > 10) {
-                let tenMinutes = UIAlertAction(title: "10 Minutes", style: .Default, {(UIAlertAction) in self.fireNotification(10, indexPath: indexPath)})
+                let tenMinutes = UIAlertAction(title: "10 Minutes", style: .Default, handler: {(UIAlertAction) in self.fireNotification(10, indexPath: indexPath)})
                 alertController.addAction(tenMinutes)
             }
             if (timeDifferenceMinutes > 15) {
-                let fifteenMinutes = UIAlertAction(title: "15 Minutes", style: .Default, {(UIAlertAction) in self.fireNotification(15, indexPath: indexPath)})
+                let fifteenMinutes = UIAlertAction(title: "15 Minutes", style: .Default, handler: {(UIAlertAction) in self.fireNotification(15, indexPath: indexPath)})
                 alertController.addAction(fifteenMinutes)
             }
             if (timeDifferenceMinutes > 2) {
@@ -239,7 +238,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     @IBAction func detailButtonPressed(sender: UIButton) {
         
-        let route = (sender.superview as StopsHeaderCollectionReusableView).route
+        let route = (sender.superview as! StopsHeaderCollectionReusableView).route
         self.stopsForRoute = Parser.stopsForRoute(route!.shortName)
         // sort the stops alphabetically
         self.stopsForRoute.sort({$0.name < $1.name})
@@ -271,7 +270,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                     self.showAlert("Could Not Calculate Walking Time", message: "Please make sure location services and network connection are available.")
                 }
                 else {
-                    var route: MKRoute = response.routes[0] as MKRoute
+                    var route: MKRoute = response.routes[0] as! MKRoute
                     var timeToBeAdded = 240.0;
                     
                     if (route.expectedTravelTime > 60) {
@@ -363,8 +362,8 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "showStopsForRoute" {
-            let containerViewController = segue.destinationViewController as ContainerViewController
-            containerViewController.selectedRoute = ((sender as UIButton).superview as StopsHeaderCollectionReusableView).route!
+            let containerViewController = segue.destinationViewController as! ContainerViewController
+            containerViewController.selectedRoute = ((sender as! UIButton).superview as! StopsHeaderCollectionReusableView).route!
             containerViewController.stops = stopsForRoute
             if (selectedRoutes.count == 1) {
                 containerViewController.segmentControl.selectedSegmentIndex = 1

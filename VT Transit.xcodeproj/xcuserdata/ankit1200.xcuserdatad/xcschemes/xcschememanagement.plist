@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>VT Transit WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>VT Transit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>474BC6611AD79C5100E15B5B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>47BB57B419AFB0A300B3807E</key>
 		<dict>
 			<key>primary</key>

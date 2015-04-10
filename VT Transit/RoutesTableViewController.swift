@@ -31,7 +31,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
             if error == nil {
                 
                 for object in objects {
-                    let route = Route(name: object["name"] as? String, shortName: object["shortName"] as String)
+                    let route = Route(name: object["name"] as? String, shortName: object["shortName"] as! String)
                     
                     self.routes.append(route)
                 }
@@ -56,7 +56,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) as! UITableViewCell
         var route:Route
         // Check to see whether the normal table or search results table is being displayed
         route = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredRoutes[indexPath.row] : routes[indexPath.row]
@@ -102,7 +102,7 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         })
     }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         return true
     }
@@ -116,9 +116,9 @@ class RoutesTableViewController: UITableViewController, UISearchBarDelegate, UIS
         
         if segue.identifier == "showStopsForRoutes" {
             
-            let containerViewController = segue.destinationViewController as ContainerViewController
+            let containerViewController = segue.destinationViewController as! ContainerViewController
             // handle selected cells in search display controlller
-            if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
+            if sender as! UITableView == self.searchDisplayController!.searchResultsTableView {
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
                 containerViewController.selectedRoute = self.filteredRoutes[indexPath.row]
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)

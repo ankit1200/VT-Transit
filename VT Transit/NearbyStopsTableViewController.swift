@@ -94,7 +94,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if tableView == self.searchDisplayController!.searchResultsTableView {
-            var cell = tableView.dequeueReusableCellWithIdentifier("searchCell") as NearbyStopsTableViewCell!
+            var cell = tableView.dequeueReusableCellWithIdentifier("searchCell") as! NearbyStopsTableViewCell!
             if cell == nil {
                 cell = NearbyStopsTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "searchCell")
             }
@@ -110,9 +110,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             return cell
             
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as NearbyStopsTableViewCell!
+            var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as! NearbyStopsTableViewCell!
             if cell == nil {
-                cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as NearbyStopsTableViewCell
+                cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as! NearbyStopsTableViewCell
             }
         
             var tuple = nearbyStops[indexPath.row]
@@ -162,7 +162,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         })
     }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         return true
     }
@@ -179,8 +179,8 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
-                    let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
+                    let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
+                    let stop = Stop(name: object["name"] as! String, code: object["code"] as! String, location:location)
                     self.getDistancesForStop(stop)
                 }
                 dispatch_async(dispatch_get_main_queue(), {
@@ -213,9 +213,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showArrivalTimesForAllRoutes" {
-            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
+            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             // handle selected cells in search display controlller
-            if sender as UITableView == self.searchDisplayController!.searchResultsTableView {
+            if sender as! UITableView == self.searchDisplayController!.searchResultsTableView {
                 let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row].stop
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)

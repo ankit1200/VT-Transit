@@ -39,7 +39,7 @@ class CloudKitManager: NSObject {
             } else {
                 self.favoriteStops = []
                 for record in results {
-                    let stop = Stop(name: record["name"] as String, code: record["code"] as String, location: record["location"] as CLLocation)
+                    let stop = Stop(name: (record["name"] as! String), code: (record["code"] as! String), location: (record["location"] as! CLLocation))
                     self.favoriteStops!.append(stop)
                 }
                 dispatch_async(dispatch_get_main_queue()) {
@@ -78,8 +78,8 @@ class CloudKitManager: NSObject {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
                 for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
-                    let stop = Stop(name: object["name"] as String, code: object["code"] as String, location:location)
+                    let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
+                    let stop = Stop(name: object["name"] as! String, code: object["code"] as! String, location:location)
                     self.allStops.append(stop)
                 }
             }

@@ -94,7 +94,7 @@ class SegmentViewController: UIViewController {
                 // Add latitude and longitute to selected Stops
                 var counter = 0
                 for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as NSString).doubleValue, longitude: (object["longitude"] as NSString).doubleValue)
+                    let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
                     self.stops[counter++].location = location
                 }
             } else {
@@ -118,13 +118,13 @@ class SegmentViewController: UIViewController {
             
             // If this is not the first time we're loading this.
             if self.childViewControllers.count > 0 {
-                swapViewControllers(self.childViewControllers[0] as UIViewController, to: stopsTableViewController!)
+                swapViewControllers(self.childViewControllers[0] as! UIViewController, to: stopsTableViewController!)
             }
             else {
                 // If this is the very first time we're loading this we need to do
                 // an initial load and not a swap.
-                addChildViewController(segue.destinationViewController as UIViewController)
-                var destView = (segue.destinationViewController as UIViewController).view
+                addChildViewController(segue.destinationViewController as! UIViewController)
+                var destView = (segue.destinationViewController as! UIViewController).view
                 destView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
                 destView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
                 self.view.addSubview(destView)
@@ -137,7 +137,7 @@ class SegmentViewController: UIViewController {
         // first one.
         else if segue.identifier == secondSegueID {
             segmentMapViewController = segue.destinationViewController as? MapViewController
-            swapViewControllers(self.childViewControllers[0] as UIViewController, to: segmentMapViewController!)
+            swapViewControllers(self.childViewControllers[0] as! UIViewController, to: segmentMapViewController!)
             segmentMapViewController?.stops = stops
             segmentMapViewController?.selectedRoutes = [selectedRoute]
             segmentMapViewController?.selectedStop = selectedStop

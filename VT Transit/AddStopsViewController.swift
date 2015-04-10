@@ -149,7 +149,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
     
-    func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
         self.filterContentForSearchText(searchString)
         return true
     }
@@ -170,7 +170,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
                 stopsDictionary[firstLetter] = [stop]
             }
         }
-        sectionTitles = (stopsDictionary as NSDictionary).allKeys as Array<String>
+        sectionTitles = (stopsDictionary as NSDictionary).allKeys as! [String]
         sectionTitles.sort({$0 < $1})
     }
 }

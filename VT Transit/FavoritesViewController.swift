@@ -104,7 +104,7 @@ class FavoritesViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showAddStopsViewController" {
         } else if segue.identifier == "showArrivalTimesForAllRoutes" {
-            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
+            let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             // handle selected cells in search display controlller
             let indexPath = self.tableView.indexPathForSelectedRow()!
             let stop = manager.favoriteStops[indexPath.row]

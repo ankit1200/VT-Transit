@@ -43,8 +43,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.startUpdatingLocation()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         addStopsToMap()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         
 //        // get current bus locations in background
 //        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
@@ -143,11 +146,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         annotationView!.canShowCallout = true
         
-        let category = (annotation as MapAnnotation).category
+        let category = (annotation as! MapAnnotation).category
         switch category {
         case "stop":
             annotationView!.pinColor = MKPinAnnotationColor.Red
-            annotationView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+            annotationView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
         case "current bus":
             annotationView!.pinColor = MKPinAnnotationColor.Purple
             annotationView!.rightCalloutAccessoryView = nil
@@ -166,7 +169,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        let stop = (view.annotation as MapAnnotation).stop!
+        let stop = (view.annotation as! MapAnnotation).stop!
         selectedRoutes = Parser.routesForStop(stop.code)
         performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: view)
     }
@@ -189,14 +192,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 if ann is MKUserLocation {
                     continue
                 }
-                if (ann as MapAnnotation).category == "search" {
-                    self.mapView.removeAnnotation((ann as MapAnnotation))
+                if (ann as! MapAnnotation).category == "search" {
+                    self.mapView.removeAnnotation((ann as! MapAnnotation))
                 }
             }
             // add response items
             if response != nil {
                 for item in response.mapItems! {
-                    var mapItem: MKMapItem = item as MKMapItem
+                    var mapItem: MKMapItem = item as! MKMapItem
                     var point: MapAnnotation = MapAnnotation(coordinate: mapItem.placemark.coordinate, title: mapItem.placemark.name, subtitle:  mapItem.placemark.title, category: "search")   
                     self.mapView.addAnnotation(point)
                     self.mapItems.append(item.description)
@@ -272,8 +275,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showArrivalTimesForAllRoutes" {
-            let arrivalTimesForRoute = segue.destinationViewController as ArrivalTimesForRouteCollectionViewController
-            arrivalTimesForRoute.selectedStop = ((sender as MKAnnotationView).annotation as MapAnnotation).stop!
+            let arrivalTimesForRoute = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
+            arrivalTimesForRoute.selectedStop = ((sender as! MKAnnotationView).annotation as! MapAnnotation).stop!
             arrivalTimesForRoute.selectedRoutes = selectedRoutes
         }
     }
