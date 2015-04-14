@@ -62,13 +62,13 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     }
     
     override func viewWillDisappear(animated: Bool) {
-//        let viewControllers = self.navigationController?.viewControllers as! [UIViewController]
-//        if viewControllers[0].isKindOfClass(MapViewController) {
-//            self.navigationController?.navigationBarHidden = true
-//        } else {
-//            self.navigationController?.navigationBarHidden = false
-//        }
-        self.navigationController?.navigationBarHidden = (selectedRoutes.count == 1) ? false : true
+        let viewControllers = self.navigationController?.viewControllers as! [UIViewController]
+        if viewControllers[0].isKindOfClass(MapViewController) {
+            self.navigationController?.navigationBarHidden = true
+        } else {
+            self.navigationController?.navigationBarHidden = false
+        }
+//        self.navigationController?.navigationBarHidden = (selectedRoutes.count == 1) ? false : true
     }
     
     override func didReceiveMemoryWarning() {
