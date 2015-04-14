@@ -20,13 +20,14 @@ extension String {
     }
 }
 
-class AddStopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
+class AddStopsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
     var filteredStops = Array<Stop>() // stops for search
     @IBOutlet weak var tableView: UITableView!
     var stopsDictionary = Dictionary<String, Array<Stop>>() // dictionary for section index
     var sectionTitles = Array<String>() // section index titles
     let manager = CloudKitManager.sharedInstance
+    var resultSearchController = UISearchController()
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -34,6 +35,21 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up the Search Bar
+        self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            controller.searchBar.placeholder = "Search by Stop # or Name"
+            controller.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+            
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
         
         // set the tableview delegate and datasource
         tableView.delegate = self
@@ -43,9 +59,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
         
         manager.allStops.sort({$0.name < $1.name})
         createAlphabetArray()
-//        dispatch_async(dispatch_get_main_queue()) {
-            self.tableView.reloadData()
-//        }
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +72,10 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func donePressed(sender: AnyObject) {
         // Save the tableView Selections
+        if self.resultSearchController.active {
+            self.resultSearchController.active = false
+        }
+        
         self.dismissViewControllerAnimated(true, completion: {})
     }
     
@@ -65,11 +83,11 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Table view data source
     // ******************************
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return (tableView == self.searchDisplayController!.searchResultsTableView) ? 1 : sectionTitles.count
+        return (self.resultSearchController.active) ? 1 : sectionTitles.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops.count : stopsDictionary[sectionTitles[section]]!.count
+        return (self.resultSearchController.active) ? filteredStops.count : stopsDictionary[sectionTitles[section]]!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -77,7 +95,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"Cell")
         
         let sectionArray = stopsDictionary[sectionTitles[indexPath.section]]!
-        var stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
+        var stop = (self.resultSearchController.active) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
         
         if manager.favoriteStops.filter({$0.code == stop.code}).count > 0 {
             cell.accessoryType = .Checkmark
@@ -95,7 +113,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     // ***************************
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return (tableView == self.searchDisplayController!.searchResultsTableView) ? nil : sectionTitles[section]
+        return (self.resultSearchController.active) ? nil : sectionTitles[section]
     }
     
     func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
@@ -104,7 +122,7 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let sectionArray = stopsDictionary[sectionTitles[indexPath.section]]!
-        var stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
+        var stop = (self.resultSearchController.active) ? filteredStops[indexPath.row] : sectionArray[indexPath.row]
         let recordID = CKRecordID(recordName: stop.code)
         // Deselect the cell
         if tableView.cellForRowAtIndexPath(indexPath)!.accessoryType == .Checkmark {
@@ -140,18 +158,14 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: Search Bar Methods
     // ************************
     
-    func filterContentForSearchText(searchText: String) {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
         // Filter the array using the filter method
         filteredStops = manager.allStops.filter({ (stop: Stop) -> Bool in
-            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchText.lowercaseString)
-            let stringMatchCode = stop.code.rangeOfString(searchText)
+            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
+            let stringMatchCode = stop.code.rangeOfString(searchController.searchBar.text)
             return (stringMatchName != nil || stringMatchCode != nil)
         })
-    }
-    
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        self.filterContentForSearchText(searchString)
-        return true
+        self.tableView.reloadData()
     }
     
     // ********************

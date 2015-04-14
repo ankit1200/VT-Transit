@@ -8,16 +8,34 @@
 
 import UIKit
 
-class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
 
     var selectedRoute = Route(name:"", shortName:"")
     var stops = Array<Stop>()
     var filteredStops = Array<Stop>()
     let parser = Parser()
+    var resultSearchController = UISearchController()
     
     // **************************************
     // MARK: View Controller Delegate Methods
     // **************************************
+    
+    override func viewDidLoad() {
+        // Set up the Search Bar
+        self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            controller.searchBar.placeholder = "Search by Stop # or Name"
+            controller.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+            
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
+    }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
@@ -41,7 +59,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // ******************************
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops.count : stops.count
+        return (self.resultSearchController.active) ? filteredStops.count : stops.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -53,7 +71,7 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
         
         var stop:Stop
         // Check to see whether the normal table or search results table is being displayed
-        stop = (tableView == self.searchDisplayController!.searchResultsTableView) ? filteredStops[indexPath.row] : stops[indexPath.row]
+        stop = (self.resultSearchController.active) ? filteredStops[indexPath.row] : stops[indexPath.row]
         // configure cell
         cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell!.textLabel?.text = stop.name
@@ -73,18 +91,14 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
     // MARK: Search Bar Methods
     // ************************
     
-    func filterContentForSearchText(searchText: String) {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
         // Filter the array using the filter method
         filteredStops = self.stops.filter({( stop: Stop) -> Bool in
-            let stringNameMatch = stop.name.lowercaseString.rangeOfString(searchText.lowercaseString)
-            let stringCodeMatch = stop.code.lowercaseString.rangeOfString(searchText.lowercaseString)
+            let stringNameMatch = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
+            let stringCodeMatch = stop.code.lowercaseString.rangeOfString(searchController.searchBar.text)
             return (stringNameMatch != nil || stringCodeMatch != nil)
         })
-    }
-    
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        self.filterContentForSearchText(searchString)
-        return true
+        self.tableView.reloadData()
     }
     
     // ***********************
@@ -98,12 +112,12 @@ class StopsTableViewController: UITableViewController, UISearchBarDelegate, UISe
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             
             // handle selected cells in search display controlller
-            if sender as! UITableView == self.searchDisplayController!.searchResultsTableView {
-                let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            if self.resultSearchController.active {
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row]
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+                self.resultSearchController.active = false
             } else {
-                let indexPath = self.tableView.indexPathForSelectedRow()!
                 arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row]
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }

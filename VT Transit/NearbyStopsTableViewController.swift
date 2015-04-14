@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
+class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchResultsUpdating {
 
     var stops: [(stop: Stop, distance: Double)] = []
     let locationManager = CLLocationManager()
@@ -17,6 +17,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     var filteredStops: [(stop: Stop, distance: Double)] = []
     var selectedRoutes = [Route]()
     let manager = CloudKitManager.sharedInstance
+    var resultSearchController = UISearchController()
     
     // **************************************
     // MARK: View Controller Delegate Methods
@@ -25,6 +26,21 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
+        
+        // Set up the Search Bar
+        self.resultSearchController = ({
+            let controller = UISearchController(searchResultsController: nil)
+            controller.searchResultsUpdater = self
+            controller.dimsBackgroundDuringPresentation = false
+            controller.hidesNavigationBarDuringPresentation = false
+            controller.searchBar.sizeToFit()
+            controller.searchBar.placeholder = "Search by Stop # or Name"
+            controller.searchBar.searchBarStyle = UISearchBarStyle.Minimal
+            
+            self.tableView.tableHeaderView = controller.searchBar
+            
+            return controller
+        })()
         
         // pull to refresh
         var refreshControl = UIRefreshControl()
@@ -83,7 +99,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // check to see if you are returning the search tableview or nearby stops tableview
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        if self.resultSearchController.active {
             return filteredStops.count
         } else {
             // Return at most 10 nearby stops
@@ -93,7 +109,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if tableView == self.searchDisplayController!.searchResultsTableView {
+        if self.resultSearchController.active {
             var cell = tableView.dequeueReusableCellWithIdentifier("searchCell") as! NearbyStopsTableViewCell!
             if cell == nil {
                 cell = NearbyStopsTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "searchCell")
@@ -143,7 +159,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var stopCode = (tableView == self.searchDisplayController!.searchResultsTableView!) ? filteredStops[indexPath.row].stop.code : nearbyStops[indexPath.row].stop.code
+        var stopCode = (self.resultSearchController.active) ? filteredStops[indexPath.row].stop.code : nearbyStops[indexPath.row].stop.code
         selectedRoutes = Parser.routesForStop(stopCode)
         performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
     }
@@ -153,18 +169,14 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // MARK: Search Bar Methods
     // ************************
     
-    func filterContentForSearchText(searchText: String) {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
         // Filter the array using the filter method
         filteredStops = self.stops.filter({(stop: Stop, distance:Double) -> Bool in
-            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchText.lowercaseString)
-            let stringMatchCode = stop.code.rangeOfString(searchText)
+            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
+            let stringMatchCode = stop.code.rangeOfString(searchController.searchBar.text)
             return (stringMatchName != nil || stringMatchCode != nil)
         })
-    }
-    
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        self.filterContentForSearchText(searchString)
-        return true
+        self.tableView.reloadData()
     }
     
     
@@ -215,12 +227,12 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         if segue.identifier == "showArrivalTimesForAllRoutes" {
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             // handle selected cells in search display controlller
-            if sender as! UITableView == self.searchDisplayController!.searchResultsTableView {
-                let indexPath = self.searchDisplayController!.searchResultsTableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow()!
+            if self.resultSearchController.active {
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row].stop
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+                self.resultSearchController.active = false
             } else {
-                let indexPath = self.tableView.indexPathForSelectedRow()!
                 arrivalTimesForRouteCollectionViewController.selectedStop = nearbyStops[indexPath.row].stop
                 self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
