@@ -45,7 +45,8 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
             controller.searchBar.sizeToFit()
             controller.searchBar.placeholder = "Search by Stop # or Name"
             controller.searchBar.searchBarStyle = UISearchBarStyle.Minimal
-            
+            controller.searchBar.tintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
+            controller.searchBar.backgroundColor = UIColor.whiteColor()
             self.tableView.tableHeaderView = controller.searchBar
             
             return controller

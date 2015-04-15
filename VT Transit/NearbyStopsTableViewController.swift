@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchResultsUpdating {
+class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
 
     var stops: [(stop: Stop, distance: Double)] = []
     let locationManager = CLLocationManager()
@@ -36,7 +36,8 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             controller.searchBar.sizeToFit()
             controller.searchBar.placeholder = "Search by Stop # or Name"
             controller.searchBar.searchBarStyle = UISearchBarStyle.Minimal
-            
+            controller.searchBar.tintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
+            controller.searchBar.backgroundColor = UIColor.whiteColor()
             self.tableView.tableHeaderView = controller.searchBar
             
             return controller
@@ -64,6 +65,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // *************************************
     
     func refresh(sender:AnyObject) {
+
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         nearbyStops = []
@@ -89,10 +91,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         })
     }
 
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
-
-    }
-
     // ****************************
     // MARK: Table view data source
     // ****************************
@@ -108,46 +106,28 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        if self.resultSearchController.active {
-            var cell = tableView.dequeueReusableCellWithIdentifier("searchCell") as! NearbyStopsTableViewCell!
-            if cell == nil {
-                cell = NearbyStopsTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "searchCell")
-            }
-            var tuple: (stop: Stop, distance: Double) = filteredStops[indexPath.row]
-            // check to see if if tableview is search or nearbyStops
 
-            // Configure cell
-            cell.textLabel?.text = tuple.stop.name
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
-            cell.textLabel?.font = UIFont(name: "System Bold", size: 16)
-            let distanceInMiles = tuple.distance
-            cell.detailTextLabel?.text = "Bus Stop #\(tuple.stop.code)"
-            return cell
-            
-        } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as! NearbyStopsTableViewCell!
-            if cell == nil {
-                cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as! NearbyStopsTableViewCell
-            }
-        
-            var tuple = nearbyStops[indexPath.row]
-            // check to see if if tableview is search or nearbyStops
-            
-            // Configure cell
-            cell.title?.text = tuple.stop.name
-            cell.title?.adjustsFontSizeToFitWidth = true
-            let distanceInMiles = tuple.distance
-            cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
-            // if location is disabled then make distance label blank
-            if locationManager.location != nil || distanceInMiles != 0.00 {
-                cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
-            } else {
-                cell.distance?.text = ""
-            }
-            
-            return cell
+        var cell = tableView.dequeueReusableCellWithIdentifier("nearbyStops") as! NearbyStopsTableViewCell!
+        if cell == nil {
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as! NearbyStopsTableViewCell
         }
+    
+        var tuple = (self.resultSearchController.active) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
+        // check to see if if tableview is search or nearbyStops
+        
+        // Configure cell
+        cell.title?.text = tuple.stop.name
+        cell.title?.adjustsFontSizeToFitWidth = true
+        let distanceInMiles = tuple.distance
+        cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
+        // if location is disabled then make distance label blank
+        if locationManager.location != nil || distanceInMiles != 0.00 {
+            cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
+        } else {
+            cell.distance?.text = ""
+        }
+        
+        return cell
     }
     
     // ****************************
@@ -178,7 +158,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         })
         self.tableView.reloadData()
     }
-    
     
     // ********************
     // MARK: Helper Methods
@@ -230,11 +209,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             let indexPath = self.tableView.indexPathForSelectedRow()!
             if self.resultSearchController.active {
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row].stop
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
                 self.resultSearchController.active = false
             } else {
                 arrivalTimesForRouteCollectionViewController.selectedStop = nearbyStops[indexPath.row].stop
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
             arrivalTimesForRouteCollectionViewController.selectedRoutes = selectedRoutes
         }

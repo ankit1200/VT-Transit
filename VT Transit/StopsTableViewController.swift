@@ -30,7 +30,8 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
             controller.searchBar.sizeToFit()
             controller.searchBar.placeholder = "Search by Stop # or Name"
             controller.searchBar.searchBarStyle = UISearchBarStyle.Minimal
-            
+            controller.searchBar.tintColor = UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)
+            controller.searchBar.backgroundColor = UIColor.whiteColor()
             self.tableView.tableHeaderView = controller.searchBar
             
             return controller
@@ -115,11 +116,9 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
             let indexPath = self.tableView.indexPathForSelectedRow()!
             if self.resultSearchController.active {
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row]
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
                 self.resultSearchController.active = false
             } else {
                 arrivalTimesForRouteCollectionViewController.selectedStop = stops[indexPath.row]
-                self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
             }
             arrivalTimesForRouteCollectionViewController.selectedRoutes = [selectedRoute]
         }

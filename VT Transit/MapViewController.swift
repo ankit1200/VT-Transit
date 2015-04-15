@@ -43,11 +43,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.startUpdatingLocation()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        addStopsToMap()
-    }
-    
     override func viewDidAppear(animated: Bool) {
+        
+        addStopsToMap()
         
 //        // get current bus locations in background
 //        var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
