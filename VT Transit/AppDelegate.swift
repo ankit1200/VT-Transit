@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKitManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,10 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Parse keys
         Parse.setApplicationId("Cn8XelDtAQiaT3K899qx1YZj5lvuTJ2yQxxyrgSq", clientKey: "Fi7NygQMW6m11emvGSmfITaMnyZeuQMbNT4byV6J")
         
-        // populate favorite Stops
-        CloudKitManager.sharedInstance.queryFavoriteStops({})
         // populate all stops list
         CloudKitManager.sharedInstance.queryAllStops({})
+        CloudKitManager.sharedInstance.queryFavoriteStops({
+            let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
+            let data = NSKeyedArchiver.archivedDataWithRootObject(CloudKitManager.sharedInstance.favoriteStops)
+            sharedDefault?.setObject(data, forKey: "favoriteStops")
+            sharedDefault?.synchronize()
+        })
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
@@ -29,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
-        //notifications
+        // Notifications
 
         // Specify the notification types.
         var notificationTypes: UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKitManager
 
 class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
 

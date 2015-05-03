@@ -7,17 +7,30 @@
 //
 
 import Foundation
+import CoreLocation
 
-class Stop {
+public class Stop : NSObject, NSCoding {
     
-    let name, code: String
-    var location: CLLocation
+    public let name, code: String
+    public var location: CLLocation
     
     // init new Stop object
-    init(name: String, code: String, location:CLLocation) {
+    public init(name: String, code: String, location:CLLocation) {
         self.name = name
         self.code = code
         self.location = location
+    }
+    
+    required public init(coder decoder:NSCoder) {
+        self.name = decoder.decodeObjectForKey("name") as! String
+        self.code = decoder.decodeObjectForKey("code") as! String
+        self.location = decoder.decodeObjectForKey("location") as! CLLocation
+    }
+    
+    public func encodeWithCoder(encoder:NSCoder) {
+        encoder.encodeObject(self.name, forKey: "name")
+        encoder.encodeObject(self.code, forKey: "code")
+        encoder.encodeObject(self.location, forKey: "location")
     }
 }
 

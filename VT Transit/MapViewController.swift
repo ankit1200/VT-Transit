@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import CloudKit
+import CloudKitManager
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
 

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
 
-class Parser: NSObject {
+public class Parser: NSObject {
     
     // This method gets the stops that are assoicated with the route shortName
-    class func stopsForRoute(shortName: String) -> Array<Stop> {
+    public class func stopsForRoute(shortName: String) -> Array<Stop> {
         
         var tbxmlParser = TBXML()
         var stops = Array<Stop>()
@@ -39,7 +40,7 @@ class Parser: NSObject {
     }
     
     // This method gets the arrival time for specified route at given stop
-    class func arrivalTimesForRoute(shortName: String, stopCode: String) -> Array<String> {
+    public class func arrivalTimesForRoute(shortName: String, stopCode: String) -> Array<String> {
         
         var tbxmlParser = TBXML()
         var arrivalTimes = Array<String>()
@@ -64,7 +65,7 @@ class Parser: NSObject {
     }
     
     // This method gets the routes that go to the given stop
-    class func routesForStop(stopCode: String) -> Array<Route> {
+    public class func routesForStop(stopCode: String) -> Array<Route> {
         
         var tbxmlParser = TBXML()
         var routes = Array<Route>()
@@ -92,7 +93,7 @@ class Parser: NSObject {
     // This method gets the current bus locations, return tuple of Route with Coordinate
     // if route short name is specified then just return a list of the specifed short name
     // else return all current bus locations
-    class func getCurrentBusLocations(shortName:String?) -> Array<(route:Route, coordinate:CLLocationCoordinate2D)> {
+    public class func getCurrentBusLocations(shortName:String?) -> Array<(route:Route, coordinate:CLLocationCoordinate2D)> {
         
         var tbxmlParser = TBXML()
         var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()

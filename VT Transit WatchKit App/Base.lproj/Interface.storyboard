@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -10,10 +10,27 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="VT_Transit_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label alignment="center" verticalAlignment="center" text="VT Transit" id="XfY-ve-mcl"/>
+                        <table alignment="left" id="ebR-ax-o3M">
+                            <items>
+                                <tableRow identifier="tableRow" id="ilU-6S-lCU" customClass="WatchTableRowController" customModule="VT_Transit_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="eyY-tn-Frj">
+                                        <items>
+                                            <label alignment="left" text="Label" id="pjA-xL-E8Z"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="favoriteStopName" destination="pjA-xL-E8Z" id="L2l-2u-kKc"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
                     </items>
+                    <connections>
+                        <outlet property="table" destination="ebR-ax-o3M" id="OPH-bU-oXy"/>
+                    </connections>
                 </controller>
             </objects>
+            <point key="canvasLocation" x="65" y="466"/>
         </scene>
     </scenes>
 </document>

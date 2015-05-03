@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CloudKitManager
 
 class MapAnnotation: NSObject, MKAnnotation {
     

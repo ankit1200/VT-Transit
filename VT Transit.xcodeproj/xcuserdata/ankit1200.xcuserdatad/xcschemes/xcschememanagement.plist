@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CloudKitManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Glance - VT Transit WatchKit App.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -48,6 +53,16 @@
 			<true/>
 		</dict>
 		<key>47BB57C819AFB0A300B3807E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>47C02B8B1AEC6369001C4E30</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>47C02B951AEC6369001C4E30</key>
 		<dict>
 			<key>primary</key>
 			<true/>

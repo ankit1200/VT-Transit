@@ -8,13 +8,13 @@
 
 import Foundation
 
-class Route {
+public class Route {
     
-    var name, shortName: String
-    var sortedStops: Array<Stop> = []
+    public var name, shortName: String
+    public var sortedStops: Array<Stop> = []
     
     // init new Route object
-    init(name: String?, shortName: String) {
+    public init(name: String?, shortName: String) {
         self.shortName = shortName
         // initialize name and then set the correct value
         self.name = String()

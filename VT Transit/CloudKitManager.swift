@@ -9,26 +9,28 @@
 
 import UIKit
 import CloudKit
+import Foundation
 
-class CloudKitManager: NSObject {
+public class CloudKitManager: NSObject {
    
-    let privateDB = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
-    var favoriteStops:Array<Stop>! = Array<Stop>() // favoriteStops
-    var allStops:Array<Stop>! = Array<Stop>() // all stops
+    public let privateDB = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
+    public var favoriteStops:Array<Stop>! = Array<Stop>() // favoriteStops
+    public var allStops:Array<Stop>! = Array<Stop>() // all stops
     
-    class var sharedInstance: CloudKitManager {
+    public class var sharedInstance: CloudKitManager {
         struct Static {
             static var instance: CloudKitManager?
             static var token: dispatch_once_t = 0
         }
         dispatch_once(&Static.token) {
             Static.instance = CloudKitManager()
+            Static.instance!.queryFavoriteStops({})
         }
         return Static.instance!
     }
     
     // get favorite stops from iCloud
-    func queryFavoriteStops(completionHandler: ()->()) {
+    public func queryFavoriteStops(completionHandler: ()->()) {
         let query = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
         let sort = NSSortDescriptor(key: "favoritesIndex", ascending: true)
         query.sortDescriptors = [sort]
@@ -50,7 +52,7 @@ class CloudKitManager: NSObject {
     }
     
     // update favorite stops to iCloud
-    func updateFavoriteStops() {
+    public func updateFavoriteStops() {
         for (index, stop) in enumerate(favoriteStops) {
             privateDB.fetchRecordWithID(CKRecordID(recordName: stop.code), completionHandler: { (record, error) -> Void in
                 if error != nil {
@@ -71,7 +73,7 @@ class CloudKitManager: NSObject {
     }
     
     // get all the stops from Parse
-    func queryAllStops(completionHandler: ()->()) {
+    public func queryAllStops(completionHandler: ()->()) {
         var query = PFQuery(className: "Stops")
         query.limit = 500
         query.findObjectsInBackgroundWithBlock {

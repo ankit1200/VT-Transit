@@ -34,6 +34,20 @@
                ReferencedContainer = "container:VT Transit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "47C02B951AEC6369001C4E30"
+               BuildableName = "CloudKitManagerTests.xctest"
+               BlueprintName = "CloudKitManagerTests"
+               ReferencedContainer = "container:VT Transit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,6 +63,16 @@
                BlueprintIdentifier = "47BB57C819AFB0A300B3807E"
                BuildableName = "VT TransitTests.xctest"
                BlueprintName = "VT TransitTests"
+               ReferencedContainer = "container:VT Transit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "47C02B951AEC6369001C4E30"
+               BuildableName = "CloudKitManagerTests.xctest"
+               BlueprintName = "CloudKitManagerTests"
                ReferencedContainer = "container:VT Transit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -72,7 +96,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "47BB57B419AFB0A300B3807E"
@@ -94,7 +119,8 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "47BB57B419AFB0A300B3807E"

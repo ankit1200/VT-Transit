@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import CloudKitManager
 
 class SegmentViewController: UIViewController {
 
