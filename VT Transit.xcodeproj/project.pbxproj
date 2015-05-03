@@ -45,7 +45,7 @@
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
-		47C02B861AEC5C12001C4E30 /* WatchTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C02B851AEC5C12001C4E30 /* WatchTableRowController.swift */; };
+		47C02B861AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */; };
 		47C02B911AEC6369001C4E30 /* CloudKitManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47C02B901AEC6369001C4E30 /* CloudKitManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47C02BA31AEC6369001C4E30 /* CloudKitManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */; };
 		47C02BA41AEC6369001C4E30 /* CloudKitManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -71,6 +71,8 @@
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
 		47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */; };
+		47F675F51AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */; };
+		47F675F71AF6CB100043F86D /* DepartureTimesTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,7 +174,7 @@
 		47BB57BA19AFB0A300B3807E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47BB57C119AFB0A300B3807E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		47BB57C319AFB0A300B3807E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		47C02B851AEC5C12001C4E30 /* WatchTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchTableRowController.swift; sourceTree = "<group>"; };
+		47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStopsTableRowController.swift; sourceTree = "<group>"; };
 		47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CloudKitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C02B8F1AEC6369001C4E30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47C02B901AEC6369001C4E30 /* CloudKitManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudKitManager.h; sourceTree = "<group>"; };
@@ -185,6 +187,8 @@
 		47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewController.swift; sourceTree = "<group>"; };
 		47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewCell.swift; sourceTree = "<group>"; };
 		47F303ED1AF6140A008798A2 /* VT Transit WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTimeInterfaceController.swift; sourceTree = "<group>"; };
+		47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTimesTableRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,7 +287,9 @@
 			children = (
 				47F303ED1AF6140A008798A2 /* VT Transit WatchKit Extension.entitlements */,
 				47AD038C1AEC504D006DCE19 /* InterfaceController.swift */,
-				47C02B851AEC5C12001C4E30 /* WatchTableRowController.swift */,
+				47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */,
+				47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */,
+				47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */,
 				47AD038E1AEC504D006DCE19 /* Images.xcassets */,
 				47AD038A1AEC504D006DCE19 /* Supporting Files */,
 			);
@@ -611,8 +617,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47F675F51AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift in Sources */,
 				47AD038D1AEC504D006DCE19 /* InterfaceController.swift in Sources */,
-				47C02B861AEC5C12001C4E30 /* WatchTableRowController.swift in Sources */,
+				47C02B861AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift in Sources */,
+				47F675F71AF6CB100043F86D /* DepartureTimesTableRowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

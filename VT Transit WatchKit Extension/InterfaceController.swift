@@ -14,23 +14,19 @@ class InterfaceController: WKInterfaceController {
 
     @IBOutlet var table: WKInterfaceTable!
     
+    let favoriteStops: [Stop] = {
+        let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
+        let data = sharedDefault?.objectForKey("favoriteStops") as! NSData
+        let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Stop]
+        return unarchivedData
+    }()
+    
+    // MARK: WatchKit Delegate Methods
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
-    }
-
-    func loadTableData() {
-        let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
-        let data = sharedDefault?.objectForKey("favoriteStops") as! NSData
-        let favoriteStops = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Stop]
-        println(favoriteStops)
-//        table.setNumberOfRows(manager.favoriteStops.count, withRowType: "tableRow")
-//        
-//        for (index, content) in enumerate(manager.favoriteStops) {
-//            let row = table.rowControllerAtIndex(index) as! WatchTableRowController
-//            row.favoriteStopName.setText(content.name)
-//        }
     }
     
     override func willActivate() {
@@ -43,5 +39,20 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-
+    
+    // MARK: Table Data Method
+    
+    func loadTableData() {
+        table.setNumberOfRows(favoriteStops.count, withRowType: "tableRow")
+        for (index, content) in enumerate(favoriteStops) {
+            let row = table.rowControllerAtIndex(index) as! FavoriteStopsTableRowController
+            row.favoriteStopName.setText(content.name)
+        }
+    }
+    
+    // MARK: Segue
+    
+    override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
+        return favoriteStops[rowIndex]
+    }
 }

@@ -8,7 +8,7 @@
 
 import WatchKit
 
-class WatchTableRowController: NSObject {
+class FavoriteStopsTableRowController: NSObject {
    
     @IBOutlet var favoriteStopName: WKInterfaceLabel!   
 }
