@@ -69,7 +69,6 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
         } else {
             self.navigationController?.navigationBarHidden = false
         }
-//        self.navigationController?.navigationBarHidden = (selectedRoutes.count == 1) ? false : true
     }
     
     override func didReceiveMemoryWarning() {

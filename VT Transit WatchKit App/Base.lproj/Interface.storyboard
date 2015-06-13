@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
@@ -40,8 +40,19 @@
             <objects>
                 <controller id="FEJ-ga-rkC" customClass="DepartureTimeInterfaceController" customModule="VT_Transit_WatchKit_Extension">
                     <items>
+                        <label alignment="center" text="Label" textAlignment="center" numberOfLines="0" id="GaD-Aj-7jM"/>
                         <table alignment="left" id="c8l-ai-5G5">
                             <items>
+                                <tableRow identifier="sectionRow" id="N1X-9s-VW3" customClass="SectionTableRowController" customModule="VT_Transit_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="uKp-Mh-UQG">
+                                        <items>
+                                            <label alignment="center" verticalAlignment="center" text="Section" textAlignment="center" id="AVu-1Z-g1E"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="sectionTitle" destination="AVu-1Z-g1E" id="Tak-pC-NSt"/>
+                                    </connections>
+                                </tableRow>
                                 <tableRow identifier="tableRow" id="Pke-e0-He1" customClass="DepartureTimesTableRowController" customModule="VT_Transit_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="47.5" alignment="left" layout="vertical" id="INE-Za-x1D">
                                         <items>
@@ -63,6 +74,7 @@
                         </table>
                     </items>
                     <connections>
+                        <outlet property="stopName" destination="GaD-Aj-7jM" id="qDl-7G-PUf"/>
                         <outlet property="table" destination="c8l-ai-5G5" id="SJ3-kj-MeG"/>
                     </connections>
                 </controller>

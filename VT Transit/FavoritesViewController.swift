@@ -79,7 +79,7 @@ class FavoritesViewController: UITableViewController {
         
         // update the favorite stops list
         let fromStop = manager.favoriteStops[fromIndexPath.row]
-        let toStop = manager.favoriteStops[toIndexPath.row]
+
         manager.favoriteStops[fromIndexPath.row] = manager.favoriteStops[toIndexPath.row]
         manager.favoriteStops[toIndexPath.row] = fromStop
         

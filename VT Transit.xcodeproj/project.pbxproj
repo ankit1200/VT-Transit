@@ -71,6 +71,8 @@
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
 		47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */; };
+		47EDF5881B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EDF5871B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m */; };
+		47EDF58D1B2C9CBB00F4BB47 /* SectionTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EDF58C1B2C9CBB00F4BB47 /* SectionTableRowController.swift */; };
 		47F675F51AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */; };
 		47F675F71AF6CB100043F86D /* DepartureTimesTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */; };
 /* End PBXBuildFile section */
@@ -186,6 +188,10 @@
 		47C8B0E11A284A8400C9BD0A /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewController.swift; sourceTree = "<group>"; };
 		47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewCell.swift; sourceTree = "<group>"; };
+		47EDF5851B2C936600F4BB47 /* VT Transit WatchKit Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit WatchKit Extension-Bridging-Header.h"; sourceTree = "<group>"; };
+		47EDF5861B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKInterfaceTable+IGInterfaceDataTable.h"; sourceTree = "<group>"; };
+		47EDF5871B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKInterfaceTable+IGInterfaceDataTable.m"; sourceTree = "<group>"; };
+		47EDF58C1B2C9CBB00F4BB47 /* SectionTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTableRowController.swift; sourceTree = "<group>"; };
 		47F303ED1AF6140A008798A2 /* VT Transit WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTimeInterfaceController.swift; sourceTree = "<group>"; };
 		47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTimesTableRowController.swift; sourceTree = "<group>"; };
@@ -286,10 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				47F303ED1AF6140A008798A2 /* VT Transit WatchKit Extension.entitlements */,
-				47AD038C1AEC504D006DCE19 /* InterfaceController.swift */,
-				47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */,
-				47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */,
-				47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */,
+				47EDF58B1B2C9C7600F4BB47 /* Interface Controller */,
+				47EDF58A1B2C9C6E00F4BB47 /* Table Row */,
+				47EDF5891B2C937400F4BB47 /* Watch Table Extension */,
 				47AD038E1AEC504D006DCE19 /* Images.xcassets */,
 				47AD038A1AEC504D006DCE19 /* Supporting Files */,
 			);
@@ -299,6 +304,7 @@
 		47AD038A1AEC504D006DCE19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				47EDF5851B2C936600F4BB47 /* VT Transit WatchKit Extension-Bridging-Header.h */,
 				47AD038B1AEC504D006DCE19 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -418,6 +424,34 @@
 				47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */,
 			);
 			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
+		47EDF5891B2C937400F4BB47 /* Watch Table Extension */ = {
+			isa = PBXGroup;
+			children = (
+				47EDF5861B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.h */,
+				47EDF5871B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m */,
+			);
+			name = "Watch Table Extension";
+			sourceTree = "<group>";
+		};
+		47EDF58A1B2C9C6E00F4BB47 /* Table Row */ = {
+			isa = PBXGroup;
+			children = (
+				47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */,
+				47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */,
+				47EDF58C1B2C9CBB00F4BB47 /* SectionTableRowController.swift */,
+			);
+			name = "Table Row";
+			sourceTree = "<group>";
+		};
+		47EDF58B1B2C9C7600F4BB47 /* Interface Controller */ = {
+			isa = PBXGroup;
+			children = (
+				47AD038C1AEC504D006DCE19 /* InterfaceController.swift */,
+				47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */,
+			);
+			name = "Interface Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -621,6 +655,8 @@
 				47AD038D1AEC504D006DCE19 /* InterfaceController.swift in Sources */,
 				47C02B861AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift in Sources */,
 				47F675F71AF6CB100043F86D /* DepartureTimesTableRowController.swift in Sources */,
+				47EDF5881B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m in Sources */,
+				47EDF58D1B2C9CBB00F4BB47 /* SectionTableRowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +774,7 @@
 		47AD03A51AEC504E006DCE19 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "VT Transit WatchKit Extension/VT Transit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -754,13 +791,15 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit WatchKit Extension/VT Transit WatchKit Extension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		47AD03A61AEC504E006DCE19 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "VT Transit WatchKit Extension/VT Transit WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -774,7 +813,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit WatchKit Extension/VT Transit WatchKit Extension-Bridging-Header.h";
 			};
 			name = Release;
 		};
