@@ -142,7 +142,13 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var stopCode = (self.resultSearchController.active) ? filteredStops[indexPath.row].stop.code : nearbyStops[indexPath.row].stop.code
         selectedRoutes = Parser.routesForStop(stopCode)
-        performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
+        if selectedRoutes.count == 0 {
+            // Instantiate an alert view object
+            let alertView = UIAlertView(title: "Stop not running!", message: "The selected stop is not running at this time. Please try a different Stop.", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+        } else {
+            performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
+        }
     }
     
     

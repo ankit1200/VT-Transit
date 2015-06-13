@@ -44,7 +44,6 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        loadTableData()
     }
     
     override func didDeactivate() {
@@ -52,9 +51,10 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
         super.didDeactivate()
     }
     
-    // MARK: Table Data Method
+    // MARK: Table Data Source
+    
     func numberOfSectionsInTable(table: WKInterfaceTable!) -> Int {
-        routesForSelectedStop.count
+        return routesForSelectedStop.count
     }
     
     func numberOfRowsInTable(table: WKInterfaceTable!, section: Int) -> Int {
@@ -64,42 +64,50 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
         return (arrivalTimesCount == 0) ?  1 : ((routesForSelectedStop.count > 1 && arrivalTimesCount > 6) ? 6 : arrivalTimesCount)
     }
     
+    func table(table: WKInterfaceTable!, configureSectionController sectionRowController: NSObject!, forSection section: Int) {
+        let row = SectionTableRowController()
+        row.sectionTitle.setText(arrivalTimes[section].route.name)
+    }
+    
+    func table(table: WKInterfaceTable!, configureRowController rowController: NSObject!, forIndexPath indexPath: NSIndexPath!) {
+        let row = DepartureTimesTableRowController()
+        
+        let dateFormatter = NSDateFormatter() // date format
+        dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
+        
+        // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
+        let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
+        
+        var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES) add 1 minute buffer
+        var timeDifferenceHours = 0
+        var timeRemainingText = String()
+        
+        // check to see if more than one hour remaining
+        if timeDifferenceMinutes > 60 {
+            timeDifferenceHours = timeDifferenceMinutes / 60
+            timeDifferenceMinutes = timeDifferenceMinutes % 60
+            timeRemainingText = "\(timeDifferenceHours) hrs\n\(timeDifferenceMinutes) min"
+            
+        } else if timeDifferenceMinutes < 0 {
+            timeRemainingText = "BUS HAS PASSED"
+            
+        } else {
+            timeRemainingText = "\(timeDifferenceMinutes) min"
+        }
+        
+        row.timeRemainingLabel.setText(timeRemainingText)
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle // short style is just h:mm a
+        let arrivalTime = dateFormatter.stringFromDate(arrivalTimeDate!) // get arrival time string from date
+        row.departureTimeLabel.setText(arrivalTime)
+    }
+    
+    // MARK: Table Row Identifiers
+    
     func table(table: WKInterfaceTable!, rowIdentifierAtIndexPath indexPath: NSIndexPath!) -> String! {
         return "tableRow"
     }
     
-    func loadTableData() {
-        table.setNumberOfRows(3, withRowType: "tableRow")
-        for (index, content) in enumerate(arrivalTimes) {
-            let row = table.rowControllerAtIndex(index) as! DepartureTimesTableRowController
-            
-            let dateFormatter = NSDateFormatter() // date format
-            dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
-            
-            // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
-            let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
-            
-            var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES) add 1 minute buffer
-            var timeDifferenceHours = 0
-            var timeRemainingText = String()
-            
-            // check to see if more than one hour remaining
-            if timeDifferenceMinutes > 60 {
-                timeDifferenceHours = timeDifferenceMinutes / 60
-                timeDifferenceMinutes = timeDifferenceMinutes % 60
-                timeRemainingText = "\(timeDifferenceHours) hrs\n\(timeDifferenceMinutes) min"
-                
-            } else if timeDifferenceMinutes < 0 {
-                timeRemainingText = "BUS HAS PASSED"
-                
-            } else {
-                timeRemainingText = "\(timeDifferenceMinutes) min"
-            }
-            
-            row.timeRemainingLabel.setText(timeRemainingText)
-            dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle // short style is just h:mm a
-            let arrivalTime = dateFormatter.stringFromDate(arrivalTimeDate!) // get arrival time string from date
-            row.departureTimeLabel = arrivalTime
-        }
+    func table(table: WKInterfaceTable!, identifierForSection section: Int) -> String! {
+        return "sectionRow"
     }
 }

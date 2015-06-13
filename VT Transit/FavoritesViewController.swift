@@ -14,6 +14,7 @@ class FavoritesViewController: UITableViewController {
     
     let database = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
     let manager = CloudKitManager.sharedInstance
+    var selectedRoutes = [Route]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +97,15 @@ class FavoritesViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
+        let stop = manager.favoriteStops[indexPath.row]
+        selectedRoutes = Parser.routesForStop(stop.code)
+        if selectedRoutes.count == 0 {
+            // Instantiate an alert view object
+            let alertView = UIAlertView(title: "Stop not running!", message: "The selected stop is not running at this time. Please try a different Stop.", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+        } else {
+            performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
+        }
     }
     
     // *************************
@@ -110,7 +119,7 @@ class FavoritesViewController: UITableViewController {
             let indexPath = self.tableView.indexPathForSelectedRow()!
             let stop = manager.favoriteStops[indexPath.row]
             arrivalTimesForRouteCollectionViewController.selectedStop = stop
-            arrivalTimesForRouteCollectionViewController.selectedRoutes = Parser.routesForStop(stop.code)
+            arrivalTimesForRouteCollectionViewController.selectedRoutes = selectedRoutes
             self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }
     }
