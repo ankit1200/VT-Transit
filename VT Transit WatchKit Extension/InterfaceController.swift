@@ -20,12 +20,11 @@ class InterfaceController: WKInterfaceController {
         let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Stop]
         return unarchivedData
     }()
+    var filteredStops = [Stop]()
     
     // MARK: WatchKit Delegate Methods
-    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
         // Configure interface objects here.
     }
     
@@ -40,19 +39,33 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
-    // MARK: Table Data Method
     
+    // MARK: Table Data Method
     func loadTableData() {
-        table.setNumberOfRows(favoriteStops.count, withRowType: "tableRow")
-        for (index, content) in enumerate(favoriteStops) {
+        filteredStops = filterFavoriteStops(favoriteStops)
+        table.setNumberOfRows(filteredStops.count, withRowType: "tableRow")
+        for (index, content) in enumerate(filteredStops) {
             let row = table.rowControllerAtIndex(index) as! FavoriteStopsTableRowController
             row.favoriteStopName.setText(content.name)
         }
     }
     
-    // MARK: Segue
     
+    // MARK: Helper Methods
+    func filterFavoriteStops(stops:[Stop]) -> [Stop] {
+        var filteredStops = [Stop]()
+        for stop in stops {
+            let routes = Parser.routesForStop(stop.code)
+            if routes.count > 0 {
+                filteredStops.append(stop)
+            }
+        }
+        return filteredStops
+    }
+    
+    
+    // MARK: Segue
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {
-        return favoriteStops[rowIndex]
+        return filteredStops[rowIndex]
     }
 }

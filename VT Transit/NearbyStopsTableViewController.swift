@@ -70,26 +70,36 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         locationManager.startUpdatingLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         nearbyStops = []
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            for tuple in self.stops {
-                var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
-                if distance < 1.61 {
-                    let nearbyTuple = (stop: tuple.stop, distance: distance)
-                    self.nearbyStops.append(nearbyTuple)
+        
+        // Check to see if current location is greater than 25 miles away
+        // If current location is greater than 25 miles away then there are no nearby stops
+        if (locationManager.location.distanceFromLocation(CLLocation(latitude: 37.228368, longitude: -80.422942)) as Double / 1609.34) > 25 {
+            let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+            self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                for tuple in self.stops {
+                    var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
+                    if distance < 1.61 {
+                        let nearbyTuple = (stop: tuple.stop, distance: distance)
+                        self.nearbyStops.append(nearbyTuple)
+                    }
                 }
-            }
-            self.locationManager.stopUpdatingLocation()
-            if self.nearbyStops.count == 0 {
-                let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
-                alertView.show()
-            } else {
-                self.nearbyStops.sort({$0.1 < $1.1})
-            }
-            dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
+                self.locationManager.stopUpdatingLocation()
+                if self.nearbyStops.count == 0 {
+                    let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
+                    alertView.show()
+                } else {
+                    self.nearbyStops.sort({$0.1 < $1.1})
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+                })
             })
-        })
+        }
     }
 
     // ****************************

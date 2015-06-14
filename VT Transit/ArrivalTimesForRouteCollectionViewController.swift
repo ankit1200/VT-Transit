@@ -131,6 +131,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
             
             let dateFormatter = NSDateFormatter() // date format
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
+            
             // indexPath.section gets the route, then time[indexPath.row] gets arrivalTime
             let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
             var timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES) add 1 minute buffer
