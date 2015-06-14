@@ -45,6 +45,7 @@
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
+		47BC258D1B2D581500A5FE49 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BC258C1B2D581500A5FE49 /* LaunchScreen.xib */; };
 		47C02B861AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */; };
 		47C02B911AEC6369001C4E30 /* CloudKitManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47C02B901AEC6369001C4E30 /* CloudKitManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47C02BA31AEC6369001C4E30 /* CloudKitManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */; };
@@ -176,6 +177,7 @@
 		47BB57BA19AFB0A300B3807E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47BB57C119AFB0A300B3807E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		47BB57C319AFB0A300B3807E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		47BC258C1B2D581500A5FE49 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStopsTableRowController.swift; sourceTree = "<group>"; };
 		47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CloudKitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C02B8F1AEC6369001C4E30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			children = (
 				47BB57BA19AFB0A300B3807E /* AppDelegate.swift */,
 				47BB57C019AFB0A300B3807E /* Main.storyboard */,
+				47BC258C1B2D581500A5FE49 /* LaunchScreen.xib */,
 				47C8B0DD1A26EF9300C9BD0A /* View Controllers */,
 				4705068F1A42B72D00EEA613 /* Collection View Cells */,
 				47D6D0B91A77E2DD004A2EFD /* Custom Classes */,
@@ -632,6 +635,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47BC258D1B2D581500A5FE49 /* LaunchScreen.xib in Resources */,
 				4711AA0219AFBF710062F587 /* VirginiaTech.gpx in Resources */,
 				47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */,
 				47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */,
@@ -905,7 +909,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "VT Transit/VT Transit.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -930,7 +933,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "VT Transit/VT Transit.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
