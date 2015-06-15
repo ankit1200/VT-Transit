@@ -61,12 +61,12 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
         // if no arrival times remain then return 1, for the noArrivalTimesCell else return the count
         // if there are multiple routes, then only return the first 6 arrivalTimes
         let arrivalTimesCount = arrivalTimes[section].time.count
-        return (arrivalTimesCount == 0) ?  1 : ((routesForSelectedStop.count > 1 && arrivalTimesCount > 6) ? 6 : arrivalTimesCount)
+        return (arrivalTimesCount == 0) ?  1 : ((routesForSelectedStop.count > 1 && arrivalTimesCount > 2) ? 2 : arrivalTimesCount)
     }
     
     func table(table: WKInterfaceTable!, configureSectionController sectionRowController: NSObject!, forSection section: Int) {
         let sectionRow = sectionRowController as! SectionTableRowController
-        sectionRow.sectionTitle.setText(arrivalTimes[section].route.name)
+        sectionRow.sectionTitle.setText(arrivalTimes[section].route.shortName)
     }
     
     func table(table: WKInterfaceTable!, configureRowController rowController: NSObject!, forIndexPath indexPath: NSIndexPath!) {
@@ -96,7 +96,6 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
                 
             } else if timeDifferenceMinutes < 0 {
                 timeRemainingText = "BUS HAS PASSED"
-                
             } else {
                 timeRemainingText = "\(timeDifferenceMinutes) min"
             }
@@ -104,7 +103,11 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
             row.timeRemainingLabel.setText(timeRemainingText)
             dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle // short style is just h:mm a
             let arrivalTime = dateFormatter.stringFromDate(arrivalTimeDate!) // get arrival time string from date
-            row.departureTimeLabel.setText(arrivalTime)
+            if timeDifferenceMinutes < 0 {
+                row.departureTimeLabel.setText("")
+            } else {
+                row.departureTimeLabel.setText(arrivalTime)
+            }
         }
     }
     

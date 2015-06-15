@@ -14,7 +14,7 @@ class InterfaceController: WKInterfaceController {
 
     @IBOutlet var table: WKInterfaceTable!
     
-    let favoriteStops: [Stop] = {
+    var favoriteStops: [Stop] = {
         let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
         let data = sharedDefault?.objectForKey("favoriteStops") as! NSData
         let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Stop]
@@ -31,6 +31,7 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        favoriteStops = loadFavoriteStops()
         loadTableData()
     }
 
@@ -63,6 +64,12 @@ class InterfaceController: WKInterfaceController {
         return filteredStops
     }
     
+    func loadFavoriteStops() -> [Stop] {
+        let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
+        let data = sharedDefault?.objectForKey("favoriteStops") as! NSData
+        let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Stop]
+        return unarchivedData
+    }
     
     // MARK: Segue
     override func contextForSegueWithIdentifier(segueIdentifier: String, inTable table: WKInterfaceTable, rowIndex: Int) -> AnyObject? {

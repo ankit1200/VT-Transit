@@ -56,7 +56,7 @@
                                 <tableRow identifier="tableRow" id="Pke-e0-He1" customClass="DepartureTimesTableRowController" customModule="VT_Transit_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="47.5" alignment="left" layout="vertical" id="INE-Za-x1D">
                                         <items>
-                                            <label height="20" alignment="center" text="Reminaing Time" textAlignment="center" id="5W6-Dd-LNn">
+                                            <label alignment="center" text="Reminaing Time" textAlignment="center" id="5W6-Dd-LNn">
                                                 <color key="textColor" red="1" green="0.40000003579999999" blue="0.1647058874" alpha="1" colorSpace="deviceRGB"/>
                                             </label>
                                             <label height="20" alignment="center" text="Departure Time" id="Exw-zt-wsR">

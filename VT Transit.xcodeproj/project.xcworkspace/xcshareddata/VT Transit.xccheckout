@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>24968E54-7C7A-421F-92F1-51FF0508D8F9</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>VT Transit</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>25065AA8FFBC4269B8E6FC1B45EC72558A47F3FD</key>
 		<string>https://github.com/ankit1200/VT-Transit.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>VT Transit.xcodeproj/project.xcworkspace</string>
+	<string>VT Transit.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>25065AA8FFBC4269B8E6FC1B45EC72558A47F3FD</key>

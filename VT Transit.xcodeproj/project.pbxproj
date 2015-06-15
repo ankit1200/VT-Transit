@@ -334,14 +334,11 @@
 			isa = PBXGroup;
 			children = (
 				47BB57B719AFB0A300B3807E /* VT Transit */,
-				47C02B8D1AEC6369001C4E30 /* CloudKitManager */,
 				47AD03891AEC504D006DCE19 /* VT Transit WatchKit Extension */,
 				47AD03961AEC504D006DCE19 /* VT Transit WatchKit App */,
+				47C02B8D1AEC6369001C4E30 /* CloudKitManager */,
 				4711A9D519AFBC300062F587 /* Frameworks */,
-				4711AA1F19AFC5330062F587 /* VT Transit.app */,
-				47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */,
-				47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */,
-				47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */,
+				47EC78EE1B2DE2040013B5C5 /* Target */,
 			);
 			sourceTree = "<group>";
 		};
@@ -427,6 +424,17 @@
 				47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */,
 			);
 			name = "Custom Classes";
+			sourceTree = "<group>";
+		};
+		47EC78EE1B2DE2040013B5C5 /* Target */ = {
+			isa = PBXGroup;
+			children = (
+				4711AA1F19AFC5330062F587 /* VT Transit.app */,
+				47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */,
+				47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */,
+				47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */,
+			);
+			name = Target;
 			sourceTree = "<group>";
 		};
 		47EDF5891B2C937400F4BB47 /* Watch Table Extension */ = {
