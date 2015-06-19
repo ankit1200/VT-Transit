@@ -17,7 +17,6 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     var nearbyStops: [(stop: Stop, distance: Double)] = []
     var filteredStops: [(stop: Stop, distance: Double)] = []
     var selectedRoutes = [Route]()
-    let manager = CloudKitManager.sharedInstance
     var resultSearchController = UISearchController()
     
     // **************************************

@@ -14,23 +14,20 @@ class InterfaceController: WKInterfaceController {
 
     @IBOutlet var table: WKInterfaceTable!
     
-    var favoriteStops: [Stop] = {
-        let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
-        let data = sharedDefault?.objectForKey("favoriteStops") as! NSData
-        let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! [Stop]
-        return unarchivedData
-    }()
+    var favoriteStops: [Stop] = []
     var filteredStops = [Stop]()
     
     // MARK: WatchKit Delegate Methods
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
+        println(2)
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        println(1)
         favoriteStops = loadFavoriteStops()
         loadTableData()
     }

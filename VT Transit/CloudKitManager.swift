@@ -64,6 +64,11 @@ public class CloudKitManager: NSObject {
                         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
                             if error != nil {
                                 println(error)
+                            } else {
+                                let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
+                                let data = NSKeyedArchiver.archivedDataWithRootObject(self.favoriteStops)
+                                sharedDefault?.setObject(data, forKey: "favoriteStops")
+                                sharedDefault?.synchronize()
                             }
                         })
                     })

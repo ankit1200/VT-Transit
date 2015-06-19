@@ -154,6 +154,9 @@ class AddStopsViewController: UIViewController, UITableViewDelegate, UITableView
             })
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        // update cloudKit
+        manager.updateFavoriteStops()
     }
     
     // ************************

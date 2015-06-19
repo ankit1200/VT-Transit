@@ -21,12 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // populate all stops list
         CloudKitManager.sharedInstance.queryAllStops({})
-        CloudKitManager.sharedInstance.queryFavoriteStops({
-            let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
-            let data = NSKeyedArchiver.archivedDataWithRootObject(CloudKitManager.sharedInstance.favoriteStops)
-            sharedDefault?.setObject(data, forKey: "favoriteStops")
-            sharedDefault?.synchronize()
-        })
+        if CloudKitManager.sharedInstance.favoriteStops.count == 0 {
+            CloudKitManager.sharedInstance.queryFavoriteStops({
+                let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
+                let data = NSKeyedArchiver.archivedDataWithRootObject(CloudKitManager.sharedInstance.favoriteStops)
+                sharedDefault?.setObject(data, forKey: "favoriteStops")
+                sharedDefault?.synchronize()
+            })
+        }
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 0.4, blue: 0, alpha: 1)]
         UINavigationBar.appearance().barTintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)

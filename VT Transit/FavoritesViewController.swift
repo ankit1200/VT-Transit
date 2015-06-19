@@ -26,10 +26,9 @@ class FavoritesViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         // if favorite stops are 0 then query the database
         if manager.favoriteStops.count == 0 {
-            manager.queryFavoriteStops({self.tableView.reloadData()})
-        } else {
-            self.tableView.reloadData()
+            manager.queryFavoriteStops({})
         }
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,6 +71,8 @@ class FavoritesViewController: UITableViewController {
                 }
             })
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            // update cloudKit
+            manager.updateFavoriteStops()
         }
     }
 
