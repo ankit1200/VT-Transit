@@ -92,7 +92,7 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
             if timeDifferenceMinutes > 60 {
                 timeDifferenceHours = timeDifferenceMinutes / 60
                 timeDifferenceMinutes = timeDifferenceMinutes % 60
-                timeRemainingText = "\(timeDifferenceHours) hrs\n\(timeDifferenceMinutes) min"
+                timeRemainingText = "\(timeDifferenceHours) hrs \(timeDifferenceMinutes) min"
                 
             } else if timeDifferenceMinutes < 0 {
                 timeRemainingText = "BUS HAS PASSED"

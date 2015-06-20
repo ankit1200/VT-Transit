@@ -101,6 +101,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 println(error)
             }
         })
+        manager.updateFavoriteStops()
         self.navigationItem.rightBarButtonItem = nil
         showAlert("Stop Added To Favorites", message: "\(selectedStop.name) has been added to favorites!")
     }
