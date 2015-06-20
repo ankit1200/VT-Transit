@@ -26,6 +26,7 @@ class FavoritesViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         // if favorite stops are 0 then query the database
         if manager.favoriteStops.count == 0 {
+            manager.favoriteStops = []
             manager.queryFavoriteStops({})
         }
         self.tableView.reloadData()

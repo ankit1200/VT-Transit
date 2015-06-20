@@ -53,7 +53,7 @@
                                         <outlet property="sectionTitle" destination="AVu-1Z-g1E" id="Tak-pC-NSt"/>
                                     </connections>
                                 </tableRow>
-                                <tableRow identifier="tableRow" id="Pke-e0-He1" customClass="DepartureTimesTableRowController" customModule="VT_Transit_WatchKit_Extension">
+                                <tableRow identifier="tableRow" selectable="NO" id="Pke-e0-He1" customClass="DepartureTimesTableRowController" customModule="VT_Transit_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="47.5" alignment="left" layout="vertical" id="INE-Za-x1D">
                                         <items>
                                             <label alignment="center" text="Reminaing Time" textAlignment="center" id="5W6-Dd-LNn">
