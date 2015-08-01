@@ -13,6 +13,7 @@ import CloudKitManager
 class InterfaceController: WKInterfaceController {
 
     @IBOutlet var table: WKInterfaceTable!
+    @IBOutlet var errorMessageLabel: WKInterfaceLabel!
     
     var favoriteStops: [Stop] = []
     var filteredStops = [Stop]()
@@ -21,15 +22,21 @@ class InterfaceController: WKInterfaceController {
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         // Configure interface objects here.
-        println(2)
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        println(1)
         favoriteStops = loadFavoriteStops()
-        loadTableData()
+
+        // if no favorite stops are present then hide table view and show message
+        if favoriteStops.count == 0 {
+            errorMessageLabel.setText("No favorite stops have been added!\nPlease add favorite stops through your iPhone.")
+            
+        } else {
+            errorMessageLabel.setText("")
+            loadTableData()
+        }
     }
 
     override func didDeactivate() {
@@ -41,10 +48,18 @@ class InterfaceController: WKInterfaceController {
     // MARK: Table Data Method
     func loadTableData() {
         filteredStops = filterFavoriteStops(favoriteStops)
-        table.setNumberOfRows(filteredStops.count, withRowType: "tableRow")
-        for (index, content) in enumerate(filteredStops) {
-            let row = table.rowControllerAtIndex(index) as! FavoriteStopsTableRowController
-            row.favoriteStopName.setText(content.name)
+
+        // if no stops are running, hide table view and show message
+        if filteredStops.count == 0 {
+            errorMessageLabel.setText("No favorite stops are currently running!")
+            
+        } else {
+            errorMessageLabel.setText("")
+            table.setNumberOfRows(filteredStops.count, withRowType: "tableRow")
+            for (index, content) in enumerate(filteredStops) {
+                let row = table.rowControllerAtIndex(index) as! FavoriteStopsTableRowController
+                row.favoriteStopName.setText(content.name)
+            }
         }
     }
     

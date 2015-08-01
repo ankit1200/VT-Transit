@@ -27,8 +27,10 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <label alignment="center" verticalAlignment="center" text="Error Message" textAlignment="center" numberOfLines="0" id="ckf-V4-4f7"/>
                     </items>
                     <connections>
+                        <outlet property="errorMessageLabel" destination="ckf-V4-4f7" id="RkQ-7A-xt2"/>
                         <outlet property="table" destination="ebR-ax-o3M" id="OPH-bU-oXy"/>
                     </connections>
                 </controller>
