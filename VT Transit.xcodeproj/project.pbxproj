@@ -36,6 +36,7 @@
 		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
 		475626CE1A92C530005AFE07 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626CC1A92C530005AFE07 /* FavoritesViewController.swift */; };
 		475626D21A92CAEA005AFE07 /* AddStopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */; };
+		4791A7AF1B6D397400B77F78 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4791A7AE1B6D397400B77F78 /* CloudKit.framework */; };
 		47AD038D1AEC504D006DCE19 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD038C1AEC504D006DCE19 /* InterfaceController.swift */; };
 		47AD038F1AEC504D006DCE19 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD038E1AEC504D006DCE19 /* Images.xcassets */; };
 		47AD03931AEC504D006DCE19 /* VT Transit WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */; };
@@ -165,6 +166,7 @@
 		475626D31A9522DE005AFE07 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudKitManager.swift; path = "../VT Transit/CloudKitManager.swift"; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = "../VT Transit/Route.swift"; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stop.swift; path = "../VT Transit/Stop.swift"; sourceTree = "<group>"; };
+		4791A7AE1B6D397400B77F78 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VT Transit WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD038B1AEC504D006DCE19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47AD038C1AEC504D006DCE19 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				4711A9C419AFBBED0062F587 /* AudioToolbox.framework in Frameworks */,
 				4711A9C219AFBBE10062F587 /* CFNetwork.framework in Frameworks */,
 				4711A9C019AFBBDB0062F587 /* libz.1.1.3.dylib in Frameworks */,
+				4791A7AF1B6D397400B77F78 /* CloudKit.framework in Frameworks */,
 				4711A9BE19AFBBD60062F587 /* MobileCoreServices.framework in Frameworks */,
 				4711A9BC19AFBBCF0062F587 /* QuartzCore.framework in Frameworks */,
 			);
@@ -266,6 +269,7 @@
 		4711A9D519AFBC300062F587 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4791A7AE1B6D397400B77F78 /* CloudKit.framework */,
 				47C02BCF1AECF36C001C4E30 /* libsqlite3.dylib */,
 				47C02BCD1AECF35E001C4E30 /* libz.dylib */,
 				47C02BCB1AECF352001C4E30 /* StoreKit.framework */,
@@ -919,7 +923,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "VT Transit/VT Transit.entitlements";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -943,7 +947,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "VT Transit/VT Transit.entitlements";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;

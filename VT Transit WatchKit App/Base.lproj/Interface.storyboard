@@ -48,7 +48,7 @@
                                 <tableRow identifier="sectionRow" selectable="NO" id="N1X-9s-VW3" customClass="SectionTableRowController" customModule="VT_Transit_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="uKp-Mh-UQG">
                                         <items>
-                                            <label alignment="center" verticalAlignment="center" text="Section" textAlignment="center" id="AVu-1Z-g1E"/>
+                                            <label alignment="center" verticalAlignment="center" text="Section" textAlignment="center" numberOfLines="0" id="AVu-1Z-g1E"/>
                                         </items>
                                     </group>
                                     <connections>

@@ -66,7 +66,7 @@ class DepartureTimeInterfaceController: WKInterfaceController, IGInterfaceTableD
     
     func table(table: WKInterfaceTable!, configureSectionController sectionRowController: NSObject!, forSection section: Int) {
         let sectionRow = sectionRowController as! SectionTableRowController
-        sectionRow.sectionTitle.setText(arrivalTimes[section].route.shortName)
+        sectionRow.sectionTitle.setText(arrivalTimes[section].route.name)
     }
     
     func table(table: WKInterfaceTable!, configureRowController rowController: NSObject!, forIndexPath indexPath: NSIndexPath!) {
