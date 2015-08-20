@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // populate all stops list
         CloudKitManager.sharedInstance.queryAllStops({})
+        // populate favorite stops list
         if CloudKitManager.sharedInstance.favoriteStops.count == 0 {
             CloudKitManager.sharedInstance.queryFavoriteStops({
                 let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")

@@ -14,7 +14,6 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
     var selectedRoute = Route(name:"", shortName:"")
     var stops = Array<Stop>()
     var filteredStops = Array<Stop>()
-    let parser = Parser()
     var resultSearchController = UISearchController()
     
     // **************************************

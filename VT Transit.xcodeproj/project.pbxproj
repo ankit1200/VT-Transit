@@ -164,6 +164,7 @@
 		475626CC1A92C530005AFE07 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStopsViewController.swift; sourceTree = "<group>"; };
 		475626D31A9522DE005AFE07 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudKitManager.swift; path = "../VT Transit/CloudKitManager.swift"; sourceTree = "<group>"; };
+		4774BD1B1B86719700B566E4 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = "../VT Transit/Route.swift"; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stop.swift; path = "../VT Transit/Stop.swift"; sourceTree = "<group>"; };
 		4791A7AE1B6D397400B77F78 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -358,6 +359,7 @@
 				47C02BBF1AECF127001C4E30 /* Objective-C Files */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
+				4774BD1B1B86719700B566E4 /* MyPlayground.playground */,
 			);
 			path = "VT Transit";
 			sourceTree = "<group>";
