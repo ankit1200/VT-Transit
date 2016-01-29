@@ -21,7 +21,7 @@ public class Stop : NSObject, NSCoding {
         self.location = location
     }
     
-    required public init(coder decoder:NSCoder) {
+    required public init?(coder decoder:NSCoder) {
         self.name = decoder.decodeObjectForKey("name") as! String
         self.code = decoder.decodeObjectForKey("code") as! String
         self.location = decoder.decodeObjectForKey("location") as! CLLocation

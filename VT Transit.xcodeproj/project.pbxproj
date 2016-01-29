@@ -28,7 +28,6 @@
 		4711AA0219AFBF710062F587 /* VirginiaTech.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0119AFBF710062F587 /* VirginiaTech.gpx */; };
 		47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47150D731A649BD6009201CA /* MapAnnotation.swift */; };
 		471A7DF41AEE0E9D006A2789 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
-		471A7DF71AEE11C8006A2789 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF481A29376B00CCEB8F /* Bolts.framework */; };
 		4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
@@ -37,22 +36,14 @@
 		475626CE1A92C530005AFE07 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626CC1A92C530005AFE07 /* FavoritesViewController.swift */; };
 		475626D21A92CAEA005AFE07 /* AddStopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */; };
 		4791A7AF1B6D397400B77F78 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4791A7AE1B6D397400B77F78 /* CloudKit.framework */; };
-		47AD038D1AEC504D006DCE19 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AD038C1AEC504D006DCE19 /* InterfaceController.swift */; };
-		47AD038F1AEC504D006DCE19 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD038E1AEC504D006DCE19 /* Images.xcassets */; };
-		47AD03931AEC504D006DCE19 /* VT Transit WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */; };
-		47AD039B1AEC504D006DCE19 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47AD03991AEC504D006DCE19 /* Interface.storyboard */; };
-		47AD039D1AEC504D006DCE19 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47AD039C1AEC504D006DCE19 /* Images.xcassets */; };
-		47AD03A01AEC504D006DCE19 /* VT Transit WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		47BB57BB19AFB0A300B3807E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BB57BA19AFB0A300B3807E /* AppDelegate.swift */; };
 		47BB57C219AFB0A300B3807E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C019AFB0A300B3807E /* Main.storyboard */; };
 		47BB57C419AFB0A300B3807E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47BB57C319AFB0A300B3807E /* Images.xcassets */; };
 		47BC258D1B2D581500A5FE49 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BC258C1B2D581500A5FE49 /* LaunchScreen.xib */; };
-		47C02B861AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */; };
 		47C02B911AEC6369001C4E30 /* CloudKitManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 47C02B901AEC6369001C4E30 /* CloudKitManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47C02BA31AEC6369001C4E30 /* CloudKitManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */; };
 		47C02BA41AEC6369001C4E30 /* CloudKitManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		47C02BB81AECE83B001C4E30 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475626D31A9522DE005AFE07 /* CloudKitManager.swift */; };
-		47C02BB91AECE85F001C4E30 /* CloudKitManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */; };
 		47C02BBA1AECE8B2001C4E30 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8719B8E3D8009BE8C4 /* Route.swift */; };
 		47C02BBB1AECE8B2001C4E30 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784FA8919B8F0DA009BE8C4 /* Stop.swift */; };
 		47C02BBC1AECE8B2001C4E30 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
@@ -73,27 +64,9 @@
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
 		47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */; };
-		47EDF5881B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 47EDF5871B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m */; };
-		47EDF58D1B2C9CBB00F4BB47 /* SectionTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EDF58C1B2C9CBB00F4BB47 /* SectionTableRowController.swift */; };
-		47F675F51AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */; };
-		47F675F71AF6CB100043F86D /* DepartureTimesTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		47AD03941AEC504D006DCE19 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47BB57AD19AFB0A300B3807E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 47AD03911AEC504D006DCE19;
-			remoteInfo = "VT Transit WatchKit App";
-		};
-		47AD039E1AEC504D006DCE19 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 47BB57AD19AFB0A300B3807E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 47AD03871AEC504D006DCE19;
-			remoteInfo = "VT Transit WatchKit Extension";
-		};
 		47C02BA11AEC6369001C4E30 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 47BB57AD19AFB0A300B3807E /* Project object */;
@@ -104,15 +77,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		474BC6771AD79C5200E15B5B /* Embed App Extensions */ = {
+		4744503C1BF7BABB00FDDE23 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
 			files = (
-				47AD03A01AEC504D006DCE19 /* VT Transit WatchKit Extension.appex in Embed App Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		47C02BA81AEC6369001C4E30 /* Embed Frameworks */ = {
@@ -160,19 +132,18 @@
 		4734D7AF19CF59B9007AB683 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../Parse Framework/Bolts.framework"; sourceTree = "<group>"; };
 		4734D7B019CF59B9007AB683 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../Parse Framework/Parse.framework"; sourceTree = "<group>"; };
 		47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
+		474450441BF7BE9F00FDDE23 /* CloudKitWatchFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudKitWatchFramework.h; sourceTree = "<group>"; };
+		474450461BF7BE9F00FDDE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		474D51521A7D56EA006EE7EF /* VT Transit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit.entitlements"; sourceTree = "<group>"; };
 		475626CC1A92C530005AFE07 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		475626D11A92CAEA005AFE07 /* AddStopsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStopsViewController.swift; sourceTree = "<group>"; };
 		475626D31A9522DE005AFE07 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudKitManager.swift; path = "../VT Transit/CloudKitManager.swift"; sourceTree = "<group>"; };
-		4774BD1B1B86719700B566E4 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = "../VT Transit/Route.swift"; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stop.swift; path = "../VT Transit/Stop.swift"; sourceTree = "<group>"; };
 		4791A7AE1B6D397400B77F78 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "VT Transit WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD038B1AEC504D006DCE19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47AD038C1AEC504D006DCE19 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		47AD038E1AEC504D006DCE19 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AD03981AEC504D006DCE19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47AD039A1AEC504D006DCE19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		47AD039C1AEC504D006DCE19 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -203,15 +174,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		47AD03851AEC504D006DCE19 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47C02BB91AECE85F001C4E30 /* CloudKitManager.framework in Frameworks */,
-				471A7DF71AEE11C8006A2789 /* Parse.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		47BB57B219AFB0A300B3807E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -295,6 +257,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		474450431BF7BE9F00FDDE23 /* CloudKitWatchFramework */ = {
+			isa = PBXGroup;
+			children = (
+				474450441BF7BE9F00FDDE23 /* CloudKitWatchFramework.h */,
+				474450461BF7BE9F00FDDE23 /* Info.plist */,
+			);
+			path = CloudKitWatchFramework;
+			sourceTree = "<group>";
+		};
 		47AD03891AEC504D006DCE19 /* VT Transit WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +313,7 @@
 				47AD03891AEC504D006DCE19 /* VT Transit WatchKit Extension */,
 				47AD03961AEC504D006DCE19 /* VT Transit WatchKit App */,
 				47C02B8D1AEC6369001C4E30 /* CloudKitManager */,
+				474450431BF7BE9F00FDDE23 /* CloudKitWatchFramework */,
 				4711A9D519AFBC300062F587 /* Frameworks */,
 				47EC78EE1B2DE2040013B5C5 /* Target */,
 			);
@@ -359,7 +331,6 @@
 				47C02BBF1AECF127001C4E30 /* Objective-C Files */,
 				47BB57C319AFB0A300B3807E /* Images.xcassets */,
 				47BB57B819AFB0A300B3807E /* Supporting Files */,
-				4774BD1B1B86719700B566E4 /* MyPlayground.playground */,
 			);
 			path = "VT Transit";
 			sourceTree = "<group>";
@@ -436,8 +407,6 @@
 			isa = PBXGroup;
 			children = (
 				4711AA1F19AFC5330062F587 /* VT Transit.app */,
-				47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */,
-				47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */,
 				47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */,
 			);
 			name = Target;
@@ -487,39 +456,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		47AD03871AEC504D006DCE19 /* VT Transit WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 47AD03A41AEC504E006DCE19 /* Build configuration list for PBXNativeTarget "VT Transit WatchKit Extension" */;
-			buildPhases = (
-				47AD03841AEC504D006DCE19 /* Sources */,
-				47AD03851AEC504D006DCE19 /* Frameworks */,
-				47AD03861AEC504D006DCE19 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				47AD03951AEC504D006DCE19 /* PBXTargetDependency */,
-			);
-			name = "VT Transit WatchKit Extension";
-			productName = "VT Transit WatchKit Extension";
-			productReference = 47AD03881AEC504D006DCE19 /* VT Transit WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		47AD03911AEC504D006DCE19 /* VT Transit WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 47AD03A11AEC504E006DCE19 /* Build configuration list for PBXNativeTarget "VT Transit WatchKit App" */;
-			buildPhases = (
-				47AD03901AEC504D006DCE19 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "VT Transit WatchKit App";
-			productName = "VT Transit WatchKit App";
-			productReference = 47AD03921AEC504D006DCE19 /* VT Transit WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
-		};
 		47BB57B419AFB0A300B3807E /* VT Transit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47BB57D319AFB0A300B3807E /* Build configuration list for PBXNativeTarget "VT Transit" */;
@@ -527,13 +463,12 @@
 				47BB57B119AFB0A300B3807E /* Sources */,
 				47BB57B219AFB0A300B3807E /* Frameworks */,
 				47BB57B319AFB0A300B3807E /* Resources */,
-				474BC6771AD79C5200E15B5B /* Embed App Extensions */,
 				47C02BA81AEC6369001C4E30 /* Embed Frameworks */,
+				4744503C1BF7BABB00FDDE23 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				47AD039F1AEC504D006DCE19 /* PBXTargetDependency */,
 				47C02BA21AEC6369001C4E30 /* PBXTargetDependency */,
 			);
 			name = "VT Transit";
@@ -565,25 +500,11 @@
 		47BB57AD19AFB0A300B3807E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Appify;
 				TargetAttributes = {
-					47AD03871AEC504D006DCE19 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = A28NM53F25;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-							com.apple.iCloud = {
-								enabled = 0;
-							};
-						};
-					};
-					47AD03911AEC504D006DCE19 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = A28NM53F25;
-					};
 					47BB57B419AFB0A300B3807E = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = A28NM53F25;
@@ -619,32 +540,12 @@
 			projectRoot = "";
 			targets = (
 				47BB57B419AFB0A300B3807E /* VT Transit */,
-				47AD03871AEC504D006DCE19 /* VT Transit WatchKit Extension */,
-				47AD03911AEC504D006DCE19 /* VT Transit WatchKit App */,
 				47C02B8B1AEC6369001C4E30 /* CloudKitManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		47AD03861AEC504D006DCE19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47AD038F1AEC504D006DCE19 /* Images.xcassets in Resources */,
-				47AD03931AEC504D006DCE19 /* VT Transit WatchKit App.app in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		47AD03901AEC504D006DCE19 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47AD039B1AEC504D006DCE19 /* Interface.storyboard in Resources */,
-				47AD039D1AEC504D006DCE19 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		47BB57B319AFB0A300B3807E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -666,19 +567,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		47AD03841AEC504D006DCE19 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				47F675F51AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift in Sources */,
-				47AD038D1AEC504D006DCE19 /* InterfaceController.swift in Sources */,
-				47C02B861AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift in Sources */,
-				47F675F71AF6CB100043F86D /* DepartureTimesTableRowController.swift in Sources */,
-				47EDF5881B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m in Sources */,
-				47EDF58D1B2C9CBB00F4BB47 /* SectionTableRowController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		47BB57B119AFB0A300B3807E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -716,16 +604,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		47AD03951AEC504D006DCE19 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 47AD03911AEC504D006DCE19 /* VT Transit WatchKit App */;
-			targetProxy = 47AD03941AEC504D006DCE19 /* PBXContainerItemProxy */;
-		};
-		47AD039F1AEC504D006DCE19 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 47AD03871AEC504D006DCE19 /* VT Transit WatchKit Extension */;
-			targetProxy = 47AD039E1AEC504D006DCE19 /* PBXContainerItemProxy */;
-		};
 		47C02BA21AEC6369001C4E30 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 47C02B8B1AEC6369001C4E30 /* CloudKitManager */;
@@ -753,95 +631,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		47AD03A21AEC504E006DCE19 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IBSC_MODULE = VT_Transit_WatchKit_Extension;
-				INFOPLIST_FILE = "VT Transit WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Debug;
-		};
-		47AD03A31AEC504E006DCE19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = VT_Transit_WatchKit_Extension;
-				INFOPLIST_FILE = "VT Transit WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Release;
-		};
-		47AD03A51AEC504E006DCE19 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "VT Transit WatchKit Extension/VT Transit WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "VT Transit WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit WatchKit Extension/VT Transit WatchKit Extension-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Debug;
-		};
-		47AD03A61AEC504E006DCE19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "VT Transit WatchKit Extension/VT Transit WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "VT Transit WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit WatchKit Extension/VT Transit WatchKit Extension-Bridging-Header.h";
-			};
-			name = Release;
-		};
 		47BB57D119AFB0A300B3807E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -862,6 +651,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -936,6 +726,7 @@
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MAD.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit/VT Transit-Bridging-Header.h";
@@ -960,6 +751,7 @@
 				INFOPLIST_FILE = "VT Transit/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MAD.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "VT Transit/VT Transit-Bridging-Header.h";
@@ -991,6 +783,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ankitagarwal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1022,6 +815,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ankitagarwal.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1034,24 +828,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		47AD03A11AEC504E006DCE19 /* Build configuration list for PBXNativeTarget "VT Transit WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				47AD03A21AEC504E006DCE19 /* Debug */,
-				47AD03A31AEC504E006DCE19 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		47AD03A41AEC504E006DCE19 /* Build configuration list for PBXNativeTarget "VT Transit WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				47AD03A51AEC504E006DCE19 /* Debug */,
-				47AD03A61AEC504E006DCE19 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		47BB57B019AFB0A300B3807E /* Build configuration list for PBXProject "VT Transit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

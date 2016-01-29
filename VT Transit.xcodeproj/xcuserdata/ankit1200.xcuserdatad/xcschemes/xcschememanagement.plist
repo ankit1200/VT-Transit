@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>CloudKitWatchFramework.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>Glance - VT Transit WatchKit App.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -32,6 +37,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>474450411BF7BE9F00FDDE23</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>474BC6611AD79C5100E15B5B</key>
 		<dict>
 			<key>primary</key>

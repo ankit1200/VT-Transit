@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Notifications
 
         // Specify the notification types.
-        var notificationTypes: UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+        var notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Sound]
         
         // Specify the category related to the above actions.
         var busTimeReminderCategory = UIMutableUserNotificationCategory()

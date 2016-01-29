@@ -56,7 +56,7 @@ class InterfaceController: WKInterfaceController {
         } else {
             errorMessageLabel.setText("")
             table.setNumberOfRows(filteredStops.count, withRowType: "tableRow")
-            for (index, content) in enumerate(filteredStops) {
+            for (index, content) in filteredStops.enumerate() {
                 let row = table.rowControllerAtIndex(index) as! FavoriteStopsTableRowController
                 row.favoriteStopName.setText(content.name)
             }

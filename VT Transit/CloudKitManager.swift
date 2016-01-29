@@ -37,10 +37,10 @@ public class CloudKitManager: NSObject {
         privateDB.performQuery(query, inZoneWithID: nil) {
             results, error in
             if error != nil {
-                println(error)
+                print(error)
             } else {
                 self.favoriteStops = []
-                for record in results {
+                for record in results! {
                     let stop = Stop(name: (record["name"] as! String), code: (record["code"] as! String), location: (record["location"] as! CLLocation))
                     self.favoriteStops!.append(stop)
                 }
@@ -53,17 +53,17 @@ public class CloudKitManager: NSObject {
     
     // update favorite stops to iCloud
     public func updateFavoriteStops() {
-        for (index, stop) in enumerate(favoriteStops) {
+        for (index, stop) in favoriteStops.enumerate() {
             privateDB.fetchRecordWithID(CKRecordID(recordName: stop.code), completionHandler: { (record, error) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                 } else {
                     // save the record once fetched
                     dispatch_async(dispatch_get_main_queue(), {
-                        record.setValue(index, forKey:"favoritesIndex")
-                        self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
+                        record!.setValue(index, forKey:"favoritesIndex")
+                        self.privateDB.saveRecord(record!, completionHandler: { (record, error) -> Void in
                             if error != nil {
-                                println(error)
+                                print(error)
                             } else {
                                 let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
                                 let data = NSKeyedArchiver.archivedDataWithRootObject(self.favoriteStops)
@@ -79,7 +79,7 @@ public class CloudKitManager: NSObject {
     
     // get all the stops from Parse
     public func queryAllStops(completionHandler: ()->()) {
-        var query = PFQuery(className: "Stops")
+        let query = PFQuery(className: "Stops")
         query.limit = 500
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in

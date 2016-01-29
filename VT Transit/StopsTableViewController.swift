@@ -45,7 +45,7 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // deselect all rows in tableView
-        let indexPath:NSIndexPath? = self.tableView.indexPathForSelectedRow()
+        let indexPath:NSIndexPath? = self.tableView.indexPathForSelectedRow
         if indexPath != nil {
             self.tableView.deselectRowAtIndexPath(indexPath!, animated: false)
         }
@@ -65,7 +65,7 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("stopsCell") as? UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("stopsCell") as UITableViewCell?
         if cell == nil {
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "stopsCell")
         }
@@ -95,8 +95,8 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         // Filter the array using the filter method
         filteredStops = self.stops.filter({( stop: Stop) -> Bool in
-            let stringNameMatch = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
-            let stringCodeMatch = stop.code.lowercaseString.rangeOfString(searchController.searchBar.text)
+            let stringNameMatch = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
+            let stringCodeMatch = stop.code.lowercaseString.rangeOfString(searchController.searchBar.text!)
             return (stringNameMatch != nil || stringCodeMatch != nil)
         })
         self.tableView.reloadData()
@@ -113,7 +113,7 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             
             // handle selected cells in search display controlller
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             if self.resultSearchController.active {
                 arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row]
                 self.resultSearchController.active = false

@@ -47,7 +47,7 @@ class FavoritesViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier:"FavoriteStop")
-        var stop = manager.favoriteStops[indexPath.row]
+        let stop = manager.favoriteStops[indexPath.row]
         cell.textLabel?.text = stop.name
         cell.textLabel?.font = UIFont.boldSystemFontOfSize(16.0)
         cell.detailTextLabel?.text = "Bus Stop #" + stop.code
@@ -68,7 +68,7 @@ class FavoritesViewController: UITableViewController {
             let recordID = CKRecordID(recordName: deletedStop.code)
             database.deleteRecordWithID(recordID, completionHandler: { (record, error) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                 }
             })
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -118,7 +118,7 @@ class FavoritesViewController: UITableViewController {
         } else if segue.identifier == "showArrivalTimesForAllRoutes" {
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             // handle selected cells in search display controlller
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             let stop = manager.favoriteStops[indexPath.row]
             arrivalTimesForRouteCollectionViewController.selectedStop = stop
             arrivalTimesForRouteCollectionViewController.selectedRoutes = selectedRoutes

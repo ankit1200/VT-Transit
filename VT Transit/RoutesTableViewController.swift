@@ -42,7 +42,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
         })()
 
         // Query the Routes Array from Parse Database
-        var query = PFQuery(className: "Routes")
+        let query = PFQuery(className: "Routes")
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]!, error: NSError!) -> Void in
             if error == nil {
@@ -52,7 +52,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
                     
                     self.routes.append(route)
                 }
-                self.routes.sort({$0.name < $1.name})
+                self.routes.sortInPlace({$0.name < $1.name})
                 self.tableView.reloadData()
             }
         }
@@ -73,7 +73,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) 
         var route:Route
         // Check to see whether the normal table or search results table is being displayed
         route = (self.resultSearchController.active) ? filteredRoutes[indexPath.row] : routes[indexPath.row]
@@ -101,7 +101,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         } else {
             // sort the stops alphabetically
-            self.stops.sort({$0.name < $1.name})
+            self.stops.sortInPlace({$0.name < $1.name})
             self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
         }
     }
@@ -113,8 +113,8 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filteredRoutes = self.routes.filter({( route: Route) -> Bool in
-            let routeNameMatch = route.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
-            let routeShortNameMatch = route.shortName.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
+            let routeNameMatch = route.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
+            let routeShortNameMatch = route.shortName.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
             return (routeNameMatch != nil || routeShortNameMatch != nil)
         })
         self.tableView.reloadData()
@@ -131,7 +131,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             
             let containerViewController = segue.destinationViewController as! ContainerViewController
             // handle selected cells in search display controlller
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             if self.resultSearchController.active {
                 containerViewController.selectedRoute = self.filteredRoutes[indexPath.row]
                 self.resultSearchController.active = false

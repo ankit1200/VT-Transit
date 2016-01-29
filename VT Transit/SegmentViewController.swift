@@ -85,7 +85,7 @@ class SegmentViewController: UIViewController {
     // ************************
     func querySelectedStopsFromParse(codes:[String]) {
         
-        var query = PFQuery(className:"Stops")
+        let query = PFQuery(className:"Stops")
         query.whereKey("code", containedIn: codes)
         query.addAscendingOrder("name")
         query.findObjectsInBackgroundWithBlock {
@@ -100,7 +100,7 @@ class SegmentViewController: UIViewController {
                 }
             } else {
                 // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error, error.userInfo)
             }
         }
     }
@@ -119,14 +119,14 @@ class SegmentViewController: UIViewController {
             
             // If this is not the first time we're loading this.
             if self.childViewControllers.count > 0 {
-                swapViewControllers(self.childViewControllers[0] as! UIViewController, to: stopsTableViewController!)
+                swapViewControllers(self.childViewControllers[0] , to: stopsTableViewController!)
             }
             else {
                 // If this is the very first time we're loading this we need to do
                 // an initial load and not a swap.
-                addChildViewController(segue.destinationViewController as! UIViewController)
-                var destView = (segue.destinationViewController as! UIViewController).view
-                destView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+                addChildViewController(segue.destinationViewController )
+                let destView = (segue.destinationViewController ).view
+                destView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
                 destView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
                 self.view.addSubview(destView)
                 segue.destinationViewController.didMoveToParentViewController(self)
@@ -138,7 +138,7 @@ class SegmentViewController: UIViewController {
         // first one.
         else if segue.identifier == secondSegueID {
             segmentMapViewController = segue.destinationViewController as? MapViewController
-            swapViewControllers(self.childViewControllers[0] as! UIViewController, to: segmentMapViewController!)
+            swapViewControllers(self.childViewControllers[0] , to: segmentMapViewController!)
             segmentMapViewController?.stops = stops
             segmentMapViewController?.selectedRoutes = [selectedRoute]
             segmentMapViewController?.selectedStop = selectedStop

@@ -17,11 +17,12 @@ public class Parser: NSObject {
         var tbxmlParser = TBXML()
         var stops = Array<Stop>()
         
-        let url = NSURL(string: "http://www.bt4u.org/webservices/BT4U_WebService.asmx/GetScheduledStopCodes?routeShortName=\(shortName)")
+        let url = NSURL(string: "https://bt4u.org/webservices/BT4U_WebService.asmx/GetScheduledStopCodes?routeShortName=\(shortName)")
+        print(url)
         let data = NSData(contentsOfURL: url!)
-        tbxmlParser = TBXML.newTBXMLWithXMLData(data, error: nil)
+        tbxmlParser = TBXML.newTBXMLWithXMLData(data)
         
-        var root = tbxmlParser.rootXMLElement
+        let root = tbxmlParser.rootXMLElement
         
         if root != nil {
             var scheduledStops = TBXML.childElementNamed("ScheduledStops", parentElement: root)
@@ -45,10 +46,10 @@ public class Parser: NSObject {
         var tbxmlParser = TBXML()
         var arrivalTimes = Array<String>()
         
-        let url = NSURL(string: "http://www.bt4u.org/webservices/BT4U_WebService.asmx/GetNextDepartures?routeShortName=\(shortName)&stopCode=\(stopCode)")
+        let url = NSURL(string: "https://bt4u.org/webservices/BT4U_WebService.asmx/GetNextDepartures?routeShortName=\(shortName)&stopCode=\(stopCode)")
         let data = NSData(contentsOfURL: url!)
-        tbxmlParser = TBXML.newTBXMLWithXMLData(data, error: nil)
-        var root = tbxmlParser.rootXMLElement
+        tbxmlParser = TBXML.newTBXMLWithXMLData(data)
+        let root = tbxmlParser.rootXMLElement
         
         if root != nil {
             var nextDepartures = TBXML.childElementNamed("NextDepartures", parentElement: root)
@@ -70,10 +71,10 @@ public class Parser: NSObject {
         var tbxmlParser = TBXML()
         var routes = Array<Route>()
         
-        let url = NSURL(string: "http://www.bt4u.org/webservices/BT4U_WebService.asmx/GetScheduledRoutes?stopCode=\(stopCode)")
+        let url = NSURL(string: "https://bt4u.org/webservices/BT4U_WebService.asmx/GetScheduledRoutes?stopCode=\(stopCode)")
         let data = NSData(contentsOfURL: url!)
-        tbxmlParser = TBXML.newTBXMLWithXMLData(data, error: nil)
-        var root = tbxmlParser.rootXMLElement
+        tbxmlParser = TBXML.newTBXMLWithXMLData(data)
+        let root = tbxmlParser.rootXMLElement
         
         if root != nil {
             var scheduledRoutes = TBXML.childElementNamed("ScheduledRoutes", parentElement: root)
@@ -98,10 +99,10 @@ public class Parser: NSObject {
         var tbxmlParser = TBXML()
         var currentBusLocations = Array<(route:Route, coordinate:CLLocationCoordinate2D)>()
         
-        let url = NSURL(string: "http://www.bt4u.org/webservices/BT4U_WebService.asmx/GetCurrentBusInfo")
+        let url = NSURL(string: "https://bt4u.org/webservices/BT4U_WebService.asmx/GetCurrentBusInfo")
         let data = NSData(contentsOfURL: url!)
-        tbxmlParser = TBXML.newTBXMLWithXMLData(data, error: nil)
-        var root = tbxmlParser.rootXMLElement
+        tbxmlParser = TBXML.newTBXMLWithXMLData(data)
+        let root = tbxmlParser.rootXMLElement
         
         if root != nil {
             var latestInfoTable = TBXML.childElementNamed("LatestInfoTable", parentElement: root)

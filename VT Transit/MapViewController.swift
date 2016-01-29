@@ -111,11 +111,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: Location Manager Delegate
     // *******************************
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // get current distance from VT campus
         let burrussHall = CLLocationCoordinate2D(latitude: 37.228368, longitude: -80.422942)
-        let distanceInMiles = manager.location.distanceFromLocation(CLLocation(latitude: burrussHall.latitude, longitude: burrussHall.longitude)) / 1609.34
+        let distanceInMiles = manager.location!.distanceFromLocation(CLLocation(latitude: burrussHall.latitude, longitude: burrussHall.longitude)) / 1609.34
         
         // zoom to current location if < 20 away, else zoom to VT Campus
         if CLLocationManager.locationServicesEnabled() && distanceInMiles < 20 && selectedStop == nil {
@@ -133,7 +133,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: MKMapView Delegate Methods
     // ********************************
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
             
         if annotation is MKUserLocation {
             return nil
@@ -149,7 +149,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         switch category {
         case "stop":
             annotationView!.pinColor = MKPinAnnotationColor.Red
-            annotationView!.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            annotationView!.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIView
         case "current bus":
             annotationView!.pinColor = MKPinAnnotationColor.Purple
             annotationView!.rightCalloutAccessoryView = nil
@@ -163,11 +163,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return annotationView
     }
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        mapView.setCenterCoordinate(view.annotation.coordinate, animated: true)
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        mapView.setCenterCoordinate(view.annotation!.coordinate, animated: true)
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let stop = (view.annotation as! MapAnnotation).stop!
         selectedRoutes = Parser.routesForStop(stop.code)
         performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: view)
@@ -197,9 +197,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             // add response items
             if response != nil {
-                for item in response.mapItems! {
-                    var mapItem: MKMapItem = item as! MKMapItem
-                    var point: MapAnnotation = MapAnnotation(coordinate: mapItem.placemark.coordinate, title: mapItem.placemark.name, subtitle:  mapItem.placemark.title, category: "search")   
+                for item in response!.mapItems {
+                    var mapItem: MKMapItem = item
+                    var point: MapAnnotation = MapAnnotation(coordinate: mapItem.placemark.coordinate, title: mapItem.placemark.name!, subtitle:  mapItem.placemark.title!, category: "search")   
                     self.mapView.addAnnotation(point)
                     self.mapItems.append(item.description)
                     var searchResultName: String = ""
