@@ -18,7 +18,7 @@ public class Parser: NSObject {
         var stops = Array<Stop>()
         
         let url = NSURL(string: "https://bt4u.org/webservices/BT4U_WebService.asmx/GetScheduledStopCodes?routeShortName=\(shortName)")
-        print(url)
+        
         let data = NSData(contentsOfURL: url!)
         tbxmlParser = TBXML.newTBXMLWithXMLData(data)
         

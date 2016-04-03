@@ -28,14 +28,14 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
 
         if manager.favoriteStops.filter({$0.code == self.selectedStop.code}).count == 0 {
             // Add the Add Favorites button
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: "addToFavorites:")
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ArrivalTimesForRouteCollectionViewController.addToFavorites(_:)))
         }
         
         // pull to refresh
         self.refreshControl = UIRefreshControl()
         self.refreshControl.tintColor = UIColor(red: 0.4, green: 0, blue: 0, alpha: 1)
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(ArrivalTimesForRouteCollectionViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView!.addSubview(refreshControl)
         
         // differentiate between whether one route is displayed with all times or 6 times displayed for multiple routes
@@ -199,7 +199,9 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     
     // function used to show reminder alert view
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            
+        
+        // Make sure the stop has times available
+        if arrivalTimes.count != 0 {
             let dateFormatter = NSDateFormatter() // date format
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
             let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
@@ -232,6 +234,7 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
                 alertController.addAction(cancel)
                 presentViewController(alertController, animated: true, completion: nil)
             }
+        }
     }
     
     // ***************************

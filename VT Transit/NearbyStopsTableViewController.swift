@@ -46,7 +46,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         // pull to refresh
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh nearby stops")
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(NearbyStopsTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
         // start location manager

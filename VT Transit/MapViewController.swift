@@ -179,10 +179,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         // get the MKLocalRequest from searchbar text
-        var request : MKLocalSearchRequest = MKLocalSearchRequest()
+        let request : MKLocalSearchRequest = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBar.text
         request.region = mapView.region;
-        var search : MKLocalSearch = MKLocalSearch(request: request)
+        let search : MKLocalSearch = MKLocalSearch(request: request)
         
         search.startWithCompletionHandler({ response, error in
             // remove search pins already in place
@@ -198,11 +198,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // add response items
             if response != nil {
                 for item in response!.mapItems {
-                    var mapItem: MKMapItem = item
-                    var point: MapAnnotation = MapAnnotation(coordinate: mapItem.placemark.coordinate, title: mapItem.placemark.name!, subtitle:  mapItem.placemark.title!, category: "search")   
+                    let mapItem: MKMapItem = item
+                    let point: MapAnnotation = MapAnnotation(coordinate: mapItem.placemark.coordinate, title: mapItem.placemark.name!, subtitle:  mapItem.placemark.title!, category: "search")
                     self.mapView.addAnnotation(point)
                     self.mapItems.append(item.description)
-                    var searchResultName: String = ""
+                    let searchResultName: String = ""
                     mapItem.name = searchResultName
                     self.mapView.showAnnotations([point], animated: true)
                 }

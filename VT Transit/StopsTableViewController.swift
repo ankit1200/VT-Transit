@@ -123,7 +123,7 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
             arrivalTimesForRouteCollectionViewController.selectedRoutes = [selectedRoute]
         }
         if segue.identifier == "showMap" {
-            let segmentMapViewController = segue.destinationViewController as! MapViewController
+            //let segmentMapViewController = segue.destinationViewController as! MapViewController
         }
     }
 }

@@ -96,7 +96,8 @@ class SegmentViewController: UIViewController {
                 var counter = 0
                 for object in objects {
                     let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
-                    self.stops[counter++].location = location
+                    self.stops[counter].location = location
+                    counter += 1
                 }
             } else {
                 // Log details of the failure
