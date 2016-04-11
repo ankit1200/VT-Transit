@@ -1,0 +1,107 @@
+{ "results": [
+	{
+        "createdAt": "2014-11-27T04:27:09.256Z",
+        "name": "University City Boulevard",
+        "objectId": "0kkkjriAZB",
+        "shortName": "UCB",
+        "updatedAt": "2014-11-27T04:27:09.256Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.662Z",
+        "name": "University Mall",
+        "objectId": "2jHsGWNs8a",
+        "shortName": "UMS",
+        "updatedAt": "2014-11-27T04:27:09.662Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.477Z",
+        "name": "Progress Street",
+        "objectId": "3obEvudty4",
+        "shortName": "PRG",
+        "updatedAt": "2014-11-27T04:27:09.477Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.328Z",
+        "name": "Harding Avenue",
+        "objectId": "9V7aiaWGSX",
+        "shortName": "HDG",
+        "updatedAt": "2014-11-27T04:27:09.328Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.565Z",
+        "name": "Hokie Express",
+        "objectId": "HrZOKTN2CM",
+        "shortName": "HXP",
+        "updatedAt": "2014-11-27T04:27:09.565Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.578Z",
+        "name": "The Explorer",
+        "objectId": "JlCGRIb03R",
+        "shortName": "TE",
+        "updatedAt": "2014-11-27T04:27:09.578Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.423Z",
+        "name": "Toms Creek",
+        "objectId": "KUsy7yrJGu",
+        "shortName": "TC",
+        "updatedAt": "2014-11-27T04:27:09.423Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.390Z",
+        "name": "Patrick Henry",
+        "objectId": "LzMY8azAah",
+        "shortName": "PHD",
+        "updatedAt": "2014-11-27T04:27:09.390Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.482Z",
+        "name": "BT Commuter",
+        "objectId": "NWF8t5RRnN",
+        "shortName": "BTC",
+        "updatedAt": "2014-11-27T04:27:09.482Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.576Z",
+        "name": "Main Street South",
+        "objectId": "PYaRLCGhI1",
+        "shortName": "MSS",
+        "updatedAt": "2014-11-27T04:27:09.576Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.402Z",
+        "name": "CRC Hospital",
+        "objectId": "R7MEGJxUOJ",
+        "shortName": "CRCH",
+        "updatedAt": "2014-11-27T04:27:09.402Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.652Z",
+        "name": "Two Town Trolley",
+        "objectId": "VAFzbf9uqt",
+        "shortName": "TTT",
+        "updatedAt": "2014-11-27T04:27:09.652Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.630Z",
+        "name": "CRC Shuttle",
+        "objectId": "ezTyZAztPc",
+        "shortName": "CRC",
+        "updatedAt": "2014-11-27T04:27:09.630Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.344Z",
+        "name": "Hethwood",
+        "objectId": "j5JKySIrim",
+        "shortName": "HWD",
+        "updatedAt": "2014-11-27T04:27:09.344Z"
+    },
+	{
+        "createdAt": "2014-11-27T04:27:09.492Z",
+        "name": "Main Street North",
+        "objectId": "ps8DFoLR3G",
+        "shortName": "MSN",
+        "updatedAt": "2014-11-27T04:27:09.492Z"
+    }
+] }
