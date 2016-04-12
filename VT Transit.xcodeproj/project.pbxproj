@@ -15,7 +15,6 @@
 		470506991A4E663D00EEA613 /* EmptySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470506981A4E663D00EEA613 /* EmptySegue.swift */; };
 		4711A9BC19AFBBCF0062F587 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */; };
 		4711A9BE19AFBBD60062F587 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */; };
-		4711A9C019AFBBDB0062F587 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9BF19AFBBDB0062F587 /* libz.1.1.3.dylib */; };
 		4711A9C219AFBBE10062F587 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C119AFBBE10062F587 /* CFNetwork.framework */; };
 		4711A9C419AFBBED0062F587 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C319AFBBED0062F587 /* AudioToolbox.framework */; };
 		4711A9C619AFBBF50062F587 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C519AFBBF50062F587 /* Security.framework */; };
@@ -27,8 +26,6 @@
 		4711A9D419AFBC290062F587 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9D319AFBC290062F587 /* CoreGraphics.framework */; };
 		4711AA0219AFBF710062F587 /* VirginiaTech.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0119AFBF710062F587 /* VirginiaTech.gpx */; };
 		47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47150D731A649BD6009201CA /* MapAnnotation.swift */; };
-		4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF481A29376B00CCEB8F /* Bolts.framework */; };
-		4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
 		47281E621AEE0C500088173E /* UmbrellaHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 47281E611AEE0C260088173E /* UmbrellaHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47404B1F1A571A7B0039C3FA /* SegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */; };
@@ -59,8 +56,6 @@
 		47C02BC91AECF352001C4E30 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C519AFBBF50062F587 /* Security.framework */; };
 		47C02BCA1AECF352001C4E30 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C719AFBC010062F587 /* SystemConfiguration.framework */; };
 		47C02BCC1AECF352001C4E30 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02BCB1AECF352001C4E30 /* StoreKit.framework */; };
-		47C02BCE1AECF35E001C4E30 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02BCD1AECF35E001C4E30 /* libz.dylib */; };
-		47C02BD01AECF36C001C4E30 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 47C02BCF1AECF36C001C4E30 /* libsqlite3.dylib */; };
 		47C8B0DA1A26D36400C9BD0A /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */; };
 		47D6D0B81A770EE6004A2EFD /* NearbyStopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */; };
 		47D6D0BB1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */; };
@@ -109,7 +104,6 @@
 		470506981A4E663D00EEA613 /* EmptySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySegue.swift; sourceTree = "<group>"; };
 		4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		4711A9BF19AFBBDB0062F587 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
 		4711A9C119AFBBE10062F587 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4711A9C319AFBBED0062F587 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4711A9C519AFBBF50062F587 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -124,16 +118,10 @@
 		4711AA1F19AFC5330062F587 /* VT Transit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VT Transit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4711AA2619AFCA6A0062F587 /* VT Transit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit-Bridging-Header.h"; sourceTree = "<group>"; };
 		47150D731A649BD6009201CA /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
-		4722CF481A29376B00CCEB8F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		4722CF491A29376B00CCEB8F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4722CF4C1A29967900CCEB8F /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = "../VT Transit/Parser.swift"; sourceTree = "<group>"; };
 		4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopsTableViewController.swift; sourceTree = "<group>"; };
 		47281E611AEE0C260088173E /* UmbrellaHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UmbrellaHeader.h; sourceTree = "<group>"; };
-		4734D7AF19CF59B9007AB683 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../Parse Framework/Bolts.framework"; sourceTree = "<group>"; };
-		4734D7B019CF59B9007AB683 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../Parse Framework/Parse.framework"; sourceTree = "<group>"; };
 		47404B1E1A571A7B0039C3FA /* SegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentViewController.swift; sourceTree = "<group>"; };
-		474450441BF7BE9F00FDDE23 /* CloudKitWatchFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudKitWatchFramework.h; sourceTree = "<group>"; };
-		474450461BF7BE9F00FDDE23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47482AED1CB1BBEE004A7AC9 /* Routes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Routes.json; sourceTree = "<group>"; };
 		47482AEF1CB1BBF5004A7AC9 /* Stops.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Stops.json; sourceTree = "<group>"; };
 		474D51521A7D56EA006EE7EF /* VT Transit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit.entitlements"; sourceTree = "<group>"; };
@@ -143,36 +131,20 @@
 		4784FA8719B8E3D8009BE8C4 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Route.swift; path = "../VT Transit/Route.swift"; sourceTree = "<group>"; };
 		4784FA8919B8F0DA009BE8C4 /* Stop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stop.swift; path = "../VT Transit/Stop.swift"; sourceTree = "<group>"; };
 		4791A7AE1B6D397400B77F78 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		47AD038B1AEC504D006DCE19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47AD038C1AEC504D006DCE19 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		47AD038E1AEC504D006DCE19 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		47AD03981AEC504D006DCE19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47AD039A1AEC504D006DCE19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		47AD039C1AEC504D006DCE19 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		47BB57B919AFB0A300B3807E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47BB57BA19AFB0A300B3807E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47BB57C119AFB0A300B3807E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		47BB57C319AFB0A300B3807E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		47BC258C1B2D581500A5FE49 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStopsTableRowController.swift; sourceTree = "<group>"; };
 		47C02B8C1AEC6369001C4E30 /* CloudKitManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CloudKitManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47C02B8F1AEC6369001C4E30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47C02B901AEC6369001C4E30 /* CloudKitManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CloudKitManager.h; sourceTree = "<group>"; };
 		47C02BCB1AECF352001C4E30 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		47C02BCD1AECF35E001C4E30 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		47C02BCF1AECF36C001C4E30 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		47C8B0D91A26D36400C9BD0A /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		47C8B0E01A284A8400C9BD0A /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		47C8B0E11A284A8400C9BD0A /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		47D6D0B71A770EE6004A2EFD /* NearbyStopsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewController.swift; sourceTree = "<group>"; };
 		47D6D0BA1A77E2F7004A2EFD /* NearbyStopsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyStopsTableViewCell.swift; sourceTree = "<group>"; };
-		47EDF5851B2C936600F4BB47 /* VT Transit WatchKit Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VT Transit WatchKit Extension-Bridging-Header.h"; sourceTree = "<group>"; };
-		47EDF5861B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKInterfaceTable+IGInterfaceDataTable.h"; sourceTree = "<group>"; };
-		47EDF5871B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKInterfaceTable+IGInterfaceDataTable.m"; sourceTree = "<group>"; };
-		47EDF58C1B2C9CBB00F4BB47 /* SectionTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTableRowController.swift; sourceTree = "<group>"; };
-		47F303ED1AF6140A008798A2 /* VT Transit WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "VT Transit WatchKit Extension.entitlements"; sourceTree = "<group>"; };
-		47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTimeInterfaceController.swift; sourceTree = "<group>"; };
-		47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartureTimesTableRowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,19 +152,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */,
 				4711A9D419AFBC290062F587 /* CoreGraphics.framework in Frameworks */,
 				4711A9D219AFBC230062F587 /* Foundation.framework in Frameworks */,
 				4711A9D019AFBC1B0062F587 /* UIKit.framework in Frameworks */,
 				4711A9CE19AFBC160062F587 /* MapKit.framework in Frameworks */,
 				47C02BA31AEC6369001C4E30 /* CloudKitManager.framework in Frameworks */,
 				4711A9CC19AFBC0B0062F587 /* CoreLocation.framework in Frameworks */,
-				4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */,
 				4711A9C819AFBC010062F587 /* SystemConfiguration.framework in Frameworks */,
 				4711A9C619AFBBF50062F587 /* Security.framework in Frameworks */,
 				4711A9C419AFBBED0062F587 /* AudioToolbox.framework in Frameworks */,
 				4711A9C219AFBBE10062F587 /* CFNetwork.framework in Frameworks */,
-				4711A9C019AFBBDB0062F587 /* libz.1.1.3.dylib in Frameworks */,
 				4791A7AF1B6D397400B77F78 /* CloudKit.framework in Frameworks */,
 				4711A9BE19AFBBD60062F587 /* MobileCoreServices.framework in Frameworks */,
 				4711A9BC19AFBBCF0062F587 /* QuartzCore.framework in Frameworks */,
@@ -203,8 +172,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47C02BD01AECF36C001C4E30 /* libsqlite3.dylib in Frameworks */,
-				47C02BCE1AECF35E001C4E30 /* libz.dylib in Frameworks */,
 				47C02BCC1AECF352001C4E30 /* StoreKit.framework in Frameworks */,
 				47C02BC81AECF352001C4E30 /* QuartzCore.framework in Frameworks */,
 				47C02BC91AECF352001C4E30 /* Security.framework in Frameworks */,
@@ -233,13 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				4791A7AE1B6D397400B77F78 /* CloudKit.framework */,
-				47C02BCF1AECF36C001C4E30 /* libsqlite3.dylib */,
-				47C02BCD1AECF35E001C4E30 /* libz.dylib */,
 				47C02BCB1AECF352001C4E30 /* StoreKit.framework */,
-				4722CF481A29376B00CCEB8F /* Bolts.framework */,
-				4722CF491A29376B00CCEB8F /* Parse.framework */,
-				4734D7AF19CF59B9007AB683 /* Bolts.framework */,
-				4734D7B019CF59B9007AB683 /* Parse.framework */,
 				4711A9D319AFBC290062F587 /* CoreGraphics.framework */,
 				4711A9D119AFBC230062F587 /* Foundation.framework */,
 				4711A9CF19AFBC1B0062F587 /* UIKit.framework */,
@@ -250,70 +211,17 @@
 				4711A9C519AFBBF50062F587 /* Security.framework */,
 				4711A9C319AFBBED0062F587 /* AudioToolbox.framework */,
 				4711A9C119AFBBE10062F587 /* CFNetwork.framework */,
-				4711A9BF19AFBBDB0062F587 /* libz.1.1.3.dylib */,
 				4711A9BD19AFBBD60062F587 /* MobileCoreServices.framework */,
 				4711A9BB19AFBBCF0062F587 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		474450431BF7BE9F00FDDE23 /* CloudKitWatchFramework */ = {
-			isa = PBXGroup;
-			children = (
-				474450441BF7BE9F00FDDE23 /* CloudKitWatchFramework.h */,
-				474450461BF7BE9F00FDDE23 /* Info.plist */,
-			);
-			path = CloudKitWatchFramework;
-			sourceTree = "<group>";
-		};
-		47AD03891AEC504D006DCE19 /* VT Transit WatchKit Extension */ = {
-			isa = PBXGroup;
-			children = (
-				47F303ED1AF6140A008798A2 /* VT Transit WatchKit Extension.entitlements */,
-				47EDF58B1B2C9C7600F4BB47 /* Interface Controller */,
-				47EDF58A1B2C9C6E00F4BB47 /* Table Row */,
-				47EDF5891B2C937400F4BB47 /* Watch Table Extension */,
-				47AD038E1AEC504D006DCE19 /* Images.xcassets */,
-				47AD038A1AEC504D006DCE19 /* Supporting Files */,
-			);
-			path = "VT Transit WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		47AD038A1AEC504D006DCE19 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				47EDF5851B2C936600F4BB47 /* VT Transit WatchKit Extension-Bridging-Header.h */,
-				47AD038B1AEC504D006DCE19 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		47AD03961AEC504D006DCE19 /* VT Transit WatchKit App */ = {
-			isa = PBXGroup;
-			children = (
-				47AD03991AEC504D006DCE19 /* Interface.storyboard */,
-				47AD039C1AEC504D006DCE19 /* Images.xcassets */,
-				47AD03971AEC504D006DCE19 /* Supporting Files */,
-			);
-			path = "VT Transit WatchKit App";
-			sourceTree = "<group>";
-		};
-		47AD03971AEC504D006DCE19 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				47AD03981AEC504D006DCE19 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		47BB57AC19AFB0A300B3807E = {
 			isa = PBXGroup;
 			children = (
 				47BB57B719AFB0A300B3807E /* VT Transit */,
-				47AD03891AEC504D006DCE19 /* VT Transit WatchKit Extension */,
-				47AD03961AEC504D006DCE19 /* VT Transit WatchKit App */,
 				47C02B8D1AEC6369001C4E30 /* CloudKitManager */,
-				474450431BF7BE9F00FDDE23 /* CloudKitWatchFramework */,
 				4711A9D519AFBC300062F587 /* Frameworks */,
 				47EC78EE1B2DE2040013B5C5 /* Target */,
 			);
@@ -414,34 +322,6 @@
 			name = Target;
 			sourceTree = "<group>";
 		};
-		47EDF5891B2C937400F4BB47 /* Watch Table Extension */ = {
-			isa = PBXGroup;
-			children = (
-				47EDF5861B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.h */,
-				47EDF5871B2C936700F4BB47 /* WKInterfaceTable+IGInterfaceDataTable.m */,
-			);
-			name = "Watch Table Extension";
-			sourceTree = "<group>";
-		};
-		47EDF58A1B2C9C6E00F4BB47 /* Table Row */ = {
-			isa = PBXGroup;
-			children = (
-				47C02B851AEC5C12001C4E30 /* FavoriteStopsTableRowController.swift */,
-				47F675F61AF6CB100043F86D /* DepartureTimesTableRowController.swift */,
-				47EDF58C1B2C9CBB00F4BB47 /* SectionTableRowController.swift */,
-			);
-			name = "Table Row";
-			sourceTree = "<group>";
-		};
-		47EDF58B1B2C9C7600F4BB47 /* Interface Controller */ = {
-			isa = PBXGroup;
-			children = (
-				47AD038C1AEC504D006DCE19 /* InterfaceController.swift */,
-				47F675F41AF6BBAB0043F86D /* DepartureTimeInterfaceController.swift */,
-			);
-			name = "Interface Controller";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -503,7 +383,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0710;
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Appify;
 				TargetAttributes = {
@@ -524,7 +404,6 @@
 					};
 					47C02B8B1AEC6369001C4E30 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = A28NM53F25;
 					};
 				};
 			};
@@ -616,14 +495,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		47AD03991AEC504D006DCE19 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				47AD039A1AEC504D006DCE19 /* Base */,
-			);
-			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
 		47BB57C019AFB0A300B3807E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

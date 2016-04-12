@@ -42,7 +42,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.startUpdatingLocation()
-        print(manager.allStops.count)
     }
     
     override func viewDidAppear(animated: Bool) {
