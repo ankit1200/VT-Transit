@@ -16,11 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        // Parse keys
-        Parse.setApplicationId("Cn8XelDtAQiaT3K899qx1YZj5lvuTJ2yQxxyrgSq", clientKey: "Fi7NygQMW6m11emvGSmfITaMnyZeuQMbNT4byV6J")
-        
         // populate all stops list
         CloudKitManager.sharedInstance.queryAllStops({})
+        CloudKitManager.sharedInstance.queryAllRoutes({})
         // populate favorite stops list
         if CloudKitManager.sharedInstance.favoriteStops.count == 0 {
             CloudKitManager.sharedInstance.queryFavoriteStops({

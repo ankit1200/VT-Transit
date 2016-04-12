@@ -27,7 +27,6 @@
 		4711A9D419AFBC290062F587 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9D319AFBC290062F587 /* CoreGraphics.framework */; };
 		4711AA0219AFBF710062F587 /* VirginiaTech.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4711AA0119AFBF710062F587 /* VirginiaTech.gpx */; };
 		47150D741A649BD6009201CA /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47150D731A649BD6009201CA /* MapAnnotation.swift */; };
-		471A7DF41AEE0E9D006A2789 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4A1A29376B00CCEB8F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF481A29376B00CCEB8F /* Bolts.framework */; };
 		4722CF4B1A29376B00CCEB8F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF491A29376B00CCEB8F /* Parse.framework */; };
 		4722CF4F1A29971400CCEB8F /* StopsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4E1A29971400CCEB8F /* StopsTableViewController.swift */; };
@@ -51,7 +50,6 @@
 		47C02BBC1AECE8B2001C4E30 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4722CF4C1A29967900CCEB8F /* Parser.swift */; };
 		47C02BBE1AECEA3E001C4E30 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C8B0E11A284A8400C9BD0A /* TBXML.m */; };
 		47C02BC01AECF16F001C4E30 /* TBXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 47C8B0E01A284A8400C9BD0A /* TBXML.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		47C02BC11AECF2A3001C4E30 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4722CF481A29376B00CCEB8F /* Bolts.framework */; };
 		47C02BC31AECF32B001C4E30 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C319AFBBED0062F587 /* AudioToolbox.framework */; };
 		47C02BC41AECF32B001C4E30 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9C119AFBBE10062F587 /* CFNetwork.framework */; };
 		47C02BC51AECF32B001C4E30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4711A9D319AFBC290062F587 /* CoreGraphics.framework */; };
@@ -216,8 +214,6 @@
 				47C02BC51AECF32B001C4E30 /* CoreGraphics.framework in Frameworks */,
 				47C02BC61AECF32B001C4E30 /* CoreLocation.framework in Frameworks */,
 				47C02BC71AECF32B001C4E30 /* MobileCoreServices.framework in Frameworks */,
-				47C02BC11AECF2A3001C4E30 /* Bolts.framework in Frameworks */,
-				471A7DF41AEE0E9D006A2789 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

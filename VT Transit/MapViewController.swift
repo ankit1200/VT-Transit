@@ -42,6 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.startUpdatingLocation()
+        print(manager.allStops.count)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -225,7 +226,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // *************************
     
     @IBAction func showCurrentLocation(sender: AnyObject) {
-        self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
+        if locationManager.location == nil {
+            let alertView = UIAlertView(title: "Location Service Not Working", message: "Please make sure location services are enabled.", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+        } else {
+            self.mapView.setUserTrackingMode(MKUserTrackingMode.Follow, animated: true);
+        }
     }
     
     @IBAction func mapType(sender: AnyObject) {

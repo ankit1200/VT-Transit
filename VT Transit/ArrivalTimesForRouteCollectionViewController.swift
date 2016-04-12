@@ -201,14 +201,14 @@ class ArrivalTimesForRouteCollectionViewController: UICollectionViewController, 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         // Make sure the stop has times available
-        if arrivalTimes.count != 0 {
+        if arrivalTimes[indexPath.section].time.count != 0 {
             let dateFormatter = NSDateFormatter() // date format
             dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a" // set date format
             let arrivalTimeDate = dateFormatter.dateFromString(arrivalTimes[indexPath.section].time[indexPath.row]) // get date from arrival time
             
             let timeDifferenceMinutes = Int((arrivalTimeDate?.timeIntervalSinceNow)! / 60) - 1 // get time difference in (MINUTES)
             
-            let alertController = UIAlertController(title: "Set Reminder", message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: "Set Reminder: Time from bus departure", message: nil, preferredStyle: .ActionSheet)
             locationManager.startUpdatingLocation()
             if (timeDifferenceMinutes > 5) {
                 let fiveMinutes = UIAlertAction(title: "5 Minutes", style: .Default, handler: {(UIAlertAction) in self.fireNotification(5, indexPath: indexPath)})

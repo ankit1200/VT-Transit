@@ -85,25 +85,21 @@ class SegmentViewController: UIViewController {
     // ************************
     func querySelectedStopsFromParse(codes:[String]) {
         
-        let query = PFQuery(className:"Stops")
-        query.whereKey("code", containedIn: codes)
-        query.addAscendingOrder("name")
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            // The find succeeded.
-            if error == nil {
-                // Add latitude and longitute to selected Stops
+        let predicate = NSPredicate(format: "code IN %@", codes)
+        let ckQuery = CKQuery(recordType: "Stop", predicate: predicate)
+        ckQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        CloudKitManager.sharedInstance.publicDB.performQuery(ckQuery, inZoneWithID: nil) {
+            results, error in
+            if error != nil {
+                print("An error occured: \(error)")
+            } else {
                 var counter = 0
-                for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
-                    self.stops[counter].location = location
+                for record in results! {
+                    self.stops[counter].location = record.objectForKey("location") as! CLLocation
                     counter += 1
                 }
-            } else {
-                // Log details of the failure
-                NSLog("Error: %@ %@", error, error.userInfo)
             }
-        }
+        }        
     }
     
     
