@@ -108,6 +108,7 @@ class FavoritesViewController: UITableViewController {
         } else {
             performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     // *************************

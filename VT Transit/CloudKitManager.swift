@@ -130,7 +130,6 @@ public class CloudKitManager: NSObject {
         operation.queryCompletionBlock = { (cursor, error) in
             if error == nil {
                 if cursor != nil {
-                    print("there is more data to fetch")
                     self.fetchRecords(cursor!)
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
@@ -155,11 +154,9 @@ public class CloudKitManager: NSObject {
         operation.queryCompletionBlock = { cursor, error in
             
             if cursor != nil {
-                print("More data to fetch")
                 self.fetchRecords(cursor!)
                 
             } else {
-                print(self.allStops.count)
             }
         }
         

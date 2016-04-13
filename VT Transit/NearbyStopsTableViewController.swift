@@ -143,6 +143,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         } else {
             performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     

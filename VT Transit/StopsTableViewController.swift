@@ -85,6 +85,7 @@ class StopsTableViewController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showArrivalTimes", sender: tableView)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     

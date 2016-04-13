@@ -41,8 +41,10 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
         })()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func viewDidAppear(animated: Bool) {
+        while CloudKitManager.sharedInstance.allRoutes.count < 15 {
+            self.tableView.reloadData()
+        }
     }
     
     // ****************************
@@ -87,6 +89,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             self.stops.sortInPlace({$0.name < $1.name})
             self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
