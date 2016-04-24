@@ -12,7 +12,6 @@ import CloudKitManager
 
 class RoutesTableViewController: UITableViewController, UISearchResultsUpdating {
 
-    var routes = Array<Route>()
     var filteredRoutes = Array<Route>()
     var stops = Array<Stop>()
     var resultSearchController = UISearchController()
@@ -40,26 +39,12 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             
             return controller
         })()
-
-        // Query the Routes Array from Parse Database
-        var query = PFQuery(className: "Routes")
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                
-                for object in objects {
-                    let route = Route(name: object["name"] as? String, shortName: object["shortName"] as! String)
-                    
-                    self.routes.append(route)
-                }
-                self.routes.sort({$0.name < $1.name})
-                self.tableView.reloadData()
-            }
-        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func viewDidAppear(animated: Bool) {
+        while CloudKitManager.sharedInstance.allRoutes.count < 15 {
+            self.tableView.reloadData()
+        }
     }
     
     // ****************************
@@ -68,15 +53,15 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // check to see if you are returning the search tableview or routes stops tableview
-        return (self.resultSearchController.active) ? filteredRoutes.count : routes.count
+        return (self.resultSearchController.active) ? filteredRoutes.count : CloudKitManager.sharedInstance.allRoutes.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("routesCell", forIndexPath: indexPath) 
         var route:Route
         // Check to see whether the normal table or search results table is being displayed
-        route = (self.resultSearchController.active) ? filteredRoutes[indexPath.row] : routes[indexPath.row]
+        route = (self.resultSearchController.active) ? filteredRoutes[indexPath.row] : CloudKitManager.sharedInstance.allRoutes[indexPath.row]
         // configure cell
         cell.textLabel?.text = route.name
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -91,7 +76,7 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             // gets stops associated with route
             self.stops = Parser.stopsForRoute(self.filteredRoutes[indexPath.row].shortName)
         } else {
-            self.stops = Parser.stopsForRoute(self.routes[indexPath.row].shortName)
+            self.stops = Parser.stopsForRoute(CloudKitManager.sharedInstance.allRoutes[indexPath.row].shortName)
         }
         
         if self.stops.count == 0 {
@@ -101,9 +86,10 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         } else {
             // sort the stops alphabetically
-            self.stops.sort({$0.name < $1.name})
+            self.stops.sortInPlace({$0.name < $1.name})
             self.performSegueWithIdentifier("showStopsForRoutes", sender: tableView)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
@@ -112,9 +98,9 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
     // ***********************
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filteredRoutes = self.routes.filter({( route: Route) -> Bool in
-            let routeNameMatch = route.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
-            let routeShortNameMatch = route.shortName.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
+        filteredRoutes = CloudKitManager.sharedInstance.allRoutes.filter({( route: Route) -> Bool in
+            let routeNameMatch = route.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
+            let routeShortNameMatch = route.shortName.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
             return (routeNameMatch != nil || routeShortNameMatch != nil)
         })
         self.tableView.reloadData()
@@ -131,12 +117,12 @@ class RoutesTableViewController: UITableViewController, UISearchResultsUpdating 
             
             let containerViewController = segue.destinationViewController as! ContainerViewController
             // handle selected cells in search display controlller
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             if self.resultSearchController.active {
                 containerViewController.selectedRoute = self.filteredRoutes[indexPath.row]
                 self.resultSearchController.active = false
             } else {
-                containerViewController.selectedRoute = self.routes[indexPath.row]
+                containerViewController.selectedRoute = CloudKitManager.sharedInstance.allRoutes[indexPath.row]
             }
             containerViewController.stops = stops
         }

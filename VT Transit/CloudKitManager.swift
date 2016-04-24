@@ -13,9 +13,15 @@ import Foundation
 
 public class CloudKitManager: NSObject {
    
-    public let privateDB = CKContainer.defaultContainer().privateCloudDatabase // CloudKit database
+    public let publicDB = CKContainer.defaultContainer().publicCloudDatabase // Public CloudKit Database
+    public let privateDB = CKContainer.defaultContainer().privateCloudDatabase // Private CloudKit Database
     public var favoriteStops:Array<Stop>! = Array<Stop>() // favoriteStops
     public var allStops:Array<Stop>! = Array<Stop>() // all stops
+    public var allRoutes:Array<Route>! = Array<Route>() // all routes
+    
+    // ***********************
+    // MARK: Singleton Pattern
+    // ***********************
     
     public class var sharedInstance: CloudKitManager {
         struct Static {
@@ -29,6 +35,10 @@ public class CloudKitManager: NSObject {
         return Static.instance!
     }
     
+    // ********************
+    // MARK: Favorite Stops
+    // ********************
+    
     // get favorite stops from iCloud
     public func queryFavoriteStops(completionHandler: ()->()) {
         let query = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
@@ -37,10 +47,10 @@ public class CloudKitManager: NSObject {
         privateDB.performQuery(query, inZoneWithID: nil) {
             results, error in
             if error != nil {
-                println(error)
+                print(error)
             } else {
                 self.favoriteStops = []
-                for record in results {
+                for record in results! {
                     let stop = Stop(name: (record["name"] as! String), code: (record["code"] as! String), location: (record["location"] as! CLLocation))
                     self.favoriteStops!.append(stop)
                 }
@@ -53,17 +63,17 @@ public class CloudKitManager: NSObject {
     
     // update favorite stops to iCloud
     public func updateFavoriteStops() {
-        for (index, stop) in enumerate(favoriteStops) {
+        for (index, stop) in favoriteStops.enumerate() {
             privateDB.fetchRecordWithID(CKRecordID(recordName: stop.code), completionHandler: { (record, error) -> Void in
                 if error != nil {
-                    println(error)
+                    print(error)
                 } else {
                     // save the record once fetched
                     dispatch_async(dispatch_get_main_queue(), {
-                        record.setValue(index, forKey:"favoritesIndex")
-                        self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
+                        record!.setValue(index, forKey:"favoritesIndex")
+                        self.privateDB.saveRecord(record!, completionHandler: { (record, error) -> Void in
                             if error != nil {
-                                println(error)
+                                print(error)
                             } else {
                                 let sharedDefault = NSUserDefaults(suiteName: "group.VTTransit")
                                 let data = NSKeyedArchiver.archivedDataWithRootObject(self.favoriteStops)
@@ -77,107 +87,159 @@ public class CloudKitManager: NSObject {
         }
     }
     
-    // get all the stops from Parse
-    public func queryAllStops(completionHandler: ()->()) {
-        var query = PFQuery(className: "Stops")
-        query.limit = 500
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
-                    let stop = Stop(name: object["name"] as! String, code: object["code"] as! String, location:location)
-                    self.allStops.append(stop)
+    // *****************
+    // MARK: All Records
+    // *****************
+    
+    // get all the routes from iCloud
+    public func queryAllRoutes(completionHandler: ()->()) {
+        let ckQuery = CKQuery(recordType: "Route", predicate: NSPredicate(value: true))
+        ckQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        let operation = CKQueryOperation(query: ckQuery)
+        
+        operation.recordFetchedBlock = { (record) in
+            let name = record["name"] as! String
+            let shortName = record["shortName"] as! String
+            let route = Route(name: name, shortName: shortName)
+            if self.allRoutes.last?.name != name {
+                self.allRoutes.append(route)
+            }
+        }
+        
+        operation.queryCompletionBlock = { (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    completionHandler()
+                } else {
+                    // HANDLE ERROR
+                    print("An error occured: \(error)")
                 }
             }
-            completionHandler()
+        }
+        publicDB.addOperation(operation)
+    }
+    
+    // get all the stops from iCloud
+    public func queryAllStops(completionHandler: ()->()) {
+        let ckQuery = CKQuery(recordType: "Stop", predicate: NSPredicate(value: true))
+        ckQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        let operation = CKQueryOperation(query: ckQuery)
+        operation.qualityOfService = .UserInitiated
+        operation.recordFetchedBlock = populateStopsArray
+        
+        operation.queryCompletionBlock = { (cursor, error) in
+            if error == nil {
+                if cursor != nil {
+                    self.fetchRecords(cursor!)
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        completionHandler()
+                    }
+                }
+            } else {
+                // HANDLE ERROR
+                print("An error occured: \(error)")
+            }
+        }
+        
+        publicDB.addOperation(operation)
+    }
+    
+    func fetchRecords(cursor: CKQueryCursor?) {
+        
+        let operation = CKQueryOperation(cursor: cursor!)
+        operation.qualityOfService = .UserInitiated
+        operation.recordFetchedBlock = populateStopsArray
+        
+        operation.queryCompletionBlock = { cursor, error in
+            
+            if cursor != nil {
+                self.fetchRecords(cursor!)
+                
+            } else {
+            }
+        }
+        
+        publicDB.addOperation(operation)
+    }
+    
+    func populateStopsArray(record: CKRecord) {
+        
+        let name = record["name"] as! String
+        let code = record["code"] as! String
+        let location = record["location"] as! CLLocation
+
+        let mainQueue = NSOperationQueue.mainQueue()
+        mainQueue.addOperationWithBlock() {
+            let stop = Stop(name: name, code: code, location: location)
+            self.allStops.append(stop)
         }
     }
     
-    // ************************************
-    // MARK: NearbyStopsTableViewController
-    // ************************************
+    // ********************
+    // MARK: Ingest Records
+    // ********************
     
-    // query parse for all the stops
-    //        let database = CKContainer.defaultContainer().publicCloudDatabase
-    //        if currentLocation == nil {
-    //            let alertView = UIAlertView(title: "Cannot Retrieve Nearby Stops", message: "Please enable location services and make sure you are connected to the internet.", delegate: nil, cancelButtonTitle: "Ok")
-    //            alertView.show()
-    //        } else {
-    //            let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location,%@) < 1.61", currentLocation)
-    //            let ckQuery = CKQuery(recordType: "Stop", predicate: predicate)
-    //            ckQuery.sortDescriptors = [CKLocationSortDescriptor(key: "location", relativeLocation: locationManager.location)]
-    //            database.performQuery(ckQuery, inZoneWithID: nil) {
-    //                results, error in
-    //                if error != nil {
-    //                    println(error)
-    //                } else {
-    //                    println(results.count)
-    //                    for record in results {
-    //                        let stop = Stop(name: record["name"] as String, code: record["code"] as String, location: record["location"] as CLLocation)
-    //                        let distance = self.locationManager.location.distanceFromLocation(stop.location) / 1609.34
-    //                        let tuple = (stop: stop, distance: distance)
-    //                        println(distance)
-    //                        self.nearbyStops.append(tuple)
-    //                    }
-    //
-    //                    dispatch_async(dispatch_get_main_queue(), {
-    //                        if self.nearbyStops.count == 0 {
-    //                            let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
-    //                            alertView.show()
-    //                        }
-    //                        self.tableView.reloadData()
-    //                        if self.refreshControl!.refreshing {
-    //                            self.refreshControl!.endRefreshing()
-    //                        }
-    //                    })
-    //                }
-    //            }
-    //        }
+    public func ingestRoutes() {
+        guard let
+            path = NSBundle.mainBundle().pathForResource("Routes", ofType: "json"),
+            jsonData = try? NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe),
+            jsonResult = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
+        
+        else {
+            print("Error occured reading file")
+            return
+        }
+        
+        for route in jsonResult!["results"] as! NSArray {
+            // upload to cloudkit
+            let routeName = route["name"] as! String
+            let routeShortName = route["shortName"] as! String
+            let routeRecordID = CKRecordID(recordName: routeShortName)
+            let routeRecord = CKRecord(recordType: "Route", recordID: routeRecordID)
+            routeRecord["name"] = routeName
+            routeRecord["shortName"] = routeShortName
+            publicDB.saveRecord(routeRecord, completionHandler: { (record, error) in
+                if error != nil {
+                    print("An error occured: \(error)")
+                } else {
+                    print("Record was saved \(record!["shortName"])")
+                }
+            })
+        }
+    }
     
-    // *******************************
-    // MARK: RoutesTableViewController
-    // *******************************
-    
-    
-    //        let database = CKContainer.defaultContainer().publicCloudDatabase
-    //        let ckQuery = CKQuery(recordType: "Route", predicate: NSPredicate(value: true))
-    //        ckQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-    //        database.performQuery(ckQuery, inZoneWithID: nil) {
-    //            results, error in
-    //            if error != nil {
-    //                println(error)
-    //            } else {
-    //                for record in results {
-    //                    let route = Route(name: record.objectForKey("name") as? String, shortName: record.objectForKey("shortName") as String)
-    //                    self.routes.append(route)
-    //                }
-    //                dispatch_async(dispatch_get_main_queue()) {
-    //                    self.tableView.reloadData()
-    //                }
-    //            }
-    //        }
-    
-    
-    // ***************************
-    // MARK: SegmentViewController
-    // ***************************
-    
-    
-    //        let database = CKContainer.defaultContainer().publicCloudDatabase
-    //        let predicate = NSPredicate(format: "code IN %@", codes)
-    //        let sort = NSSortDescriptor(key: "name", ascending: true)
-    //        let ckQuery = CKQuery(recordType: "Stop", predicate: predicate)
-    //        ckQuery.sortDescriptors = [sort]
-    //        database.performQuery(ckQuery, inZoneWithID: nil) {
-    //            results, error in
-    //            if error != nil {
-    //                println(error)
-    //            } else {
-    //                var counter = 0
-    //                for record in results {
-    //                    self.stops[counter++].location = record.objectForKey("location") as CLLocation
-    //                }
-    //            }
-    //        }
+    public func ingestStops() {
+        guard let
+            path = NSBundle.mainBundle().pathForResource("Stops", ofType: "json"),
+            jsonData = try? NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe),
+            jsonResult = try? NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? NSDictionary
+            
+        else {
+            print("Error occured reading file")
+            return
+        }
+        
+        for stop in jsonResult!["results"] as! NSArray {
+            // upload to cloudkit
+            let stopName = stop["name"] as! String
+            let stopCode = stop["code"] as! String
+            let stopLocation = CLLocation(latitude: Double(stop["latitude"] as! String)!, longitude: Double(stop["longitude"] as! String)!)
+            
+            let stopRecordID = CKRecordID(recordName: stopName)
+            let stopRecord = CKRecord(recordType: "Stop", recordID: stopRecordID)
+            
+            stopRecord["name"] = stopName
+            stopRecord["code"] = stopCode
+            stopRecord["location"] = stopLocation
+            
+            publicDB.saveRecord(stopRecord, completionHandler: { (record, error) in
+                if error != nil {
+                    print("An error occured: \(error)")
+                } else {
+                    print("Record was saved \(record!["code"])")
+                }
+            })
+        }
+    }
 }

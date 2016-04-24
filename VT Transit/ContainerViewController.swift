@@ -24,7 +24,7 @@ class ContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        segmentControl.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
+        segmentControl.addTarget(self, action: #selector(ContainerViewController.valueChanged(_:)), forControlEvents: .ValueChanged)
         if (segmentControl.selectedSegmentIndex == 1) {
             self.segmentViewController!.swap()
         }

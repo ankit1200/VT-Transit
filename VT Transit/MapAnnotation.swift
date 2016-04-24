@@ -13,8 +13,8 @@ import CloudKitManager
 class MapAnnotation: NSObject, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D
-    var title: String
-    var subtitle: String
+    var title: String?
+    var subtitle: String?
     var category: String
     var stop: Stop?
     

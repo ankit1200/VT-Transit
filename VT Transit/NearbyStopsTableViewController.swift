@@ -12,10 +12,9 @@ import CloudKitManager
 
 class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
 
-    var stops: [(stop: Stop, distance: Double)] = []
     let locationManager = CLLocationManager()
     var nearbyStops: [(stop: Stop, distance: Double)] = []
-    var filteredStops: [(stop: Stop, distance: Double)] = []
+    var filteredStops: [Stop] = []
     var selectedRoutes = [Route]()
     var resultSearchController = UISearchController()
     
@@ -44,16 +43,16 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         })()
         
         // pull to refresh
-        var refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refersh nearby stops")
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(NearbyStopsTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
         // start location manager
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        getStopsFromParse()
+        self.refresh(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,36 +73,10 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         if locationManager.location == nil {
             let alertView = UIAlertView(title: "Location Service Not Working", message: "Please make sure location services are enabled.", delegate: nil, cancelButtonTitle: "Ok")
             alertView.show()
+            self.refreshControl?.endRefreshing()
+            self.locationManager.stopUpdatingLocation()
         } else {
-            // Check to see if current location is greater than 25 miles away
-            // If current location is greater than 25 miles away then there are no nearby stops
-            if (locationManager.location.distanceFromLocation(CLLocation(latitude: 37.228368, longitude: -80.422942)) as Double / 1609.34) > 25 {
-                let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
-                alertView.show()
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-            } else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    for tuple in self.stops {
-                        var distance = tuple.stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
-                        if distance < 1.61 {
-                            let nearbyTuple = (stop: tuple.stop, distance: distance)
-                            self.nearbyStops.append(nearbyTuple)
-                        }
-                    }
-                    self.locationManager.stopUpdatingLocation()
-                    if self.nearbyStops.count == 0 {
-                        let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
-                        alertView.show()
-                    } else {
-                        self.nearbyStops.sort({$0.1 < $1.1})
-                    }
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableView.reloadData()
-                        self.refreshControl?.endRefreshing()
-                    })
-                })
-            }
+            self.queryNearbyStops(self.locationManager.location!)
         }
     }
 
@@ -128,19 +101,25 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "nearbyStops") as! NearbyStopsTableViewCell
         }
     
-        var tuple = (self.resultSearchController.active) ? filteredStops[indexPath.row] : nearbyStops[indexPath.row]
-        // check to see if if tableview is search or nearbyStops
-        
-        // Configure cell
-        cell.title?.text = tuple.stop.name
-        cell.title?.adjustsFontSizeToFitWidth = true
-        let distanceInMiles = tuple.distance
-        cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
-        // if location is disabled then make distance label blank
-        if locationManager.location != nil || distanceInMiles != 0.00 {
-            cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
+        if self.resultSearchController.active {
+            let filteredStop = filteredStops[indexPath.row]
+            cell.title.text = filteredStop.name
+            cell.subtitle?.text = "Bus Stop #\(filteredStop.code)"
+            cell.distance.text = ""
+            
         } else {
-            cell.distance?.text = ""
+            let tuple = nearbyStops[indexPath.row]
+            // Configure cell
+            cell.title?.text = tuple.stop.name
+            cell.title?.adjustsFontSizeToFitWidth = true
+            let distanceInMiles = tuple.distance
+            cell.subtitle?.text = "Bus Stop #\(tuple.stop.code)"
+            // if location is disabled then make distance label blank
+            if locationManager.location != nil || distanceInMiles != 0.00 {
+                cell.distance?.text = String(format:"%.2f", distanceInMiles) + " miles"
+            } else {
+                cell.distance?.text = ""
+            }
         }
         
         return cell
@@ -155,7 +134,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var stopCode = (self.resultSearchController.active) ? filteredStops[indexPath.row].stop.code : nearbyStops[indexPath.row].stop.code
+        let stopCode = (self.resultSearchController.active) ? filteredStops[indexPath.row].code : nearbyStops[indexPath.row].stop.code
         selectedRoutes = Parser.routesForStop(stopCode)
         if selectedRoutes.count == 0 {
             // Instantiate an alert view object
@@ -164,6 +143,7 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         } else {
             performSegueWithIdentifier("showArrivalTimesForAllRoutes", sender: tableView)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
@@ -173,9 +153,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         // Filter the array using the filter method
-        filteredStops = self.stops.filter({(stop: Stop, distance:Double) -> Bool in
-            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text.lowercaseString)
-            let stringMatchCode = stop.code.rangeOfString(searchController.searchBar.text)
+        filteredStops = CloudKitManager.sharedInstance.allStops.filter({(stop: Stop) -> Bool in
+            let stringMatchName = stop.name.lowercaseString.rangeOfString(searchController.searchBar.text!.lowercaseString)
+            let stringMatchCode = stop.code.rangeOfString(searchController.searchBar.text!)
             return (stringMatchName != nil || stringMatchCode != nil)
         })
         self.tableView.reloadData()
@@ -185,37 +165,38 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
     // MARK: Helper Methods
     // ********************
     
-    func getStopsFromParse() {
-        var query = PFQuery(className: "Stops")
-        query.limit = 500
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                for object in objects {
-                    let location = CLLocation(latitude: (object["latitude"] as! NSString).doubleValue, longitude: (object["longitude"] as! NSString).doubleValue)
-                    let stop = Stop(name: object["name"] as! String, code: object["code"] as! String, location:location)
-                    self.getDistancesForStop(stop)
-                }
-                dispatch_async(dispatch_get_main_queue(), {
-                    if self.nearbyStops.count == 0 {
-                        let alertView = UIAlertView(title: "No Nearby Stops found", message: "Either location services are not enabled, or no stops are available within a mile.", delegate: nil, cancelButtonTitle: "Ok")
-                        alertView.show()
-                    }
-                    self.tableView.reloadData()
-                })
-            }
-        }
-    }
-    
-    func getDistancesForStop(stop:Stop) {
-        var distance = stop.location.distanceFromLocation(self.locationManager.location) as Double / 1609.34
-        self.locationManager.stopUpdatingLocation()
-        let tuple = (stop: stop, distance: distance)
-        self.stops.append(tuple)
-        if distance < 1.61 {
+    func queryNearbyStops(currentLocation: CLLocation) {
+        let database = CKContainer.defaultContainer().publicCloudDatabase
+        let predicate = NSPredicate(format: "distanceToLocation:fromLocation:(location,%@) < 1.61", currentLocation)
+        let ckQuery = CKQuery(recordType: "Stop", predicate: predicate)
+        let operation = CKQueryOperation(query: ckQuery)
+        
+        operation.recordFetchedBlock = { (record) in
+            let name = record["name"] as! String
+            let code = record["code"] as! String
+            let location = record["location"] as! CLLocation
+            let stop = Stop(name: name, code: code, location: location)
+            let distance = currentLocation.distanceFromLocation(stop.location) / 1609.34
+            let tuple = (stop: stop, distance: distance)
             self.nearbyStops.append(tuple)
         }
-        self.nearbyStops.sort({$0.1 < $1.1})
+        
+        operation.queryCompletionBlock = {
+            [unowned self] (cursor, error) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil {
+                    self.nearbyStops.sortInPlace({$0.1 < $1.1})
+                    self.refreshControl?.endRefreshing()
+                     self.locationManager.stopUpdatingLocation()
+                    self.tableView.reloadData()
+                } else {
+                    // HANDLE ERROR
+                    let alertView = UIAlertView(title: "No Nearby Stops found", message: "No stops were found within a mile.", delegate: nil, cancelButtonTitle: "Ok")
+                    alertView.show()
+                }
+            }
+        }
+        database.addOperation(operation)
     }
     
     
@@ -228,9 +209,9 @@ class NearbyStopsTableViewController: UITableViewController, CLLocationManagerDe
         if segue.identifier == "showArrivalTimesForAllRoutes" {
             let arrivalTimesForRouteCollectionViewController = segue.destinationViewController as! ArrivalTimesForRouteCollectionViewController
             // handle selected cells in search display controlller
-            let indexPath = self.tableView.indexPathForSelectedRow()!
+            let indexPath = self.tableView.indexPathForSelectedRow!
             if self.resultSearchController.active {
-                arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row].stop
+                arrivalTimesForRouteCollectionViewController.selectedStop = filteredStops[indexPath.row]
                 self.resultSearchController.active = false
             } else {
                 arrivalTimesForRouteCollectionViewController.selectedStop = nearbyStops[indexPath.row].stop

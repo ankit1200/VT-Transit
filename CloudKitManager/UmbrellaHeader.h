@@ -9,7 +9,6 @@
 #ifndef VT_Transit_UmbrellaHeader_h
 #define VT_Transit_UmbrellaHeader_h
 
-#import <Parse/Parse.h>
 #import "TBXML.h"
 
 #endif
